@@ -1,0 +1,5 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5606b07d02d0 [shape=record,label="{%0:\l  %1 = alloca i32, align 4\l  store i32 0, i32* %1, align 4\l  %2 = call i32 @_Z7addFuncii(i32 5, i32 2)\l  %3 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x\l... i8]* @.str, i32 0, i32 0), i32 %2)\l  call void @_Z9countDownv()\l  ret i32 0\l}"];
+}

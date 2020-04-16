@@ -1,0 +1,12 @@
+digraph "CFG for '_Z9countDownv' function" {
+	label="CFG for '_Z9countDownv' function";
+
+	Node0x5606b07cef70 [shape=record,label="{%0:\l  %1 = alloca i32, align 4\l  store i32 0, i32* %1, align 4\l  br label %2\l}"];
+	Node0x5606b07cef70 -> Node0x5606b07cf770;
+	Node0x5606b07cf770 [shape=record,label="{%2:\l\l  %3 = load i32, i32* %1, align 4\l  %4 = icmp slt i32 %3, 10\l  br i1 %4, label %5, label %8\l|{<s0>T|<s1>F}}"];
+	Node0x5606b07cf770:s0 -> Node0x5606b07cf9a0;
+	Node0x5606b07cf770:s1 -> Node0x5606b07cf9f0;
+	Node0x5606b07cf9a0 [shape=record,label="{%5:\l\l  %6 = load i32, i32* %1, align 4\l  %7 = add nsw i32 %6, 1\l  store i32 %7, i32* %1, align 4\l  br label %2\l}"];
+	Node0x5606b07cf9a0 -> Node0x5606b07cf770;
+	Node0x5606b07cf9f0 [shape=record,label="{%8:\l\l  ret void\l}"];
+}
