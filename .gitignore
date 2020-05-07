@@ -4,3 +4,4 @@
 /llvm-master.zip
 /LLVMtutorial/LLVMTutorial/*
 !/LLVMtutorial/LLVMTutorial/*.cpp
+!/LLVMtutorial/LLVMTutorial/*.h
