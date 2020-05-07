@@ -2,5 +2,5 @@
 /source/llvm
 /source1
 /llvm-master.zip
-/LLVMtutorial//LLVMTutorial/*
+/LLVMtutorial/LLVMTutorial/*
 !/LLVMtutorial/LLVMTutorial/tutorial.cpp
