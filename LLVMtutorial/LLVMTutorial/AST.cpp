@@ -5,6 +5,9 @@ using namespace llvm;
 
 LLVMContext theContext;
 std::unique_ptr<Module> theModule;
+std::unique_ptr<KaleidoscopeJIT> theJIT;
+std::unique_ptr<legacy::FunctionPassManager> theFPM;
+std::map<std::string, std::unique_ptr<tutorial::PrototypeAST>> functionProtos;
 
 std::unique_ptr<ExprAST> logError(const char* str){
   fprintf(stderr,"Error: %s\n",str);
@@ -21,6 +24,16 @@ Value* logErrorV(const char* str){
     return nullptr;
 }
 
+Function* getFunction(std::string name){
+    if(auto* f=theModule->getFunction(name))
+        return f;
+
+    auto fi=functionProtos.find(name);
+    if(fi!=functionProtos.end()){
+        return fi->second->codegen();
+    }
+    return nullptr;
+}
 
 Value* NumberExprAST::codegen(){
     return ConstantFP::get(theContext,APFloat(val));
@@ -54,7 +67,7 @@ Value* BinaryExprAST::codegen(){
 }
 
 Value* CallExprAST::codegen(){
-    Function* calleeF=theModule->getFunction(callee);
+    Function* calleeF=getFunction(callee);
     if(!calleeF)
         return logErrorV("Unknown function referenced");
     if(calleeF->arg_size()!=args.size())
@@ -82,9 +95,9 @@ Function* PrototypeAST::codegen(){
 }
 
 Function* FunctionAST::codegen(){
-    Function* theFunction=theModule->getFunction(proto->getName());
-    if(!theFunction)
-        theFunction=proto->codegen();
+    auto& p=*proto;
+    functionProtos[proto->getName()]=std::move(proto);
+    Function* theFunction=getFunction(p.getName());
     if(!theFunction)
         return nullptr;
 
@@ -98,6 +111,7 @@ Function* FunctionAST::codegen(){
     if(Value* retVal=body->codegen()){
         builder.CreateRet(retVal);
         verifyFunction(*theFunction);
+        theFPM->run(*theFunction);
         return theFunction;
     }
     theFunction->eraseFromParent();

@@ -6,12 +6,25 @@
 
 using namespace llvm;
 
+static void initModuleAndPassManager(){
+    theModule=std::make_unique<Module>("my cool jit",theContext);
+    theModule->setDataLayout(theJIT->getTargetMachine().createDataLayout());
+    theFPM=std::make_unique<legacy::FunctionPassManager>(theModule.get());
+    theFPM->add(createInstructionCombiningPass());
+    theFPM->add(createReassociatePass());
+    theFPM->add(createGVNPass());
+    theFPM->add(createCFGSimplificationPass());
+    theFPM->doInitialization();
+}
+
 static void handleDefinition(){
   if(auto fnAST=parseDefinition()){
     if(auto* fnIR=fnAST->codegen()){
         fprintf(stderr, "Read a function definition. \n");
         fnIR->print(errs());
         fprintf(stderr,"\n");
+        theJIT->addModule(std::move(theModule));
+        initModuleAndPassManager();
     }
   }else{
     getNextToken();
@@ -24,6 +37,7 @@ static void handleExtern(){
         fprintf(stderr,"Read an extern: \n");
         fnIR->print(errs());
         fprintf(stderr,"\n");
+        functionProtos[protoAST->getName()]=std::move(protoAST);
     }
   }else{
     getNextToken();
@@ -32,14 +46,37 @@ static void handleExtern(){
 
 static void handleTopLevelExpression(){
   if(auto fnAST=parseTopLevelExpr()){
-    if(auto* fnIR=fnAST->codegen()){
-        fprintf(stderr,"Read a top-level expr\n");
-        fnIR->print(errs());
+    if(auto tmp=fnAST->codegen()){
+        tmp->print(errs());
         fprintf(stderr,"\n");
+        auto h=theJIT->addModule(std::move(theModule));
+        initModuleAndPassManager();
+        auto exprSymbol=theJIT->findSymbol("__anon_expr");
+        assert(exprSymbol&&"Function not found");
+        double (*FP)()=(double(*)())(intptr_t)cantFail(exprSymbol.getAddress());
+        fprintf(stderr,"Evaluated to %f\n",FP());
+        theJIT->removeModule(h);
     }
   }else{
     getNextToken();
   }
+}
+
+#ifdef _WIN32
+#define DLLEXPORT __declspec(dllexport)
+#else
+#define DLLEXPORT
+#endif
+
+
+extern "C" DLLEXPORT double putchard(double x){
+    fputc((char)x,stderr);
+    return 0;
+}
+
+extern "C" DLLEXPORT double printd(double x){
+    fprintf(stderr,"%f\n",x);
+    return 0;
 }
 
 
@@ -67,6 +104,10 @@ static void mainLoop(){
 
 
 int main(){
+  InitializeNativeTarget();
+  InitializeNativeTargetAsmPrinter();
+  InitializeNativeTargetAsmParser();
+
   binopPrecedence['<']=10;
   binopPrecedence['+']=20;
   binopPrecedence['-']=20;
@@ -74,8 +115,9 @@ int main(){
 
   fprintf(stderr,"ready> ");
   getNextToken();
-  theModule=std::make_unique<Module>("my cool jit",theContext);
+
+  theJIT=std::make_unique<KaleidoscopeJIT>();
+  initModuleAndPassManager();
   mainLoop();
-  theModule->print(errs(),nullptr);
   return 0;
 }

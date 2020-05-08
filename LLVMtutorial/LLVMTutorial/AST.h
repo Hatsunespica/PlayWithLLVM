@@ -16,8 +16,14 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Type.h"
 #include "llvm/IR/Verifier.h"
+#include "KaleidoscopeJIT.h"
+#include "llvm/IR/LegacyPassManager.h"
+#include "llvm/Support/TargetSelect.h"
+#include "llvm/Transforms/Scalar.h"
+#include "llvm/Transforms/Scalar/GVN.h"
 
 using namespace llvm;
+using namespace llvm::orc;
 
 namespace tutorial{
   class ExprAST{
@@ -81,6 +87,10 @@ extern LLVMContext theContext;
 static IRBuilder<> builder(theContext);
 extern std::unique_ptr<Module> theModule;
 static std::map<std::string,Value*> namedValues;
+extern std::unique_ptr<legacy::FunctionPassManager> theFPM;
+extern std::unique_ptr<KaleidoscopeJIT> theJIT;
+extern std::map<std::string, std::unique_ptr<tutorial::PrototypeAST>> functionProtos;
+
 
 std::unique_ptr<tutorial::ExprAST> logError(const char* str);
 std::unique_ptr<tutorial::PrototypeAST> logErrorP(const char* str);
