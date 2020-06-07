@@ -14,6 +14,13 @@ enum Token{
            tok_extern=-3,
            tok_identifier=-4,
            tok_number=-5,
+           tok_if=-6,
+           tok_then=-7,
+           tok_else=-8,
+           tok_for=-9,
+           tok_in=-10,
+           tok_binary=-11,
+           tok_unary=-12,
 };
 
 static std::string identifierStr;
@@ -24,8 +31,6 @@ int gettok();
 
 extern int curTok;
 int getNextToken();
-
-extern std::map<char,int> binopPrecedence;
 
 int getTokPrecedence();
 std::unique_ptr<ExprAST> parseExpression();
@@ -39,5 +44,8 @@ std::unique_ptr<PrototypeAST> parsePrototype();
 std::unique_ptr<FunctionAST> parseDefinition();
 std::unique_ptr<FunctionAST> parseTopLevelExpr();
 std::unique_ptr<PrototypeAST> parseExtern();
+std::unique_ptr<ExprAST> parseIfExpr();
+std::unique_ptr<ExprAST> parseForExpr();
+std::unique_ptr<ExprAST> parseUnary();
 
 #endif

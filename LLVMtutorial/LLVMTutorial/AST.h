@@ -21,6 +21,7 @@
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Transforms/Scalar.h"
 #include "llvm/Transforms/Scalar/GVN.h"
+#include "llvm/IR/Instructions.h"
 
 using namespace llvm;
 using namespace llvm::orc;
@@ -67,10 +68,22 @@ namespace tutorial{
   class PrototypeAST{
     std::string name;
     std::vector<std::string> args;
+    bool isOperator;
+    unsigned precedence;
   public:
-    PrototypeAST(const std::string& name,std::vector<std::string> args):name(name),args(args){};
+    PrototypeAST(const std::string& name,std::vector<std::string> args,bool isOperator=false,unsigned precedence=0)
+        :name(name),args(args),isOperator(isOperator),precedence(precedence){};
     const std::string getName()const{return name;}
     Function* codegen();
+    bool isUnaryOp()const{return isOperator&&args.size()==1;}
+    bool isBinaryOp()const {return isOperator&&args.size()==2;}
+
+    char getOperatorName()const{
+        assert(isUnaryOp()||isBinaryOp());
+        return name[name.size()-1];
+    }
+
+    unsigned getBinaryPrecedence()const{return precedence;}
   };
 
   class FunctionAST{
@@ -81,7 +94,40 @@ namespace tutorial{
                 std::unique_ptr<ExprAST> body):proto(std::move(proto)),body(std::move(body)){};
     Function* codegen();
   };
-}
+
+  class IfExprAST:public ExprAST{
+    std::unique_ptr<ExprAST> cond,then,els;
+    public:
+      IfExprAST(std::unique_ptr<ExprAST> cond
+        ,std::unique_ptr<ExprAST> then
+        , std::unique_ptr<ExprAST>els)
+        :cond(std::move(cond)),then(std::move(then)),els(std::move(els)){};
+      virtual Value* codegen();
+  };
+
+  class ForExprAST:public ExprAST{
+    std::string varName;
+    std::unique_ptr<ExprAST> start,end,step,body;
+
+    public:
+      ForExprAST(const std::string& varName,
+                std::unique_ptr<ExprAST> start,
+                std::unique_ptr<ExprAST> end,
+                std::unique_ptr<ExprAST> step,
+                std::unique_ptr<ExprAST> body):varName(varName),start(std::move(start)),
+                    end(std::move(end)),step(std::move(step)),body(std::move(body)){};
+      virtual Value* codegen();
+  };
+
+  class UnaryExprAST:public ExprAST{
+    char opCode;
+    std::unique_ptr<ExprAST> operand;
+
+    public:
+        UnaryExprAST(char opCode,std::unique_ptr<ExprAST> operand):opCode(opCode),operand(std::move(operand)){};
+        Value* codegen() override;
+  };
+};
 
 extern LLVMContext theContext;
 static IRBuilder<> builder(theContext);
@@ -90,6 +136,7 @@ static std::map<std::string,Value*> namedValues;
 extern std::unique_ptr<legacy::FunctionPassManager> theFPM;
 extern std::unique_ptr<KaleidoscopeJIT> theJIT;
 extern std::map<std::string, std::unique_ptr<tutorial::PrototypeAST>> functionProtos;
+extern std::map<char,int> binopPrecedence;
 
 
 std::unique_ptr<tutorial::ExprAST> logError(const char* str);
