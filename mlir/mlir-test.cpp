@@ -1,4 +1,5 @@
 #include "mlir/IR/Dialect.h"
+#include "mlir/Dialect/Func/IR/FuncOps.h"
 #include "mlir/Parser/Parser.h"
 #include "mutatorUtil.h"
 #include "mlir/InitAllDialects.h"
@@ -8,9 +9,15 @@
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/SourceMgr.h"
 #include "llvm/Support/Debug.h"
+#include "llvm/Support/KnownBits.h"
 #include "llvm/ADT/StringSet.h"
 #include <filesystem>
 #include <string>
+#include "mlir/Analysis/DataFlow/IntegerRangeAnalysis.h"
+#include "mlir/Analysis/DataFlow/ConstantPropagationAnalysis.h"
+#include "mlir/Analysis/DataFlow/DeadCodeAnalysis.h"
+#include "llvm/ADT/APInt.h"
+#include "KnownBits.h"
 
 using namespace std;
 using namespace mlir;
@@ -39,6 +46,24 @@ filesystem::path inputPath, outputPath;
 
 bool isValidInputPath();
 
+std::string toString(const KnownBits& kb){
+    string res;
+    res.resize(kb.getBitWidth());
+    for(size_t i=0;i<res.size();++i){
+        unsigned N = res.size() - i - 1;
+        if(kb.Zero[N]&&kb.One[N]){
+            res[i]='!';
+        }else if(kb.Zero[N]){
+            res[i]='0';
+        }else if(kb.One[N]){
+            res[i]='1';
+        }else{
+            res[i]='?';
+        }
+    }
+    return res;
+}
+
 int main(int argc, char *argv[]) {
   llvm::sys::PrintStackTraceOnErrorSignal(argv[0]);
   llvm::PrettyStackTraceProgram X(argc, argv);
@@ -50,7 +75,7 @@ int main(int argc, char *argv[]) {
   DialectRegistry registry;
   mlir::registerAllDialects(context);
   context.appendDialectRegistry(registry);
-  //context.allowUnregisteredDialects();
+  context.allowUnregisteredDialects();
 
   if (!isValidInputPath()) {
     llvm::errs() << "Invalid input file!\n";
@@ -70,9 +95,97 @@ int main(int argc, char *argv[]) {
   llvm::SourceMgr src_sourceMgr;
   ParserConfig parserConfig(&context);
   src_sourceMgr.AddNewSourceBuffer(move(src_file), llvm::SMLoc());
-    auto ir_before = parseSourceFile<ModuleOp>(src_sourceMgr, parserConfig);
-    ir_before->print(llvm::errs());
+  auto ir_before = parseSourceFile<ModuleOp>(src_sourceMgr, parserConfig);
+  //ir_before->print(llvm::errs());
+  ModuleOp moduleOp=ir_before.release();
+  for(auto& op:moduleOp.getBodyRegion().front().getOperations()){
+      if(auto funcOp=llvm::dyn_cast<func::FuncOp>(op);!funcOp.isDeclaration()){
+          DataFlowSolver solver;
+          dataflow::IntegerRangeAnalysis* analysis=solver.load<dataflow::IntegerRangeAnalysis>();
+          //KnownBitsRangeAnalysis* knownBitsRangeAnalysis=solver.load<KnownBitsRangeAnalysis>();
+          //dataflow::SparseConstantPropagation* analysis=solver.load<dataflow::SparseConstantPropagation>();
+          LogicalResult result=solver.initializeAndRun(funcOp);
 
+          //auto tmp=solver.lookupState<dataflow::Executable>(ProgramPoint(&funcOp.getBody().front()));
+          //((dataflow::Executable*)tmp)->setToLive();
+          funcOp->walk([&](Operation* op){
+              auto tmp=solver.lookupState<dataflow::Executable>(ProgramPoint(op->getBlock()));
+              if(tmp){
+                  ((dataflow::Executable*)tmp)->setToLive();
+              }
+          });
+          funcOp->walk([&](Operation* op){
+             //auto res=knownBitsRangeAnalysis->visit(ProgramPoint(op));
+             //if(res.failed()){
+             //    llvm::errs()<<"Error\n";
+             //}
+             auto res=analysis->visit(ProgramPoint(op));
+              if(res.failed()){
+                  llvm::errs()<<"Error\n";
+              }
+          });
+          if(result.succeeded()){
+              /*
+              llvm::errs()<<"Success "<<solver.analysisStates.size()<<"\n";
+              auto opit=funcOp->getBlock()->getOperations().begin();
+              for(auto it=solver.analysisStates.begin();it!=solver.analysisStates.end();++it){
+                  it->first.first.print(llvm::errs());
+                  llvm::errs()<<"\n";
+                  //opit->print(llvm::errs());
+                  //llvm::errs()<<"\n";
+                  llvm::errs()<<"\n";
+                  it->second->print(llvm::errs());
+                  llvm::errs()<<"\n";
+                  llvm::errs()<<(it->first.second==TypeID::get<dataflow::IntegerValueRangeLattice>());
+                  llvm::errs()<<"\n";
+              }*/
+              llvm::errs()<<"Check args\n";
+              for(auto it=funcOp.args_begin();it!=funcOp.args_end();++it){
+                  ProgramPoint point(*it);
+                  point.print(llvm::errs());
+                  llvm::errs()<<"\n";
+                  auto res=solver.lookupState<dataflow::IntegerValueRangeLattice>(point);
+                  //auto res=solver.lookupState<KnownBitsRangeLattice>(point);
+                  if(res!=nullptr){
+                      llvm::errs()<<"Known Bits: ";
+                      res->print(llvm::errs());
+                      llvm::errs()<<"\n";
+                  }else {
+                      llvm::errs() << res << "\n";
+                  }
+
+              }
+              funcOp->walk([&](Operation* op){
+                  if(op->getNumResults()==0){
+                      return;
+                  }
+                  ProgramPoint point(op->getResult(0));
+                 auto intRes=solver.lookupState<dataflow::IntegerValueRangeLattice>(point);
+                 auto res=solver.lookupState<KnownBitsRangeLattice>(point);
+                 point.print(llvm::errs());
+                 llvm::errs()<<"\n";
+                 if(res!=nullptr){
+                     std::string resStr=toString(res->getValue().getValue());
+                     Twine tmpTwine(resStr);
+                     StringAttr kb=StringAttr::get(&context, tmpTwine);
+                     op->setAttr("kb", kb);
+                     llvm::errs()<<"Known Bits: ";
+                     res->print(llvm::errs());
+                     llvm::errs()<<"\n";
+                 }else{
+                     llvm::errs()<<res<<"\n";
+                 }
+                 intRes->dump();
+                 llvm::errs()<<"\n";
+                 //auto it = solver.analysisStates.find({ProgramPoint(op), TypeID::get<dataflow::IntegerValueRangeLattice>()});
+
+              });
+          }else{
+              llvm::errs()<<"obtaining result failed\n";
+          }
+      }
+  }
+  moduleOp.print(llvm::errs());
   return 0;
 }
 

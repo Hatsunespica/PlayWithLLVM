@@ -23,7 +23,8 @@ include(AddLLVM)
 
 set(PROJECT_OBJ "mlir-mutate")
 add_library(${PROJECT_OBJ} OBJECT
-    mutatorUtil.cpp)
+    mutatorUtil.cpp
+        KnownBits.cpp)
 
 # Check MLIR and LLVM headers and include
 target_include_directories(${PROJECT_OBJ} PUBLIC ${LLVM_INCLUDE_DIRS})
@@ -64,4 +65,6 @@ endif()
 # Build executable
 add_executable(mlir-test mlir-test.cpp)
 target_link_libraries(mlir-test ${PROJECT_LIB})
+add_executable(mlir-random mlir-random.cpp)
+target_link_libraries(mlir-random ${PROJECT_LIB})
 
