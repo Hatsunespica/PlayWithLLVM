@@ -4506,27 +4506,27 @@ module {
     %124 = comb.mux bin %121, %123, %locked : i1
     %125 = comb.extract %118 from 7 {sv.namehint = "deq_id_hi_2"} : (i15) -> i8
     %c0_i8_0 = hw.constant 0 : i8
-    %126 = comb.icmp bin ne %125, %c0_i8 {sv.namehint = "deq_id_hi_3"} : i8
+    %126 = comb.icmp bin ne %c0_i8_0, %c0_i8 {sv.namehint = "deq_id_hi_3"} : i8
     %127 = comb.extract %118 from 8 : (i15) -> i7
     %128 = comb.extract %118 from 0 : (i15) -> i7
     %c0_i7 = hw.constant 0 : i7
-    %129 = comb.or %127, %128 {sv.namehint = "_deq_id_T_1"} : i7
+    %129 = comb.or %c0_i7, %128 {sv.namehint = "_deq_id_T_1"} : i7
     %130 = comb.extract %129 from 3 {sv.namehint = "deq_id_hi_4"} : (i7) -> i4
     %c0_i4_1 = hw.constant 0 : i4
-    %131 = comb.icmp bin ne %130, %c0_i4 {sv.namehint = "deq_id_hi_5"} : i4
+    %131 = comb.icmp bin ne %c0_i4_1, %c0_i4 {sv.namehint = "deq_id_hi_5"} : i4
     %132 = comb.extract %129 from 4 : (i7) -> i3
     %133 = comb.extract %129 from 0 : (i7) -> i3
     %c0_i3_2 = hw.constant 0 : i3
-    %134 = comb.or %132, %133 {sv.namehint = "_deq_id_T_2"} : i3
+    %134 = comb.or %c0_i3_2, %133 {sv.namehint = "_deq_id_T_2"} : i3
     %135 = comb.extract %134 from 1 {sv.namehint = "deq_id_hi_6"} : (i3) -> i2
     %136 = comb.icmp bin ne %135, %c0_i2 {sv.namehint = "deq_id_hi_7"} : i2
     %137 = comb.extract %134 from 2 : (i3) -> i1
     %138 = comb.extract %134 from 0 : (i3) -> i1
     %false_3 = hw.constant false
-    %139 = comb.or %137, %138 {sv.namehint = "_deq_id_T_3"} : i1
+    %139 = comb.or %false_3, %138 {sv.namehint = "_deq_id_T_3"} : i1
     %false_4 = hw.constant false
     %false_5 = hw.constant false
-    %140 = comb.concat %126, %131, %136, %139 : i1, i1, i1, i1
+    %140 = comb.concat %false_4, %false_5, %136, %139 : i1, i1, i1, i1
     %141 = comb.mux bin %121, %140, %deq_id : i4
     %142 = hw.array_create %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %qs_queue_2.io_deq_bits_id, %qs_queue_1.io_deq_bits_id, %qs_queue_0.io_deq_bits_id : i4
     %143 = hw.array_get %142[%deq_id] {sv.namehint = "bundleIn_0_r_bits_id"} : !hw.array<16xi4>, i4
@@ -31770,46 +31770,36 @@ module {
     %41 = comb.extract %29 from 0 {sv.namehint = "_which_T_23"} : (i16) -> i1
     %42 = comb.extract %29 from 4 {sv.namehint = "_which_T_24"} : (i16) -> i1
     %false_0 = hw.constant false
+    %43 = comb.or bin %io_interrupts_debug, %30, %31, %32, %33, %34, %35, %36, %37, %38, %39, %40, %41, %false_0 {sv.namehint = "anyInterrupt"} : i1
     %false_1 = hw.constant false
-    %false_2 = hw.constant false
-    %false_3 = hw.constant false
-    %false_4 = hw.constant false
-    %false_5 = hw.constant false
-    %false_6 = hw.constant false
-    %false_7 = hw.constant false
-    %false_8 = hw.constant false
-    %false_9 = hw.constant false
-    %false_10 = hw.constant false
-    %43 = comb.or bin %io_interrupts_debug, %30, %31, %32, %33, %34, %35, %36, %37, %38, %39, %40, %41, %42 {sv.namehint = "anyInterrupt"} : i1
-    %false_11 = hw.constant false
-    %44 = comb.xor %41, %true : i1
-    %true_12 = hw.constant true
-    %45 = comb.concat %false, %44, %c0_i2 {sv.namehint = "_which_T_51"} : i1, i1, i2
+    %44 = comb.xor %false_1, %true : i1
+    %true_2 = hw.constant true
+    %45 = comb.concat %false, %true_2, %c0_i2 {sv.namehint = "_which_T_51"} : i1, i1, i2
     %c4_i4 = hw.constant 4 : i4
-    %false_13 = hw.constant false
-    %46 = comb.mux bin %40, %c-8_i4, %45 {sv.namehint = "_which_T_52"} : i4
-    %c4_i4_14 = hw.constant 4 : i4
-    %false_15 = hw.constant false
-    %47 = comb.mux bin %39, %c5_i4, %46 {sv.namehint = "_which_T_53"} : i4
-    %c4_i4_16 = hw.constant 4 : i4
-    %false_17 = hw.constant false
-    %48 = comb.mux bin %38, %c1_i4, %47 {sv.namehint = "_which_T_54"} : i4
-    %c4_i4_18 = hw.constant 4 : i4
-    %false_19 = hw.constant false
-    %49 = comb.mux bin %37, %c-7_i4, %48 {sv.namehint = "_which_T_55"} : i4
-    %c4_i4_20 = hw.constant 4 : i4
-    %50 = comb.mux bin %36, %c7_i4, %49 {sv.namehint = "_which_T_56"} : i4
+    %false_3 = hw.constant false
+    %46 = comb.mux bin %false_3, %c-8_i4, %c4_i4 {sv.namehint = "_which_T_52"} : i4
+    %c4_i4_4 = hw.constant 4 : i4
+    %false_5 = hw.constant false
+    %47 = comb.mux bin %false_5, %c5_i4, %c4_i4_4 {sv.namehint = "_which_T_53"} : i4
+    %c4_i4_6 = hw.constant 4 : i4
+    %false_7 = hw.constant false
+    %48 = comb.mux bin %false_7, %c1_i4, %c4_i4_6 {sv.namehint = "_which_T_54"} : i4
+    %c4_i4_8 = hw.constant 4 : i4
+    %false_9 = hw.constant false
+    %49 = comb.mux bin %false_9, %c-7_i4, %c4_i4_8 {sv.namehint = "_which_T_55"} : i4
+    %c4_i4_10 = hw.constant 4 : i4
+    %50 = comb.mux bin %36, %c7_i4, %c4_i4_10 {sv.namehint = "_which_T_56"} : i4
     %51 = comb.mux bin %35, %c3_i4, %50 {sv.namehint = "_which_T_57"} : i4
-    %false_21 = hw.constant false
-    %52 = comb.mux bin %34, %c-5_i4, %51 {sv.namehint = "_which_T_58"} : i4
-    %false_22 = hw.constant false
-    %53 = comb.mux bin %33, %c-4_i4, %52 {sv.namehint = "_which_T_59"} : i4
-    %false_23 = hw.constant false
-    %54 = comb.mux bin %32, %c-3_i4, %53 {sv.namehint = "_which_T_60"} : i4
-    %false_24 = hw.constant false
-    %55 = comb.mux bin %31, %c-2_i4, %54 {sv.namehint = "_which_T_61"} : i4
-    %false_25 = hw.constant false
-    %56 = comb.mux bin %30, %c-1_i4, %55 {sv.namehint = "_which_T_63"} : i4
+    %false_11 = hw.constant false
+    %52 = comb.mux bin %false_11, %c-5_i4, %51 {sv.namehint = "_which_T_58"} : i4
+    %false_12 = hw.constant false
+    %53 = comb.mux bin %false_12, %c-4_i4, %52 {sv.namehint = "_which_T_59"} : i4
+    %false_13 = hw.constant false
+    %54 = comb.mux bin %false_13, %c-3_i4, %53 {sv.namehint = "_which_T_60"} : i4
+    %false_14 = hw.constant false
+    %55 = comb.mux bin %false_14, %c-2_i4, %54 {sv.namehint = "_which_T_61"} : i4
+    %false_15 = hw.constant false
+    %56 = comb.mux bin %false_15, %c-1_i4, %55 {sv.namehint = "_which_T_63"} : i4
     %57 = comb.mux bin %io_interrupts_debug, %c-2_i4, %56 {sv.namehint = "whichInterrupt"} : i4
     %58 = comb.concat %c0_i60, %57 : i60, i4
     %59 = comb.add %58, %c-9223372036854775808_i64 {sv.namehint = "_interruptCause_T_3"} : i64
@@ -32838,7 +32828,7 @@ module {
     %105 = comb.extract %73 from 1 : (i8) -> i1
     %106 = comb.extract %80 from 5 : (i55) -> i1
     %false_0 = hw.constant false
-    %107 = comb.or %106, %87 : i1
+    %107 = comb.or %false_0, %87 : i1
     %108 = comb.extract %21 from 19 : (i32) -> i1
     %109 = comb.extract %80 from 0 : (i55) -> i3
     %110 = comb.concat %109, %false : i3, i1
@@ -32943,7 +32933,7 @@ module {
     %209 = comb.extract %167 from 1 : (i8) -> i1
     %210 = comb.extract %174 from 5 : (i51) -> i1
     %false_1 = hw.constant false
-    %211 = comb.or %210, %185 : i1
+    %211 = comb.or %false_1, %185 : i1
     %212 = comb.extract %121 from 51 : (i65) -> i1
     %213 = comb.extract %174 from 0 : (i51) -> i3
     %214 = comb.concat %213, %false : i3, i1
@@ -34297,9 +34287,9 @@ module {
     %869 = comb.concat %868, %828, %834, %843, %846, %854, %859 : i33, i11, i8, i1, i6, i4, i1
     %870 = comb.extract %867 from 3 : (i4) -> i1
     %false_0 = hw.constant false
-    %871 = comb.replicate %870 : (i1) -> i60
+    %871 = comb.replicate %false_0 : (i1) -> i60
     %c0_i60_1 = hw.constant 0 : i60
-    %872 = comb.concat %871, %867 : i60, i4
+    %872 = comb.concat %c0_i60_1, %867 : i60, i4
     %873 = hw.array_create %869, %820, %872, %c0_i64 : i64
     %874 = hw.array_get %873[%ex_ctrl_sel_alu2] {sv.namehint = "ex_op2"} : !hw.array<4xi64>, i2
     %alu.io_out, %alu.io_adder_out, %alu.io_cmp_out = hw.instance "alu" @ALU(io_dw: %ex_ctrl_alu_dw: i1, io_fn: %ex_ctrl_alu_fn: i4, io_in2: %874: i64, io_in1: %866: i64) -> (io_out: i64, io_adder_out: i64, io_cmp_out: i1) {sv.namehint = "alu.io_out"}
@@ -34433,9 +34423,9 @@ module {
     %1001 = comb.mux bin %mem_reg_rvc, %c2_i4, %c4_i4 {sv.namehint = "_mem_br_target_T_6"} : i4
     %1002 = comb.extract %1001 from 3 : (i4) -> i1
     %false_2 = hw.constant false
-    %1003 = comb.replicate %1002 : (i1) -> i28
+    %1003 = comb.replicate %false_2 : (i1) -> i28
     %c0_i28 = hw.constant 0 : i28
-    %1004 = comb.concat %1003, %1001 : i28, i4
+    %1004 = comb.concat %c0_i28, %1001 : i28, i4
     %1005 = comb.mux bin %mem_ctrl_jal, %1000, %1004 {sv.namehint = "_mem_br_target_T_7"} : i32
     %1006 = comb.mux bin %989, %997, %1005 {sv.namehint = "_mem_br_target_T_8"} : i32
     %1007 = comb.extract %1006 from 31 : (i32) -> i1
