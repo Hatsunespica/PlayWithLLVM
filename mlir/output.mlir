@@ -1699,7 +1699,8 @@ module {
         sv.if %903 {
           sv.fatal 1
         }
-        sv.if %903 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %1033 = comb.and bin %STOP_COND_, %588 : i1
@@ -1928,7 +1929,8 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %160 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %160 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %161 = comb.and bin %STOP_COND_, %89 : i1
@@ -1940,7 +1942,8 @@ module {
           sv.fatal 1
         }
         %163 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %163 {
+        %false_1 = hw.constant false
+        sv.if %false_1 {
           sv.fatal 1
         }
       }
@@ -3691,7 +3694,8 @@ module {
         sv.if %903 {
           sv.fatal 1
         }
-        sv.if %903 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %1033 = comb.and bin %STOP_COND_, %588 : i1
@@ -5559,7 +5563,8 @@ module {
         sv.if %483 {
           sv.fatal 1
         }
-        sv.if %483 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %573 = comb.and bin %STOP_COND_, %480 : i1
@@ -6873,7 +6878,8 @@ module {
         sv.if %626 {
           sv.fatal 1
         }
-        sv.if %528 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %627 = comb.and bin %STOP_COND_, %525 : i1
@@ -7922,7 +7928,8 @@ module {
         sv.if %626 {
           sv.fatal 1
         }
-        sv.if %528 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %627 = comb.and bin %STOP_COND_, %525 : i1
@@ -8112,7 +8119,8 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %225 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %225 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %226 = comb.and bin %STOP_COND_, %146 : i1
@@ -8124,7 +8132,8 @@ module {
           sv.fatal 1
         }
         %228 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %228 {
+        %false_1 = hw.constant false
+        sv.if %false_1 {
           sv.fatal 1
         }
       }
@@ -9256,7 +9265,8 @@ module {
         sv.if %539 {
           sv.fatal 1
         }
-        sv.if %539 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %639 = comb.and bin %STOP_COND_, %536 : i1
@@ -10392,7 +10402,8 @@ module {
         sv.if %541 {
           sv.fatal 1
         }
-        sv.if %541 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %641 = comb.and bin %STOP_COND_, %538 : i1
@@ -10969,7 +10980,8 @@ module {
           sv.fatal 1
         }
         %602 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %602 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -12033,7 +12045,8 @@ module {
         sv.if %476 {
           sv.fatal 1
         }
-        sv.if %476 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %565 = comb.and bin %STOP_COND_, %473 : i1
@@ -12110,7 +12123,8 @@ module {
       sv.always posedge %1 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %35 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %35 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -13138,7 +13152,8 @@ module {
         sv.if %511 {
           sv.fatal 1
         }
-        sv.if %511 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %611 = comb.and bin %STOP_COND_, %508 : i1
@@ -14162,7 +14177,8 @@ module {
         sv.if %453 {
           sv.fatal 1
         }
-        sv.if %453 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %535 = comb.and bin %STOP_COND_, %450 : i1
@@ -14313,7 +14329,8 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %79 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %79 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %80 = comb.and bin %STOP_COND_, %74 : i1
@@ -15242,7 +15259,8 @@ module {
         sv.if %522 {
           sv.fatal 1
         }
-        sv.if %442 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %523 = comb.and bin %STOP_COND_, %439 : i1
@@ -15393,7 +15411,8 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %79 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %79 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %80 = comb.and bin %STOP_COND_, %74 : i1
@@ -16318,7 +16337,8 @@ module {
         sv.if %519 {
           sv.fatal 1
         }
-        sv.if %439 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %520 = comb.and bin %STOP_COND_, %436 : i1
@@ -16469,7 +16489,8 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %79 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %79 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %80 = comb.and bin %STOP_COND_, %74 : i1
@@ -17290,7 +17311,8 @@ module {
         sv.if %349 {
           sv.fatal 1
         }
-        sv.if %349 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -17424,7 +17446,8 @@ module {
         sv.if %65 {
           sv.fatal 1
         }
-        sv.if %65 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %66 = comb.and bin %STOP_COND_, %63 : i1
@@ -18355,7 +18378,8 @@ module {
         sv.if %419 {
           sv.fatal 1
         }
-        sv.if %419 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %488 = comb.and bin %STOP_COND_, %416 : i1
@@ -19258,7 +19282,8 @@ module {
         sv.if %419 {
           sv.fatal 1
         }
-        sv.if %419 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %488 = comb.and bin %STOP_COND_, %416 : i1
@@ -20904,7 +20929,8 @@ module {
         sv.if %419 {
           sv.fatal 1
         }
-        sv.if %419 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %488 = comb.and bin %STOP_COND_, %416 : i1
@@ -23012,7 +23038,8 @@ module {
         sv.if %767 {
           sv.fatal 1
         }
-        sv.if %767 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %897 = comb.and bin %STOP_COND_, %458 : i1
@@ -24023,7 +24050,8 @@ module {
           sv.fatal 1
         }
         %475 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %475 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %476 = comb.and bin %STOP_COND_, %266 : i1
@@ -24035,7 +24063,8 @@ module {
           sv.fatal 1
         }
         %478 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %478 {
+        %false_1 = hw.constant false
+        sv.if %false_1 {
           sv.fatal 1
         }
       }
@@ -25139,7 +25168,8 @@ module {
         sv.if %419 {
           sv.fatal 1
         }
-        sv.if %419 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %488 = comb.and bin %STOP_COND_, %416 : i1
@@ -26252,7 +26282,8 @@ module {
           sv.fatal 1
         }
         %977 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %977 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %978 = comb.and bin %STOP_COND_, %101 : i1
@@ -26283,7 +26314,8 @@ module {
           sv.fatal 1
         }
         %984 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %984 {
+        %false_1 = hw.constant false
+        sv.if %false_1 {
           sv.fatal 1
         }
         %985 = comb.and bin %STOP_COND_, %120 : i1
@@ -26318,7 +26350,8 @@ module {
           sv.fatal 1
         }
         %992 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %992 {
+        %false_2 = hw.constant false
+        sv.if %false_2 {
           sv.fatal 1
         }
         %993 = comb.and bin %STOP_COND_, %139 : i1
@@ -26341,7 +26374,8 @@ module {
           sv.fatal 1
         }
         %997 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %997 {
+        %false_3 = hw.constant false
+        sv.if %false_3 {
           sv.fatal 1
         }
         %998 = comb.and bin %STOP_COND_, %159 : i1
@@ -26361,7 +26395,8 @@ module {
           sv.fatal 1
         }
         %1002 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1002 {
+        %false_4 = hw.constant false
+        sv.if %false_4 {
           sv.fatal 1
         }
         %1003 = comb.and bin %STOP_COND_, %165 : i1
@@ -26381,7 +26416,8 @@ module {
           sv.fatal 1
         }
         %1007 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1007 {
+        %false_5 = hw.constant false
+        sv.if %false_5 {
           sv.fatal 1
         }
         %1008 = comb.and bin %STOP_COND_, %181 : i1
@@ -26401,7 +26437,8 @@ module {
           sv.fatal 1
         }
         %1012 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1012 {
+        %false_6 = hw.constant false
+        sv.if %false_6 {
           sv.fatal 1
         }
         %1013 = comb.and bin %STOP_COND_, %190 : i1
@@ -26421,7 +26458,8 @@ module {
           sv.fatal 1
         }
         %1017 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1017 {
+        %false_7 = hw.constant false
+        sv.if %false_7 {
           sv.fatal 1
         }
         %1018 = comb.and bin %STOP_COND_, %203 : i1
@@ -26444,7 +26482,8 @@ module {
           sv.fatal 1
         }
         %1022 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1022 {
+        %false_8 = hw.constant false
+        sv.if %false_8 {
           sv.fatal 1
         }
         %1023 = comb.and bin %STOP_COND_, %218 : i1
@@ -26464,7 +26503,8 @@ module {
           sv.fatal 1
         }
         %1027 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1027 {
+        %false_9 = hw.constant false
+        sv.if %false_9 {
           sv.fatal 1
         }
         sv.if %974 {
@@ -26490,7 +26530,8 @@ module {
           sv.fatal 1
         }
         %1032 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1032 {
+        %false_10 = hw.constant false
+        sv.if %false_10 {
           sv.fatal 1
         }
         sv.if %974 {
@@ -26516,7 +26557,8 @@ module {
           sv.fatal 1
         }
         %1037 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1037 {
+        %false_11 = hw.constant false
+        sv.if %false_11 {
           sv.fatal 1
         }
         %1038 = comb.and bin %STOP_COND_, %253 : i1
@@ -26531,7 +26573,8 @@ module {
           sv.fatal 1
         }
         %1040 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1040 {
+        %false_12 = hw.constant false
+        sv.if %false_12 {
           sv.fatal 1
         }
         %1041 = comb.and bin %STOP_COND_, %257 : i1
@@ -26546,7 +26589,8 @@ module {
           sv.fatal 1
         }
         %1043 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1043 {
+        %false_13 = hw.constant false
+        sv.if %false_13 {
           sv.fatal 1
         }
         %1044 = comb.and bin %STOP_COND_, %261 : i1
@@ -26745,7 +26789,8 @@ module {
           sv.fatal 1
         }
         %1083 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1083 {
+        %false_14 = hw.constant false
+        sv.if %false_14 {
           sv.fatal 1
         }
         %1084 = comb.and bin %STOP_COND_, %490 : i1
@@ -26768,7 +26813,8 @@ module {
           sv.fatal 1
         }
         %1088 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1088 {
+        %false_15 = hw.constant false
+        sv.if %false_15 {
           sv.fatal 1
         }
         %1089 = comb.and bin %STOP_COND_, %502 : i1
@@ -26792,7 +26838,8 @@ module {
           sv.fatal 1
         }
         %1094 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1094 {
+        %false_16 = hw.constant false
+        sv.if %false_16 {
           sv.fatal 1
         }
         %1095 = comb.and bin %STOP_COND_, %527 : i1
@@ -26819,7 +26866,8 @@ module {
           sv.fatal 1
         }
         %1100 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1100 {
+        %false_17 = hw.constant false
+        sv.if %false_17 {
           sv.fatal 1
         }
         %1101 = comb.and bin %STOP_COND_, %537 : i1
@@ -26839,7 +26887,8 @@ module {
           sv.fatal 1
         }
         %1105 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1105 {
+        %false_18 = hw.constant false
+        sv.if %false_18 {
           sv.fatal 1
         }
         %1106 = comb.and bin %STOP_COND_, %543 : i1
@@ -26858,7 +26907,8 @@ module {
           sv.fatal 1
         }
         %1109 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1109 {
+        %false_19 = hw.constant false
+        sv.if %false_19 {
           sv.fatal 1
         }
         %1110 = comb.and bin %STOP_COND_, %551 : i1
@@ -26874,7 +26924,8 @@ module {
           sv.fatal 1
         }
         %1113 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1113 {
+        %false_20 = hw.constant false
+        sv.if %false_20 {
           sv.fatal 1
         }
         %1114 = comb.and bin %STOP_COND_, %556 : i1
@@ -26888,7 +26939,8 @@ module {
         sv.if %974 {
           sv.fatal 1
         }
-        sv.if %974 {
+        %false_21 = hw.constant false
+        sv.if %false_21 {
           sv.fatal 1
         }
         %1116 = comb.and bin %STOP_COND_, %573 : i1
@@ -27743,7 +27795,8 @@ module {
         sv.if %257 {
           sv.fatal 1
         }
-        sv.if %257 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %296 = comb.and bin %STOP_COND_, %254 : i1
@@ -27850,7 +27903,8 @@ module {
         sv.if %106 {
           sv.fatal 1
         }
-        sv.if %104 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -30279,7 +30333,8 @@ module {
           sv.fatal 1
         }
         %1250 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1250 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %1251 = comb.and bin %STOP_COND_, %311 : i1
@@ -30518,7 +30573,8 @@ module {
         sv.if %100 {
           sv.fatal 1
         }
-        sv.if %100 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -31048,7 +31104,8 @@ module {
         sv.if %1 {
           sv.fatal 1
         }
-        sv.if %1 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -31459,7 +31516,8 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %106 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %106 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -32174,7 +32232,8 @@ module {
           sv.fatal 1
         }
         %841 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %841 {
+        %false_16 = hw.constant false
+        sv.if %false_16 {
           sv.fatal 1
         }
         %842 = comb.and bin %STOP_COND_, %418 : i1
@@ -36610,7 +36669,8 @@ module {
         sv.if %1035 {
           sv.fatal 1
         }
-        sv.if %1035 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %1184 = comb.and bin %STOP_COND_, %623 : i1
@@ -37879,7 +37939,8 @@ module {
         sv.if %424 {
           sv.fatal 1
         }
-        sv.if %424 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %504 = comb.and bin %STOP_COND_, %421 : i1
@@ -37958,7 +38019,8 @@ module {
         sv.if %30 {
           sv.fatal 1
         }
-        sv.if %30 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -38857,7 +38919,8 @@ module {
         sv.if %491 {
           sv.fatal 1
         }
-        sv.if %413 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %492 = comb.and bin %STOP_COND_, %410 : i1
@@ -39661,7 +39724,8 @@ module {
         sv.if %307 {
           sv.fatal 1
         }
-        sv.if %255 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %308 = comb.and bin %STOP_COND_, %252 : i1
@@ -39783,7 +39847,8 @@ module {
         sv.if %108 {
           sv.fatal 1
         }
-        sv.if %106 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
@@ -40434,7 +40499,8 @@ module {
         sv.if %224 {
           sv.fatal 1
         }
-        sv.if %193 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %225 = comb.and bin %STOP_COND_, %190 : i1
@@ -41276,7 +41342,8 @@ module {
         sv.if %378 {
           sv.fatal 1
         }
-        sv.if %317 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %379 = comb.and bin %STOP_COND_, %314 : i1
@@ -41994,7 +42061,8 @@ module {
         sv.if %266 {
           sv.fatal 1
         }
-        sv.if %226 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %267 = comb.and bin %STOP_COND_, %223 : i1
@@ -42049,10 +42117,12 @@ module {
           sv.fatal 1
         }
         %36 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %36 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
-        sv.if %35 {
+        %false_1 = hw.constant false
+        sv.if %false_1 {
           sv.fatal 1
         }
       }
@@ -42861,7 +42931,8 @@ module {
         sv.if %329 {
           sv.fatal 1
         }
-        sv.if %329 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %397 = comb.and bin %STOP_COND_, %326 : i1
@@ -44089,7 +44160,8 @@ module {
         sv.if %480 {
           sv.fatal 1
         }
-        sv.if %402 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %481 = comb.and bin %STOP_COND_, %399 : i1
@@ -44975,7 +45047,8 @@ module {
         sv.if %482 {
           sv.fatal 1
         }
-        sv.if %405 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %483 = comb.and bin %STOP_COND_, %402 : i1
@@ -46260,7 +46333,8 @@ module {
           sv.fatal 1
         }
         %1082 = comb.and bin %STOP_COND_, %false : i1
-        sv.if %1082 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
         %1083 = comb.and bin %STOP_COND_, %1062 : i1
@@ -47434,7 +47508,8 @@ module {
         sv.if %335 {
           sv.fatal 1
         }
-        sv.if %335 {
+        %false_0 = hw.constant false
+        sv.if %false_0 {
           sv.fatal 1
         }
       }
