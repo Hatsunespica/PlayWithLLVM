@@ -1829,6 +1829,9 @@ module {
         sv.if %1205 {
           sv.fatal 1
         }
+        sv.if %1049 {
+          sv.fatal 1
+        }
         %1206 = comb.and bin %STOP_COND_, %637 : i1
         sv.if %1206 {
           sv.fatal 1
@@ -2117,12 +2120,20 @@ module {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %160 = comb.and bin %STOP_COND_, %89 : i1
+        %160 = comb.and bin %STOP_COND_, %false : i1
         sv.if %160 {
           sv.fatal 1
         }
-        %161 = comb.and bin %STOP_COND_, %94 : i1
+        %161 = comb.and bin %STOP_COND_, %89 : i1
         sv.if %161 {
+          sv.fatal 1
+        }
+        %162 = comb.and bin %STOP_COND_, %94 : i1
+        sv.if %162 {
+          sv.fatal 1
+        }
+        %163 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %163 {
           sv.fatal 1
         }
       }
@@ -2513,57 +2524,57 @@ module {
     %true = hw.constant true
     %c0_i8 = hw.constant 0 : i8
     %0 = seq.from_clock %clock
-    %qs_queue_0.io_enq_ready, %qs_queue_0.io_deq_bits_id, %qs_queue_0.io_deq_bits_data, %qs_queue_0.io_deq_bits_resp, %qs_queue_0.io_deq_bits_echo_tl_state_size, %qs_queue_0.io_deq_bits_echo_tl_state_source, %qs_queue_0.io_deq_bits_last = hw.instance "qs_queue_0" @Queue_5(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %168: i1, io_enq_bits_id: %auto_out_r_bits_id: i4, io_enq_bits_data: %auto_out_r_bits_data: i64, io_enq_bits_resp: %auto_out_r_bits_resp: i2, io_enq_bits_echo_tl_state_size: %auto_out_r_bits_echo_tl_state_size: i4, io_enq_bits_echo_tl_state_source: %auto_out_r_bits_echo_tl_state_source: i2, io_enq_bits_last: %auto_out_r_bits_last: i1, io_deq_ready: %150: i1) -> (io_enq_ready: i1, io_deq_bits_id: i4, io_deq_bits_data: i64, io_deq_bits_resp: i2, io_deq_bits_echo_tl_state_size: i4, io_deq_bits_echo_tl_state_source: i2, io_deq_bits_last: i1) {sv.namehint = "enq_readys_0"}
-    %qs_queue_1.io_enq_ready, %qs_queue_1.io_deq_bits_id, %qs_queue_1.io_deq_bits_data, %qs_queue_1.io_deq_bits_resp, %qs_queue_1.io_deq_bits_echo_tl_state_size, %qs_queue_1.io_deq_bits_echo_tl_state_source, %qs_queue_1.io_deq_bits_last = hw.instance "qs_queue_1" @Queue_5(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %169: i1, io_enq_bits_id: %auto_out_r_bits_id: i4, io_enq_bits_data: %auto_out_r_bits_data: i64, io_enq_bits_resp: %auto_out_r_bits_resp: i2, io_enq_bits_echo_tl_state_size: %auto_out_r_bits_echo_tl_state_size: i4, io_enq_bits_echo_tl_state_source: %auto_out_r_bits_echo_tl_state_source: i2, io_enq_bits_last: %auto_out_r_bits_last: i1, io_deq_ready: %151: i1) -> (io_enq_ready: i1, io_deq_bits_id: i4, io_deq_bits_data: i64, io_deq_bits_resp: i2, io_deq_bits_echo_tl_state_size: i4, io_deq_bits_echo_tl_state_source: i2, io_deq_bits_last: i1) {sv.namehint = "enq_readys_1"}
-    %qs_queue_2.io_enq_ready, %qs_queue_2.io_deq_bits_id, %qs_queue_2.io_deq_bits_data, %qs_queue_2.io_deq_bits_resp, %qs_queue_2.io_deq_bits_echo_tl_state_size, %qs_queue_2.io_deq_bits_echo_tl_state_source, %qs_queue_2.io_deq_bits_last = hw.instance "qs_queue_2" @Queue_5(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %170: i1, io_enq_bits_id: %auto_out_r_bits_id: i4, io_enq_bits_data: %auto_out_r_bits_data: i64, io_enq_bits_resp: %auto_out_r_bits_resp: i2, io_enq_bits_echo_tl_state_size: %auto_out_r_bits_echo_tl_state_size: i4, io_enq_bits_echo_tl_state_source: %auto_out_r_bits_echo_tl_state_source: i2, io_enq_bits_last: %auto_out_r_bits_last: i1, io_deq_ready: %152: i1) -> (io_enq_ready: i1, io_deq_bits_id: i4, io_deq_bits_data: i64, io_deq_bits_resp: i2, io_deq_bits_echo_tl_state_size: i4, io_deq_bits_echo_tl_state_source: i2, io_deq_bits_last: i1) {sv.namehint = "enq_readys_2"}
-    %1 = comb.xor bin %171, %true {sv.namehint = "_qs_T"} : i1
+    %qs_queue_0.io_enq_ready, %qs_queue_0.io_deq_bits_id, %qs_queue_0.io_deq_bits_data, %qs_queue_0.io_deq_bits_resp, %qs_queue_0.io_deq_bits_echo_tl_state_size, %qs_queue_0.io_deq_bits_echo_tl_state_source, %qs_queue_0.io_deq_bits_last = hw.instance "qs_queue_0" @Queue_5(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %172: i1, io_enq_bits_id: %auto_out_r_bits_id: i4, io_enq_bits_data: %auto_out_r_bits_data: i64, io_enq_bits_resp: %auto_out_r_bits_resp: i2, io_enq_bits_echo_tl_state_size: %auto_out_r_bits_echo_tl_state_size: i4, io_enq_bits_echo_tl_state_source: %auto_out_r_bits_echo_tl_state_source: i2, io_enq_bits_last: %auto_out_r_bits_last: i1, io_deq_ready: %154: i1) -> (io_enq_ready: i1, io_deq_bits_id: i4, io_deq_bits_data: i64, io_deq_bits_resp: i2, io_deq_bits_echo_tl_state_size: i4, io_deq_bits_echo_tl_state_source: i2, io_deq_bits_last: i1) {sv.namehint = "enq_readys_0"}
+    %qs_queue_1.io_enq_ready, %qs_queue_1.io_deq_bits_id, %qs_queue_1.io_deq_bits_data, %qs_queue_1.io_deq_bits_resp, %qs_queue_1.io_deq_bits_echo_tl_state_size, %qs_queue_1.io_deq_bits_echo_tl_state_source, %qs_queue_1.io_deq_bits_last = hw.instance "qs_queue_1" @Queue_5(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %173: i1, io_enq_bits_id: %auto_out_r_bits_id: i4, io_enq_bits_data: %auto_out_r_bits_data: i64, io_enq_bits_resp: %auto_out_r_bits_resp: i2, io_enq_bits_echo_tl_state_size: %auto_out_r_bits_echo_tl_state_size: i4, io_enq_bits_echo_tl_state_source: %auto_out_r_bits_echo_tl_state_source: i2, io_enq_bits_last: %auto_out_r_bits_last: i1, io_deq_ready: %155: i1) -> (io_enq_ready: i1, io_deq_bits_id: i4, io_deq_bits_data: i64, io_deq_bits_resp: i2, io_deq_bits_echo_tl_state_size: i4, io_deq_bits_echo_tl_state_source: i2, io_deq_bits_last: i1) {sv.namehint = "enq_readys_1"}
+    %qs_queue_2.io_enq_ready, %qs_queue_2.io_deq_bits_id, %qs_queue_2.io_deq_bits_data, %qs_queue_2.io_deq_bits_resp, %qs_queue_2.io_deq_bits_echo_tl_state_size, %qs_queue_2.io_deq_bits_echo_tl_state_source, %qs_queue_2.io_deq_bits_last = hw.instance "qs_queue_2" @Queue_5(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %174: i1, io_enq_bits_id: %auto_out_r_bits_id: i4, io_enq_bits_data: %auto_out_r_bits_data: i64, io_enq_bits_resp: %auto_out_r_bits_resp: i2, io_enq_bits_echo_tl_state_size: %auto_out_r_bits_echo_tl_state_size: i4, io_enq_bits_echo_tl_state_source: %auto_out_r_bits_echo_tl_state_source: i2, io_enq_bits_last: %auto_out_r_bits_last: i1, io_deq_ready: %156: i1) -> (io_enq_ready: i1, io_deq_bits_id: i4, io_deq_bits_data: i64, io_deq_bits_resp: i2, io_deq_bits_echo_tl_state_size: i4, io_deq_bits_echo_tl_state_source: i2, io_deq_bits_last: i1) {sv.namehint = "enq_readys_2"}
+    %1 = comb.xor bin %175, %true {sv.namehint = "_qs_T"} : i1
     %2 = comb.or bin %1, %reset {sv.namehint = "_qs_T_2"} : i1
     %3 = comb.xor bin %2, %true {sv.namehint = "_qs_T_3"} : i1
-    %4 = comb.xor bin %172, %true {sv.namehint = "_qs_T_4"} : i1
+    %4 = comb.xor bin %176, %true {sv.namehint = "_qs_T_4"} : i1
     %5 = comb.or bin %4, %reset {sv.namehint = "_qs_T_6"} : i1
     %6 = comb.xor bin %5, %true {sv.namehint = "_qs_T_7"} : i1
-    %7 = comb.xor bin %173, %true {sv.namehint = "_qs_T_8"} : i1
+    %7 = comb.xor bin %177, %true {sv.namehint = "_qs_T_8"} : i1
     %8 = comb.or bin %7, %reset {sv.namehint = "_qs_T_10"} : i1
     %9 = comb.xor bin %8, %true {sv.namehint = "_qs_T_11"} : i1
-    %10 = comb.xor bin %174, %true {sv.namehint = "_qs_T_12"} : i1
+    %10 = comb.xor bin %178, %true {sv.namehint = "_qs_T_12"} : i1
     %11 = comb.or bin %10, %reset {sv.namehint = "_qs_T_14"} : i1
     %12 = comb.xor bin %11, %true {sv.namehint = "_qs_T_15"} : i1
-    %13 = comb.xor bin %175, %true {sv.namehint = "_qs_T_16"} : i1
+    %13 = comb.xor bin %179, %true {sv.namehint = "_qs_T_16"} : i1
     %14 = comb.or bin %13, %reset {sv.namehint = "_qs_T_18"} : i1
     %15 = comb.xor bin %14, %true {sv.namehint = "_qs_T_19"} : i1
-    %16 = comb.xor bin %176, %true {sv.namehint = "_qs_T_20"} : i1
+    %16 = comb.xor bin %180, %true {sv.namehint = "_qs_T_20"} : i1
     %17 = comb.or bin %16, %reset {sv.namehint = "_qs_T_22"} : i1
     %18 = comb.xor bin %17, %true {sv.namehint = "_qs_T_23"} : i1
-    %19 = comb.xor bin %177, %true {sv.namehint = "_qs_T_24"} : i1
+    %19 = comb.xor bin %181, %true {sv.namehint = "_qs_T_24"} : i1
     %20 = comb.or bin %19, %reset {sv.namehint = "_qs_T_26"} : i1
     %21 = comb.xor bin %20, %true {sv.namehint = "_qs_T_27"} : i1
-    %22 = comb.xor bin %178, %true {sv.namehint = "_qs_T_28"} : i1
+    %22 = comb.xor bin %182, %true {sv.namehint = "_qs_T_28"} : i1
     %23 = comb.or bin %22, %reset {sv.namehint = "_qs_T_30"} : i1
     %24 = comb.xor bin %23, %true {sv.namehint = "_qs_T_31"} : i1
-    %25 = comb.xor bin %179, %true {sv.namehint = "_qs_T_32"} : i1
+    %25 = comb.xor bin %183, %true {sv.namehint = "_qs_T_32"} : i1
     %26 = comb.or bin %25, %reset {sv.namehint = "_qs_T_34"} : i1
     %27 = comb.xor bin %26, %true {sv.namehint = "_qs_T_35"} : i1
-    %28 = comb.xor bin %180, %true {sv.namehint = "_qs_T_36"} : i1
+    %28 = comb.xor bin %184, %true {sv.namehint = "_qs_T_36"} : i1
     %29 = comb.or bin %28, %reset {sv.namehint = "_qs_T_38"} : i1
     %30 = comb.xor bin %29, %true {sv.namehint = "_qs_T_39"} : i1
-    %31 = comb.xor bin %181, %true {sv.namehint = "_qs_T_40"} : i1
+    %31 = comb.xor bin %185, %true {sv.namehint = "_qs_T_40"} : i1
     %32 = comb.or bin %31, %reset {sv.namehint = "_qs_T_42"} : i1
     %33 = comb.xor bin %32, %true {sv.namehint = "_qs_T_43"} : i1
-    %34 = comb.xor bin %182, %true {sv.namehint = "_qs_T_44"} : i1
+    %34 = comb.xor bin %186, %true {sv.namehint = "_qs_T_44"} : i1
     %35 = comb.or bin %34, %reset {sv.namehint = "_qs_T_46"} : i1
     %36 = comb.xor bin %35, %true {sv.namehint = "_qs_T_47"} : i1
-    %37 = comb.xor bin %183, %true {sv.namehint = "_qs_T_48"} : i1
+    %37 = comb.xor bin %187, %true {sv.namehint = "_qs_T_48"} : i1
     %38 = comb.or bin %37, %reset {sv.namehint = "_qs_T_50"} : i1
     %39 = comb.xor bin %38, %true {sv.namehint = "_qs_T_51"} : i1
     %locked = seq.firreg %124 clock %clock reset sync %reset, %false {firrtl.random_init_start = 0 : ui64, sv.namehint = "locked"} : i1
-    %deq_id = seq.firreg %137 clock %clock {firrtl.random_init_start = 1 : ui64} : i4
+    %deq_id = seq.firreg %141 clock %clock {firrtl.random_init_start = 1 : ui64} : i4
     %pending_count = seq.firreg %49 clock %clock reset sync %reset, %c0_i4 {firrtl.random_init_start = 5 : ui64} : i4
     %40 = comb.icmp eq %auto_out_r_bits_id, %c0_i4 {sv.namehint = "enq_OH_bools_0"} : i4
-    %41 = comb.and bin %167, %auto_out_r_valid {sv.namehint = "_pending_inc_T_7"} : i1
+    %41 = comb.and bin %171, %auto_out_r_valid {sv.namehint = "_pending_inc_T_7"} : i1
     %42 = comb.and bin %40, %41, %auto_out_r_bits_last {sv.namehint = "pending_inc"} : i1
     %43 = comb.icmp eq %deq_id, %c0_i4 {sv.namehint = "deq_OH_bools_0"} : i4
     %44 = comb.and bin %auto_in_r_ready, %locked {sv.namehint = "_queue_wire_15_deq_ready_T"} : i1
-    %45 = comb.and bin %43, %44, %149 {sv.namehint = "pending_dec"} : i1
+    %45 = comb.and bin %43, %44, %153 {sv.namehint = "pending_dec"} : i1
     %46 = comb.concat %c0_i3, %42 : i3, i1
     %47 = comb.add %pending_count, %46 {sv.namehint = "_pending_next_T"} : i4
     %48 = comb.concat %c0_i3, %45 : i3, i1
@@ -2581,7 +2592,7 @@ module {
     %59 = comb.icmp eq %auto_out_r_bits_id, %c1_i4 {sv.namehint = "enq_OH_bools_1"} : i4
     %60 = comb.and bin %59, %41, %auto_out_r_bits_last {sv.namehint = "pending_inc_1"} : i1
     %61 = comb.icmp eq %deq_id, %c1_i4 {sv.namehint = "deq_OH_bools_1"} : i4
-    %62 = comb.and bin %61, %44, %149 {sv.namehint = "pending_dec_1"} : i1
+    %62 = comb.and bin %61, %44, %153 {sv.namehint = "pending_dec_1"} : i1
     %63 = comb.concat %c0_i3, %60 : i3, i1
     %64 = comb.add %pending_count_1, %63 {sv.namehint = "_pending_next_T_4"} : i4
     %65 = comb.concat %c0_i3, %62 : i3, i1
@@ -2599,7 +2610,7 @@ module {
     %76 = comb.icmp eq %auto_out_r_bits_id, %c2_i4 {sv.namehint = "enq_OH_bools_2"} : i4
     %77 = comb.and bin %76, %41, %auto_out_r_bits_last {sv.namehint = "pending_inc_2"} : i1
     %78 = comb.icmp eq %deq_id, %c2_i4 {sv.namehint = "deq_OH_bools_2"} : i4
-    %79 = comb.and bin %78, %44, %149 {sv.namehint = "pending_dec_2"} : i1
+    %79 = comb.and bin %78, %44, %153 {sv.namehint = "pending_dec_2"} : i1
     %80 = comb.concat %c0_i3, %77 : i3, i1
     %81 = comb.add %pending_count_2, %80 {sv.namehint = "_pending_next_T_8"} : i4
     %82 = comb.concat %c0_i3, %79 : i3, i1
@@ -2616,80 +2627,80 @@ module {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %184 = comb.and bin %STOP_COND_, %3 : i1
-        sv.if %184 {
-          sv.fatal 1
-        }
-        %185 = comb.and bin %STOP_COND_, %6 : i1
-        sv.if %185 {
-          sv.fatal 1
-        }
-        %186 = comb.and bin %STOP_COND_, %9 : i1
-        sv.if %186 {
-          sv.fatal 1
-        }
-        %187 = comb.and bin %STOP_COND_, %12 : i1
-        sv.if %187 {
-          sv.fatal 1
-        }
-        %188 = comb.and bin %STOP_COND_, %15 : i1
+        %188 = comb.and bin %STOP_COND_, %3 : i1
         sv.if %188 {
           sv.fatal 1
         }
-        %189 = comb.and bin %STOP_COND_, %18 : i1
+        %189 = comb.and bin %STOP_COND_, %6 : i1
         sv.if %189 {
           sv.fatal 1
         }
-        %190 = comb.and bin %STOP_COND_, %21 : i1
+        %190 = comb.and bin %STOP_COND_, %9 : i1
         sv.if %190 {
           sv.fatal 1
         }
-        %191 = comb.and bin %STOP_COND_, %24 : i1
+        %191 = comb.and bin %STOP_COND_, %12 : i1
         sv.if %191 {
           sv.fatal 1
         }
-        %192 = comb.and bin %STOP_COND_, %27 : i1
+        %192 = comb.and bin %STOP_COND_, %15 : i1
         sv.if %192 {
           sv.fatal 1
         }
-        %193 = comb.and bin %STOP_COND_, %30 : i1
+        %193 = comb.and bin %STOP_COND_, %18 : i1
         sv.if %193 {
           sv.fatal 1
         }
-        %194 = comb.and bin %STOP_COND_, %33 : i1
+        %194 = comb.and bin %STOP_COND_, %21 : i1
         sv.if %194 {
           sv.fatal 1
         }
-        %195 = comb.and bin %STOP_COND_, %36 : i1
+        %195 = comb.and bin %STOP_COND_, %24 : i1
         sv.if %195 {
           sv.fatal 1
         }
-        %196 = comb.and bin %STOP_COND_, %39 : i1
+        %196 = comb.and bin %STOP_COND_, %27 : i1
         sv.if %196 {
           sv.fatal 1
         }
-        %197 = comb.and bin %STOP_COND_, %53 : i1
+        %197 = comb.and bin %STOP_COND_, %30 : i1
         sv.if %197 {
           sv.fatal 1
         }
-        %198 = comb.and bin %STOP_COND_, %57 : i1
+        %198 = comb.and bin %STOP_COND_, %33 : i1
         sv.if %198 {
           sv.fatal 1
         }
-        %199 = comb.and bin %STOP_COND_, %70 : i1
+        %199 = comb.and bin %STOP_COND_, %36 : i1
         sv.if %199 {
           sv.fatal 1
         }
-        %200 = comb.and bin %STOP_COND_, %74 : i1
+        %200 = comb.and bin %STOP_COND_, %39 : i1
         sv.if %200 {
           sv.fatal 1
         }
-        %201 = comb.and bin %STOP_COND_, %87 : i1
+        %201 = comb.and bin %STOP_COND_, %53 : i1
         sv.if %201 {
           sv.fatal 1
         }
-        %202 = comb.and bin %STOP_COND_, %91 : i1
+        %202 = comb.and bin %STOP_COND_, %57 : i1
         sv.if %202 {
+          sv.fatal 1
+        }
+        %203 = comb.and bin %STOP_COND_, %70 : i1
+        sv.if %203 {
+          sv.fatal 1
+        }
+        %204 = comb.and bin %STOP_COND_, %74 : i1
+        sv.if %204 {
+          sv.fatal 1
+        }
+        %205 = comb.and bin %STOP_COND_, %87 : i1
+        sv.if %205 {
+          sv.fatal 1
+        }
+        %206 = comb.and bin %STOP_COND_, %91 : i1
+        sv.if %206 {
           sv.fatal 1
         }
       }
@@ -2722,71 +2733,75 @@ module {
     %117 = comb.concat %c0_i13, %92, %75 : i13, i1, i1
     %118 = comb.and %116, %117 {sv.namehint = "deq_id_lo"} : i15
     %119 = comb.xor bin %locked, %true : i1
-    %120 = comb.and bin %44, %149 : i1
+    %120 = comb.and bin %44, %153 : i1
     %121 = comb.or bin %119, %120 : i1
     %122 = comb.concat %92, %75, %58 : i1, i1, i1
     %123 = comb.icmp bin ne %122, %c0_i3 {sv.namehint = "_locked_T"} : i3
     %124 = comb.mux bin %121, %123, %locked : i1
     %125 = comb.extract %118 from 7 {sv.namehint = "deq_id_hi_2"} : (i15) -> i8
     %126 = comb.icmp bin ne %125, %c0_i8 {sv.namehint = "deq_id_hi_3"} : i8
-    %127 = comb.extract %118 from 11 : (i15) -> i4
-    %128 = comb.extract %118 from 3 : (i15) -> i4
-    %129 = comb.or %127, %128 {sv.namehint = "_deq_id_T_1"} : i4
-    %130 = comb.icmp bin ne %129, %c0_i4 {sv.namehint = "deq_id_hi_5"} : i4
-    %131 = comb.extract %129 from 2 : (i4) -> i2
-    %132 = comb.extract %118 from 1 : (i15) -> i2
-    %133 = comb.or %131, %132 {sv.namehint = "_deq_id_T_2"} : i2
-    %134 = comb.icmp bin ne %133, %c0_i2 {sv.namehint = "deq_id_hi_7"} : i2
-    %135 = comb.extract %118 from 0 : (i15) -> i1
-    %136 = comb.concat %126, %130, %134, %135 : i1, i1, i1, i1
-    %137 = comb.mux bin %121, %136, %deq_id : i4
-    %138 = hw.array_create %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %qs_queue_2.io_deq_bits_id, %qs_queue_1.io_deq_bits_id, %qs_queue_0.io_deq_bits_id : i4
-    %139 = hw.array_get %138[%deq_id] {sv.namehint = "bundleIn_0_r_bits_id"} : !hw.array<16xi4>, i4
-    %140 = hw.array_create %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %qs_queue_2.io_deq_bits_data, %qs_queue_1.io_deq_bits_data, %qs_queue_0.io_deq_bits_data : i64
-    %141 = hw.array_get %140[%deq_id] {sv.namehint = "bundleIn_0_r_bits_data"} : !hw.array<16xi64>, i4
-    %142 = hw.array_create %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %qs_queue_2.io_deq_bits_resp, %qs_queue_1.io_deq_bits_resp, %qs_queue_0.io_deq_bits_resp : i2
-    %143 = hw.array_get %142[%deq_id] {sv.namehint = "bundleIn_0_r_bits_resp"} : !hw.array<16xi2>, i4
-    %144 = hw.array_create %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %qs_queue_2.io_deq_bits_echo_tl_state_size, %qs_queue_1.io_deq_bits_echo_tl_state_size, %qs_queue_0.io_deq_bits_echo_tl_state_size : i4
-    %145 = hw.array_get %144[%deq_id] {sv.namehint = "bundleIn_0_r_bits_echo_tl_state_size"} : !hw.array<16xi4>, i4
-    %146 = hw.array_create %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %qs_queue_2.io_deq_bits_echo_tl_state_source, %qs_queue_1.io_deq_bits_echo_tl_state_source, %qs_queue_0.io_deq_bits_echo_tl_state_source : i2
-    %147 = hw.array_get %146[%deq_id] {sv.namehint = "bundleIn_0_r_bits_echo_tl_state_source"} : !hw.array<16xi2>, i4
-    %148 = hw.array_create %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %qs_queue_2.io_deq_bits_last, %qs_queue_1.io_deq_bits_last, %qs_queue_0.io_deq_bits_last : i1
-    %149 = hw.array_get %148[%deq_id] {sv.namehint = "bundleIn_0_r_bits_last"} : !hw.array<16xi1>, i4
-    %150 = comb.and bin %43, %44 {sv.namehint = "qs_queue_0.io_deq_ready"} : i1
-    %151 = comb.and bin %61, %44 {sv.namehint = "qs_queue_1.io_deq_ready"} : i1
-    %152 = comb.and bin %78, %44 {sv.namehint = "qs_queue_2.io_deq_ready"} : i1
-    %153 = comb.icmp eq %auto_out_r_bits_id, %c3_i4 {sv.namehint = "enq_OH_bools_3"} : i4
-    %154 = comb.icmp eq %auto_out_r_bits_id, %c4_i4 {sv.namehint = "enq_OH_bools_4"} : i4
-    %155 = comb.icmp eq %auto_out_r_bits_id, %c5_i4 {sv.namehint = "enq_OH_bools_5"} : i4
-    %156 = comb.icmp eq %auto_out_r_bits_id, %c6_i4 {sv.namehint = "enq_OH_bools_6"} : i4
-    %157 = comb.icmp eq %auto_out_r_bits_id, %c7_i4 {sv.namehint = "enq_OH_bools_7"} : i4
-    %158 = comb.icmp eq %auto_out_r_bits_id, %c-8_i4 {sv.namehint = "enq_OH_bools_8"} : i4
-    %159 = comb.icmp eq %auto_out_r_bits_id, %c-7_i4 {sv.namehint = "enq_OH_bools_9"} : i4
-    %160 = comb.icmp eq %auto_out_r_bits_id, %c-6_i4 {sv.namehint = "enq_OH_bools_10"} : i4
-    %161 = comb.icmp eq %auto_out_r_bits_id, %c-5_i4 {sv.namehint = "enq_OH_bools_11"} : i4
-    %162 = comb.icmp eq %auto_out_r_bits_id, %c-4_i4 {sv.namehint = "enq_OH_bools_12"} : i4
-    %163 = comb.icmp eq %auto_out_r_bits_id, %c-3_i4 {sv.namehint = "enq_OH_bools_13"} : i4
-    %164 = comb.icmp eq %auto_out_r_bits_id, %c-2_i4 {sv.namehint = "enq_OH_bools_14"} : i4
-    %165 = comb.icmp eq %auto_out_r_bits_id, %c-1_i4 {sv.namehint = "enq_OH_bools_15"} : i4
-    %166 = hw.array_create %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %qs_queue_2.io_enq_ready, %qs_queue_1.io_enq_ready, %qs_queue_0.io_enq_ready : i1
-    %167 = hw.array_get %166[%auto_out_r_bits_id] {sv.namehint = "bundleOut_0_r_ready"} : !hw.array<16xi1>, i4
-    %168 = comb.and bin %40, %auto_out_r_valid {sv.namehint = "qs_queue_0.io_enq_valid"} : i1
-    %169 = comb.and bin %59, %auto_out_r_valid {sv.namehint = "qs_queue_1.io_enq_valid"} : i1
-    %170 = comb.and bin %76, %auto_out_r_valid {sv.namehint = "qs_queue_2.io_enq_valid"} : i1
-    %171 = comb.and bin %153, %auto_out_r_valid {sv.namehint = "queue_wire_3_enq_valid"} : i1
-    %172 = comb.and bin %154, %auto_out_r_valid {sv.namehint = "queue_wire_4_enq_valid"} : i1
-    %173 = comb.and bin %155, %auto_out_r_valid {sv.namehint = "queue_wire_5_enq_valid"} : i1
-    %174 = comb.and bin %156, %auto_out_r_valid {sv.namehint = "queue_wire_6_enq_valid"} : i1
-    %175 = comb.and bin %157, %auto_out_r_valid {sv.namehint = "queue_wire_7_enq_valid"} : i1
-    %176 = comb.and bin %158, %auto_out_r_valid {sv.namehint = "queue_wire_8_enq_valid"} : i1
-    %177 = comb.and bin %159, %auto_out_r_valid {sv.namehint = "queue_wire_9_enq_valid"} : i1
-    %178 = comb.and bin %160, %auto_out_r_valid {sv.namehint = "queue_wire_10_enq_valid"} : i1
-    %179 = comb.and bin %161, %auto_out_r_valid {sv.namehint = "queue_wire_11_enq_valid"} : i1
-    %180 = comb.and bin %162, %auto_out_r_valid {sv.namehint = "queue_wire_12_enq_valid"} : i1
-    %181 = comb.and bin %163, %auto_out_r_valid {sv.namehint = "queue_wire_13_enq_valid"} : i1
-    %182 = comb.and bin %164, %auto_out_r_valid {sv.namehint = "queue_wire_14_enq_valid"} : i1
-    %183 = comb.and bin %165, %auto_out_r_valid {sv.namehint = "queue_wire_15_enq_valid"} : i1
-    hw.output %auto_out_aw_ready, %auto_out_w_ready, %auto_out_b_valid, %auto_out_b_bits_id, %auto_out_b_bits_resp, %auto_out_b_bits_echo_tl_state_size, %auto_out_b_bits_echo_tl_state_source, %auto_out_ar_ready, %locked, %139, %141, %143, %145, %147, %149, %auto_in_aw_valid, %auto_in_aw_bits_id, %auto_in_aw_bits_addr, %auto_in_aw_bits_len, %auto_in_aw_bits_size, %auto_in_aw_bits_burst, %auto_in_aw_bits_lock, %auto_in_aw_bits_cache, %auto_in_aw_bits_prot, %auto_in_aw_bits_qos, %auto_in_aw_bits_echo_tl_state_size, %auto_in_aw_bits_echo_tl_state_source, %auto_in_w_valid, %auto_in_w_bits_data, %auto_in_w_bits_strb, %auto_in_w_bits_last, %auto_in_b_ready, %auto_in_ar_valid, %auto_in_ar_bits_id, %auto_in_ar_bits_addr, %auto_in_ar_bits_len, %auto_in_ar_bits_size, %auto_in_ar_bits_burst, %auto_in_ar_bits_lock, %auto_in_ar_bits_cache, %auto_in_ar_bits_prot, %auto_in_ar_bits_qos, %auto_in_ar_bits_echo_tl_state_size, %auto_in_ar_bits_echo_tl_state_source, %167 : i1, i1, i1, i4, i2, i4, i2, i1, i1, i4, i64, i2, i4, i2, i1, i1, i4, i31, i8, i3, i2, i1, i4, i3, i4, i4, i2, i1, i64, i8, i1, i1, i1, i4, i31, i8, i3, i2, i1, i4, i3, i4, i4, i2, i1
+    %127 = comb.extract %118 from 8 : (i15) -> i7
+    %128 = comb.extract %118 from 0 : (i15) -> i7
+    %129 = comb.or %127, %128 {sv.namehint = "_deq_id_T_1"} : i7
+    %130 = comb.extract %129 from 3 {sv.namehint = "deq_id_hi_4"} : (i7) -> i4
+    %131 = comb.icmp bin ne %130, %c0_i4 {sv.namehint = "deq_id_hi_5"} : i4
+    %132 = comb.extract %129 from 4 : (i7) -> i3
+    %133 = comb.extract %129 from 0 : (i7) -> i3
+    %134 = comb.or %132, %133 {sv.namehint = "_deq_id_T_2"} : i3
+    %135 = comb.extract %134 from 1 {sv.namehint = "deq_id_hi_6"} : (i3) -> i2
+    %136 = comb.icmp bin ne %135, %c0_i2 {sv.namehint = "deq_id_hi_7"} : i2
+    %137 = comb.extract %134 from 2 : (i3) -> i1
+    %138 = comb.extract %134 from 0 : (i3) -> i1
+    %139 = comb.or %137, %138 {sv.namehint = "_deq_id_T_3"} : i1
+    %140 = comb.concat %126, %131, %136, %139 : i1, i1, i1, i1
+    %141 = comb.mux bin %121, %140, %deq_id : i4
+    %142 = hw.array_create %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %qs_queue_2.io_deq_bits_id, %qs_queue_1.io_deq_bits_id, %qs_queue_0.io_deq_bits_id : i4
+    %143 = hw.array_get %142[%deq_id] {sv.namehint = "bundleIn_0_r_bits_id"} : !hw.array<16xi4>, i4
+    %144 = hw.array_create %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %c0_i64, %qs_queue_2.io_deq_bits_data, %qs_queue_1.io_deq_bits_data, %qs_queue_0.io_deq_bits_data : i64
+    %145 = hw.array_get %144[%deq_id] {sv.namehint = "bundleIn_0_r_bits_data"} : !hw.array<16xi64>, i4
+    %146 = hw.array_create %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %qs_queue_2.io_deq_bits_resp, %qs_queue_1.io_deq_bits_resp, %qs_queue_0.io_deq_bits_resp : i2
+    %147 = hw.array_get %146[%deq_id] {sv.namehint = "bundleIn_0_r_bits_resp"} : !hw.array<16xi2>, i4
+    %148 = hw.array_create %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %c0_i4, %qs_queue_2.io_deq_bits_echo_tl_state_size, %qs_queue_1.io_deq_bits_echo_tl_state_size, %qs_queue_0.io_deq_bits_echo_tl_state_size : i4
+    %149 = hw.array_get %148[%deq_id] {sv.namehint = "bundleIn_0_r_bits_echo_tl_state_size"} : !hw.array<16xi4>, i4
+    %150 = hw.array_create %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %c0_i2, %qs_queue_2.io_deq_bits_echo_tl_state_source, %qs_queue_1.io_deq_bits_echo_tl_state_source, %qs_queue_0.io_deq_bits_echo_tl_state_source : i2
+    %151 = hw.array_get %150[%deq_id] {sv.namehint = "bundleIn_0_r_bits_echo_tl_state_source"} : !hw.array<16xi2>, i4
+    %152 = hw.array_create %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %qs_queue_2.io_deq_bits_last, %qs_queue_1.io_deq_bits_last, %qs_queue_0.io_deq_bits_last : i1
+    %153 = hw.array_get %152[%deq_id] {sv.namehint = "bundleIn_0_r_bits_last"} : !hw.array<16xi1>, i4
+    %154 = comb.and bin %43, %44 {sv.namehint = "qs_queue_0.io_deq_ready"} : i1
+    %155 = comb.and bin %61, %44 {sv.namehint = "qs_queue_1.io_deq_ready"} : i1
+    %156 = comb.and bin %78, %44 {sv.namehint = "qs_queue_2.io_deq_ready"} : i1
+    %157 = comb.icmp eq %auto_out_r_bits_id, %c3_i4 {sv.namehint = "enq_OH_bools_3"} : i4
+    %158 = comb.icmp eq %auto_out_r_bits_id, %c4_i4 {sv.namehint = "enq_OH_bools_4"} : i4
+    %159 = comb.icmp eq %auto_out_r_bits_id, %c5_i4 {sv.namehint = "enq_OH_bools_5"} : i4
+    %160 = comb.icmp eq %auto_out_r_bits_id, %c6_i4 {sv.namehint = "enq_OH_bools_6"} : i4
+    %161 = comb.icmp eq %auto_out_r_bits_id, %c7_i4 {sv.namehint = "enq_OH_bools_7"} : i4
+    %162 = comb.icmp eq %auto_out_r_bits_id, %c-8_i4 {sv.namehint = "enq_OH_bools_8"} : i4
+    %163 = comb.icmp eq %auto_out_r_bits_id, %c-7_i4 {sv.namehint = "enq_OH_bools_9"} : i4
+    %164 = comb.icmp eq %auto_out_r_bits_id, %c-6_i4 {sv.namehint = "enq_OH_bools_10"} : i4
+    %165 = comb.icmp eq %auto_out_r_bits_id, %c-5_i4 {sv.namehint = "enq_OH_bools_11"} : i4
+    %166 = comb.icmp eq %auto_out_r_bits_id, %c-4_i4 {sv.namehint = "enq_OH_bools_12"} : i4
+    %167 = comb.icmp eq %auto_out_r_bits_id, %c-3_i4 {sv.namehint = "enq_OH_bools_13"} : i4
+    %168 = comb.icmp eq %auto_out_r_bits_id, %c-2_i4 {sv.namehint = "enq_OH_bools_14"} : i4
+    %169 = comb.icmp eq %auto_out_r_bits_id, %c-1_i4 {sv.namehint = "enq_OH_bools_15"} : i4
+    %170 = hw.array_create %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %false, %qs_queue_2.io_enq_ready, %qs_queue_1.io_enq_ready, %qs_queue_0.io_enq_ready : i1
+    %171 = hw.array_get %170[%auto_out_r_bits_id] {sv.namehint = "bundleOut_0_r_ready"} : !hw.array<16xi1>, i4
+    %172 = comb.and bin %40, %auto_out_r_valid {sv.namehint = "qs_queue_0.io_enq_valid"} : i1
+    %173 = comb.and bin %59, %auto_out_r_valid {sv.namehint = "qs_queue_1.io_enq_valid"} : i1
+    %174 = comb.and bin %76, %auto_out_r_valid {sv.namehint = "qs_queue_2.io_enq_valid"} : i1
+    %175 = comb.and bin %157, %auto_out_r_valid {sv.namehint = "queue_wire_3_enq_valid"} : i1
+    %176 = comb.and bin %158, %auto_out_r_valid {sv.namehint = "queue_wire_4_enq_valid"} : i1
+    %177 = comb.and bin %159, %auto_out_r_valid {sv.namehint = "queue_wire_5_enq_valid"} : i1
+    %178 = comb.and bin %160, %auto_out_r_valid {sv.namehint = "queue_wire_6_enq_valid"} : i1
+    %179 = comb.and bin %161, %auto_out_r_valid {sv.namehint = "queue_wire_7_enq_valid"} : i1
+    %180 = comb.and bin %162, %auto_out_r_valid {sv.namehint = "queue_wire_8_enq_valid"} : i1
+    %181 = comb.and bin %163, %auto_out_r_valid {sv.namehint = "queue_wire_9_enq_valid"} : i1
+    %182 = comb.and bin %164, %auto_out_r_valid {sv.namehint = "queue_wire_10_enq_valid"} : i1
+    %183 = comb.and bin %165, %auto_out_r_valid {sv.namehint = "queue_wire_11_enq_valid"} : i1
+    %184 = comb.and bin %166, %auto_out_r_valid {sv.namehint = "queue_wire_12_enq_valid"} : i1
+    %185 = comb.and bin %167, %auto_out_r_valid {sv.namehint = "queue_wire_13_enq_valid"} : i1
+    %186 = comb.and bin %168, %auto_out_r_valid {sv.namehint = "queue_wire_14_enq_valid"} : i1
+    %187 = comb.and bin %169, %auto_out_r_valid {sv.namehint = "queue_wire_15_enq_valid"} : i1
+    hw.output %auto_out_aw_ready, %auto_out_w_ready, %auto_out_b_valid, %auto_out_b_bits_id, %auto_out_b_bits_resp, %auto_out_b_bits_echo_tl_state_size, %auto_out_b_bits_echo_tl_state_source, %auto_out_ar_ready, %locked, %143, %145, %147, %149, %151, %153, %auto_in_aw_valid, %auto_in_aw_bits_id, %auto_in_aw_bits_addr, %auto_in_aw_bits_len, %auto_in_aw_bits_size, %auto_in_aw_bits_burst, %auto_in_aw_bits_lock, %auto_in_aw_bits_cache, %auto_in_aw_bits_prot, %auto_in_aw_bits_qos, %auto_in_aw_bits_echo_tl_state_size, %auto_in_aw_bits_echo_tl_state_source, %auto_in_w_valid, %auto_in_w_bits_data, %auto_in_w_bits_strb, %auto_in_w_bits_last, %auto_in_b_ready, %auto_in_ar_valid, %auto_in_ar_bits_id, %auto_in_ar_bits_addr, %auto_in_ar_bits_len, %auto_in_ar_bits_size, %auto_in_ar_bits_burst, %auto_in_ar_bits_lock, %auto_in_ar_bits_cache, %auto_in_ar_bits_prot, %auto_in_ar_bits_qos, %auto_in_ar_bits_echo_tl_state_size, %auto_in_ar_bits_echo_tl_state_source, %171 : i1, i1, i1, i4, i2, i4, i2, i1, i1, i4, i64, i2, i4, i2, i1, i1, i4, i31, i8, i3, i2, i1, i4, i3, i4, i4, i2, i1, i64, i8, i1, i1, i1, i4, i31, i8, i3, i2, i1, i4, i3, i4, i4, i2, i1
   }
   hw.module private @AXI4IdIndexer(out auto_in_aw_ready : i1, in %auto_in_aw_valid : i1, in %auto_in_aw_bits_id : i2, in %auto_in_aw_bits_addr : i31, in %auto_in_aw_bits_len : i8, in %auto_in_aw_bits_size : i3, in %auto_in_aw_bits_burst : i2, in %auto_in_aw_bits_lock : i1, in %auto_in_aw_bits_cache : i4, in %auto_in_aw_bits_prot : i3, in %auto_in_aw_bits_qos : i4, in %auto_in_aw_bits_echo_tl_state_size : i4, in %auto_in_aw_bits_echo_tl_state_source : i2, out auto_in_w_ready : i1, in %auto_in_w_valid : i1, in %auto_in_w_bits_data : i64, in %auto_in_w_bits_strb : i8, in %auto_in_w_bits_last : i1, in %auto_in_b_ready : i1, out auto_in_b_valid : i1, out auto_in_b_bits_id : i2, out auto_in_b_bits_resp : i2, out auto_in_b_bits_echo_tl_state_size : i4, out auto_in_b_bits_echo_tl_state_source : i2, out auto_in_ar_ready : i1, in %auto_in_ar_valid : i1, in %auto_in_ar_bits_id : i2, in %auto_in_ar_bits_addr : i31, in %auto_in_ar_bits_len : i8, in %auto_in_ar_bits_size : i3, in %auto_in_ar_bits_burst : i2, in %auto_in_ar_bits_lock : i1, in %auto_in_ar_bits_cache : i4, in %auto_in_ar_bits_prot : i3, in %auto_in_ar_bits_qos : i4, in %auto_in_ar_bits_echo_tl_state_size : i4, in %auto_in_ar_bits_echo_tl_state_source : i2, in %auto_in_r_ready : i1, out auto_in_r_valid : i1, out auto_in_r_bits_id : i2, out auto_in_r_bits_data : i64, out auto_in_r_bits_resp : i2, out auto_in_r_bits_echo_tl_state_size : i4, out auto_in_r_bits_echo_tl_state_source : i2, out auto_in_r_bits_last : i1, in %auto_out_aw_ready : i1, out auto_out_aw_valid : i1, out auto_out_aw_bits_id : i4, out auto_out_aw_bits_addr : i31, out auto_out_aw_bits_len : i8, out auto_out_aw_bits_size : i3, out auto_out_aw_bits_burst : i2, out auto_out_aw_bits_lock : i1, out auto_out_aw_bits_cache : i4, out auto_out_aw_bits_prot : i3, out auto_out_aw_bits_qos : i4, out auto_out_aw_bits_echo_tl_state_size : i4, out auto_out_aw_bits_echo_tl_state_source : i2, in %auto_out_w_ready : i1, out auto_out_w_valid : i1, out auto_out_w_bits_data : i64, out auto_out_w_bits_strb : i8, out auto_out_w_bits_last : i1, out auto_out_b_ready : i1, in %auto_out_b_valid : i1, in %auto_out_b_bits_id : i4, in %auto_out_b_bits_resp : i2, in %auto_out_b_bits_echo_tl_state_size : i4, in %auto_out_b_bits_echo_tl_state_source : i2, in %auto_out_ar_ready : i1, out auto_out_ar_valid : i1, out auto_out_ar_bits_id : i4, out auto_out_ar_bits_addr : i31, out auto_out_ar_bits_len : i8, out auto_out_ar_bits_size : i3, out auto_out_ar_bits_burst : i2, out auto_out_ar_bits_lock : i1, out auto_out_ar_bits_cache : i4, out auto_out_ar_bits_prot : i3, out auto_out_ar_bits_qos : i4, out auto_out_ar_bits_echo_tl_state_size : i4, out auto_out_ar_bits_echo_tl_state_source : i2, out auto_out_r_ready : i1, in %auto_out_r_valid : i1, in %auto_out_r_bits_id : i4, in %auto_out_r_bits_data : i64, in %auto_out_r_bits_resp : i2, in %auto_out_r_bits_echo_tl_state_size : i4, in %auto_out_r_bits_echo_tl_state_source : i2, in %auto_out_r_bits_last : i1) {
     %c0_i2 = hw.constant 0 : i2
@@ -3764,6 +3779,9 @@ module {
         }
         %572 = comb.and bin %STOP_COND_, %471 : i1
         sv.if %572 {
+          sv.fatal 1
+        }
+        sv.if %483 {
           sv.fatal 1
         }
         sv.if %483 {
@@ -5081,6 +5099,9 @@ module {
         sv.if %626 {
           sv.fatal 1
         }
+        sv.if %528 {
+          sv.fatal 1
+        }
         %627 = comb.and bin %STOP_COND_, %525 : i1
         sv.if %627 {
           sv.fatal 1
@@ -5274,12 +5295,20 @@ module {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %225 = comb.and bin %STOP_COND_, %146 : i1
+        %225 = comb.and bin %STOP_COND_, %false : i1
         sv.if %225 {
           sv.fatal 1
         }
-        %226 = comb.and bin %STOP_COND_, %151 : i1
+        %226 = comb.and bin %STOP_COND_, %146 : i1
         sv.if %226 {
+          sv.fatal 1
+        }
+        %227 = comb.and bin %STOP_COND_, %151 : i1
+        sv.if %227 {
+          sv.fatal 1
+        }
+        %228 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %228 {
           sv.fatal 1
         }
       }
@@ -6404,6 +6433,9 @@ module {
         }
         %638 = comb.and bin %STOP_COND_, %527 : i1
         sv.if %638 {
+          sv.fatal 1
+        }
+        sv.if %539 {
           sv.fatal 1
         }
         sv.if %539 {
@@ -7540,6 +7572,9 @@ module {
         sv.if %541 {
           sv.fatal 1
         }
+        sv.if %541 {
+          sv.fatal 1
+        }
         %641 = comb.and bin %STOP_COND_, %538 : i1
         sv.if %641 {
           sv.fatal 1
@@ -8111,6 +8146,10 @@ module {
         }
         %601 = comb.and bin %STOP_COND_, %512 : i1
         sv.if %601 {
+          sv.fatal 1
+        }
+        %602 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %602 {
           sv.fatal 1
         }
       }
@@ -9221,6 +9260,9 @@ module {
         sv.if %511 {
           sv.fatal 1
         }
+        sv.if %511 {
+          sv.fatal 1
+        }
         %611 = comb.and bin %STOP_COND_, %508 : i1
         sv.if %611 {
           sv.fatal 1
@@ -9258,44 +9300,55 @@ module {
     %c0_i2 = hw.constant 0 : i2
     %c0_i9 = hw.constant 0 : i9
     %c0_i23 = hw.constant 0 : i23
-    hw.instance "monitor" @TLMonitor_7(clock: %clock: !seq.clock, reset: %reset: i1, io_in_a_ready: %a.io_enq_ready: i1, io_in_a_valid: %auto_in_a_valid: i1, io_in_a_bits_opcode: %auto_in_a_bits_opcode: i3, io_in_a_bits_param: %auto_in_a_bits_param: i3, io_in_a_bits_size: %auto_in_a_bits_size: i4, io_in_a_bits_source: %auto_in_a_bits_source: i2, io_in_a_bits_address: %auto_in_a_bits_address: i14, io_in_a_bits_mask: %auto_in_a_bits_mask: i8, io_in_a_bits_corrupt: %auto_in_a_bits_corrupt: i1, io_in_d_ready: %auto_in_d_ready: i1, io_in_d_valid: %32: i1, io_in_d_bits_opcode: %33: i3, io_in_d_bits_param: %c0_i2: i2, io_in_d_bits_size: %a.io_deq_bits_size: i4, io_in_d_bits_source: %a.io_deq_bits_source: i2, io_in_d_bits_sink: %false: i1, io_in_d_bits_denied: %true: i1, io_in_d_bits_corrupt: %20: i1) -> ()
-    %a.io_enq_ready, %a.io_deq_valid, %a.io_deq_bits_opcode, %a.io_deq_bits_size, %a.io_deq_bits_source = hw.instance "a" @Queue_12(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %auto_in_a_valid: i1, io_enq_bits_opcode: %auto_in_a_bits_opcode: i3, io_enq_bits_param: %auto_in_a_bits_param: i3, io_enq_bits_size: %auto_in_a_bits_size: i4, io_enq_bits_source: %auto_in_a_bits_source: i2, io_enq_bits_address: %auto_in_a_bits_address: i14, io_enq_bits_mask: %auto_in_a_bits_mask: i8, io_enq_bits_data: %auto_in_a_bits_data: i64, io_enq_bits_corrupt: %auto_in_a_bits_corrupt: i1, io_deq_ready: %31: i1) -> (io_enq_ready: i1, io_deq_valid: i1, io_deq_bits_opcode: i3, io_deq_bits_size: i4, io_deq_bits_source: i2) {sv.namehint = "da_bits_size"}
-    %1 = comb.and bin %31, %a.io_deq_valid {sv.namehint = "_a_last_T"} : i1
-    %2 = comb.concat %c0_i23, %a.io_deq_bits_size : i23, i4
-    %3 = comb.shl bin %c4095_i27, %2 {sv.namehint = "_a_last_beats1_decode_T_1"} : i27
-    %4 = comb.extract %3 from 3 : (i27) -> i9
-    %5 = comb.xor %4, %c-1_i9 {sv.namehint = "_a_last_beats1_decode_T_3"} : i9
-    %6 = comb.extract %a.io_deq_bits_opcode from 2 {sv.namehint = "_a_last_beats1_opdata_T"} : (i3) -> i1
-    %7 = comb.mux bin %6, %c0_i9, %5 {sv.namehint = "a_last_beats1"} : i9
-    %a_last_counter = seq.firreg %14 clock %clock reset sync %reset, %c0_i9 {firrtl.random_init_start = 1 : ui64} : i9
-    %8 = comb.add %a_last_counter, %c-1_i9 {sv.namehint = "_a_last_counter1_T"} : i9
-    %9 = comb.icmp bin eq %a_last_counter, %c0_i9 {sv.namehint = "a_last_first"} : i9
-    %10 = comb.icmp bin eq %a_last_counter, %c1_i9 {sv.namehint = "_a_last_last_T"} : i9
-    %11 = comb.icmp bin eq %7, %c0_i9 {sv.namehint = "_a_last_last_T_1"} : i9
-    %12 = comb.or bin %10, %11 {sv.namehint = "a_last"} : i1
-    %13 = comb.mux bin %9, %7, %8 {sv.namehint = "_a_last_counter_T"} : i9
-    %14 = comb.mux bin %1, %13, %a_last_counter : i9
-    %15 = comb.and bin %auto_in_d_ready, %32 : i1
-    %16 = comb.concat %c0_i23, %a.io_deq_bits_size : i23, i4
-    %17 = comb.shl bin %c4095_i27, %16 {sv.namehint = "_beats1_decode_T_1"} : i27
-    %18 = comb.extract %17 from 3 : (i27) -> i9
-    %19 = comb.xor %18, %c-1_i9 {sv.namehint = "_beats1_decode_T_3"} : i9
-    %20 = comb.extract %33 from 0 {sv.namehint = "beats1_opdata"} : (i3) -> i1
-    %21 = comb.mux bin %20, %19, %c0_i9 {sv.namehint = "beats1"} : i9
-    %counter = seq.firreg %28 clock %clock reset sync %reset, %c0_i9 {firrtl.random_init_start = 10 : ui64} : i9
-    %22 = comb.add %counter, %c-1_i9 {sv.namehint = "_counter1_T"} : i9
-    %23 = comb.icmp bin eq %counter, %c0_i9 {sv.namehint = "da_first"} : i9
-    %24 = comb.icmp bin eq %counter, %c1_i9 {sv.namehint = "_last_T"} : i9
-    %25 = comb.icmp bin eq %21, %c0_i9 {sv.namehint = "_last_T_1"} : i9
-    %26 = comb.or bin %24, %25 {sv.namehint = "da_last"} : i1
-    %27 = comb.mux bin %23, %21, %22 {sv.namehint = "_counter_T"} : i9
-    %28 = comb.mux bin %15, %27, %counter : i9
-    %29 = comb.and bin %auto_in_d_ready, %26 {sv.namehint = "_a_io_deq_ready_T"} : i1
-    %30 = comb.xor bin %12, %true {sv.namehint = "_a_io_deq_ready_T_2"} : i1
-    %31 = comb.or bin %29, %30 {sv.namehint = "a.io_deq_ready"} : i1
-    %32 = comb.and bin %a.io_deq_valid, %12 {sv.namehint = "da_valid"} : i1
-    %33 = hw.array_get %0[%a.io_deq_bits_opcode] {sv.namehint = "da_bits_opcode"} : !hw.array<8xi3>, i3
-    hw.output %a.io_enq_ready, %32, %33, %a.io_deq_bits_size, %a.io_deq_bits_source, %20 : i1, i1, i3, i4, i2, i1
+    %1 = seq.from_clock %clock
+    hw.instance "monitor" @TLMonitor_7(clock: %clock: !seq.clock, reset: %reset: i1, io_in_a_ready: %a.io_enq_ready: i1, io_in_a_valid: %auto_in_a_valid: i1, io_in_a_bits_opcode: %auto_in_a_bits_opcode: i3, io_in_a_bits_param: %auto_in_a_bits_param: i3, io_in_a_bits_size: %auto_in_a_bits_size: i4, io_in_a_bits_source: %auto_in_a_bits_source: i2, io_in_a_bits_address: %auto_in_a_bits_address: i14, io_in_a_bits_mask: %auto_in_a_bits_mask: i8, io_in_a_bits_corrupt: %auto_in_a_bits_corrupt: i1, io_in_d_ready: %auto_in_d_ready: i1, io_in_d_valid: %33: i1, io_in_d_bits_opcode: %34: i3, io_in_d_bits_param: %c0_i2: i2, io_in_d_bits_size: %a.io_deq_bits_size: i4, io_in_d_bits_source: %a.io_deq_bits_source: i2, io_in_d_bits_sink: %false: i1, io_in_d_bits_denied: %true: i1, io_in_d_bits_corrupt: %21: i1) -> ()
+    %a.io_enq_ready, %a.io_deq_valid, %a.io_deq_bits_opcode, %a.io_deq_bits_size, %a.io_deq_bits_source = hw.instance "a" @Queue_12(clock: %clock: !seq.clock, reset: %reset: i1, io_enq_valid: %auto_in_a_valid: i1, io_enq_bits_opcode: %auto_in_a_bits_opcode: i3, io_enq_bits_param: %auto_in_a_bits_param: i3, io_enq_bits_size: %auto_in_a_bits_size: i4, io_enq_bits_source: %auto_in_a_bits_source: i2, io_enq_bits_address: %auto_in_a_bits_address: i14, io_enq_bits_mask: %auto_in_a_bits_mask: i8, io_enq_bits_data: %auto_in_a_bits_data: i64, io_enq_bits_corrupt: %auto_in_a_bits_corrupt: i1, io_deq_ready: %32: i1) -> (io_enq_ready: i1, io_deq_valid: i1, io_deq_bits_opcode: i3, io_deq_bits_size: i4, io_deq_bits_source: i2) {sv.namehint = "da_bits_size"}
+    %2 = comb.and bin %32, %a.io_deq_valid {sv.namehint = "_a_last_T"} : i1
+    %3 = comb.concat %c0_i23, %a.io_deq_bits_size : i23, i4
+    %4 = comb.shl bin %c4095_i27, %3 {sv.namehint = "_a_last_beats1_decode_T_1"} : i27
+    %5 = comb.extract %4 from 3 : (i27) -> i9
+    %6 = comb.xor %5, %c-1_i9 {sv.namehint = "_a_last_beats1_decode_T_3"} : i9
+    %7 = comb.extract %a.io_deq_bits_opcode from 2 {sv.namehint = "_a_last_beats1_opdata_T"} : (i3) -> i1
+    %8 = comb.mux bin %7, %c0_i9, %6 {sv.namehint = "a_last_beats1"} : i9
+    %a_last_counter = seq.firreg %15 clock %clock reset sync %reset, %c0_i9 {firrtl.random_init_start = 1 : ui64} : i9
+    %9 = comb.add %a_last_counter, %c-1_i9 {sv.namehint = "_a_last_counter1_T"} : i9
+    %10 = comb.icmp bin eq %a_last_counter, %c0_i9 {sv.namehint = "a_last_first"} : i9
+    %11 = comb.icmp bin eq %a_last_counter, %c1_i9 {sv.namehint = "_a_last_last_T"} : i9
+    %12 = comb.icmp bin eq %8, %c0_i9 {sv.namehint = "_a_last_last_T_1"} : i9
+    %13 = comb.or bin %11, %12 {sv.namehint = "a_last"} : i1
+    %14 = comb.mux bin %10, %8, %9 {sv.namehint = "_a_last_counter_T"} : i9
+    %15 = comb.mux bin %2, %14, %a_last_counter : i9
+    %16 = comb.and bin %auto_in_d_ready, %33 : i1
+    %17 = comb.concat %c0_i23, %a.io_deq_bits_size : i23, i4
+    %18 = comb.shl bin %c4095_i27, %17 {sv.namehint = "_beats1_decode_T_1"} : i27
+    %19 = comb.extract %18 from 3 : (i27) -> i9
+    %20 = comb.xor %19, %c-1_i9 {sv.namehint = "_beats1_decode_T_3"} : i9
+    %21 = comb.extract %34 from 0 {sv.namehint = "beats1_opdata"} : (i3) -> i1
+    %22 = comb.mux bin %21, %20, %c0_i9 {sv.namehint = "beats1"} : i9
+    %counter = seq.firreg %29 clock %clock reset sync %reset, %c0_i9 {firrtl.random_init_start = 10 : ui64} : i9
+    %23 = comb.add %counter, %c-1_i9 {sv.namehint = "_counter1_T"} : i9
+    %24 = comb.icmp bin eq %counter, %c0_i9 {sv.namehint = "da_first"} : i9
+    %25 = comb.icmp bin eq %counter, %c1_i9 {sv.namehint = "_last_T"} : i9
+    %26 = comb.icmp bin eq %22, %c0_i9 {sv.namehint = "_last_T_1"} : i9
+    %27 = comb.or bin %25, %26 {sv.namehint = "da_last"} : i1
+    %28 = comb.mux bin %24, %22, %23 {sv.namehint = "_counter_T"} : i9
+    %29 = comb.mux bin %16, %28, %counter : i9
+    sv.ifdef  "SYNTHESIS" {
+    } else {
+      sv.always posedge %1 {
+        %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
+        %35 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %35 {
+          sv.fatal 1
+        }
+      }
+    }
+    %30 = comb.and bin %auto_in_d_ready, %27 {sv.namehint = "_a_io_deq_ready_T"} : i1
+    %31 = comb.xor bin %13, %true {sv.namehint = "_a_io_deq_ready_T_2"} : i1
+    %32 = comb.or bin %30, %31 {sv.namehint = "a.io_deq_ready"} : i1
+    %33 = comb.and bin %a.io_deq_valid, %13 {sv.namehint = "da_valid"} : i1
+    %34 = hw.array_get %0[%a.io_deq_bits_opcode] {sv.namehint = "da_bits_opcode"} : !hw.array<8xi3>, i3
+    hw.output %a.io_enq_ready, %33, %34, %a.io_deq_bits_size, %a.io_deq_bits_source, %21 : i1, i1, i3, i4, i2, i1
   }
   hw.module private @Queue_13(in %clock : !seq.clock, in %reset : i1, out io_enq_ready : i1, in %io_enq_valid : i1, in %io_enq_bits_opcode : i3, in %io_enq_bits_param : i3, in %io_enq_bits_size : i4, in %io_enq_bits_source : i2, in %io_enq_bits_address : i14, in %io_enq_bits_mask : i8, in %io_enq_bits_data : i64, in %io_enq_bits_corrupt : i1, in %io_deq_ready : i1, out io_deq_valid : i1, out io_deq_bits_opcode : i3, out io_deq_bits_param : i3, out io_deq_bits_size : i4, out io_deq_bits_source : i2, out io_deq_bits_address : i14, out io_deq_bits_mask : i8, out io_deq_bits_data : i64, out io_deq_bits_corrupt : i1) {
     %false = hw.constant false
@@ -10274,6 +10327,9 @@ module {
         sv.if %453 {
           sv.fatal 1
         }
+        sv.if %453 {
+          sv.fatal 1
+        }
         %535 = comb.and bin %STOP_COND_, %450 : i1
         sv.if %535 {
           sv.fatal 1
@@ -10421,12 +10477,16 @@ module {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %79 = comb.and bin %STOP_COND_, %74 : i1
+        %79 = comb.and bin %STOP_COND_, %false : i1
         sv.if %79 {
           sv.fatal 1
         }
-        %80 = comb.and bin %STOP_COND_, %77 : i1
+        %80 = comb.and bin %STOP_COND_, %74 : i1
         sv.if %80 {
+          sv.fatal 1
+        }
+        %81 = comb.and bin %STOP_COND_, %77 : i1
+        sv.if %81 {
           sv.fatal 1
         }
       }
@@ -11345,6 +11405,9 @@ module {
         sv.if %522 {
           sv.fatal 1
         }
+        sv.if %442 {
+          sv.fatal 1
+        }
         %523 = comb.and bin %STOP_COND_, %439 : i1
         sv.if %523 {
           sv.fatal 1
@@ -11492,12 +11555,16 @@ module {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %79 = comb.and bin %STOP_COND_, %74 : i1
+        %79 = comb.and bin %STOP_COND_, %false : i1
         sv.if %79 {
           sv.fatal 1
         }
-        %80 = comb.and bin %STOP_COND_, %77 : i1
+        %80 = comb.and bin %STOP_COND_, %74 : i1
         sv.if %80 {
+          sv.fatal 1
+        }
+        %81 = comb.and bin %STOP_COND_, %77 : i1
+        sv.if %81 {
           sv.fatal 1
         }
       }
@@ -12412,6 +12479,9 @@ module {
         sv.if %519 {
           sv.fatal 1
         }
+        sv.if %439 {
+          sv.fatal 1
+        }
         %520 = comb.and bin %STOP_COND_, %436 : i1
         sv.if %520 {
           sv.fatal 1
@@ -12559,12 +12629,16 @@ module {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %79 = comb.and bin %STOP_COND_, %74 : i1
+        %79 = comb.and bin %STOP_COND_, %false : i1
         sv.if %79 {
           sv.fatal 1
         }
-        %80 = comb.and bin %STOP_COND_, %77 : i1
+        %80 = comb.and bin %STOP_COND_, %74 : i1
         sv.if %80 {
+          sv.fatal 1
+        }
+        %81 = comb.and bin %STOP_COND_, %77 : i1
+        sv.if %81 {
           sv.fatal 1
         }
       }
@@ -13375,6 +13449,9 @@ module {
         sv.if %349 {
           sv.fatal 1
         }
+        sv.if %349 {
+          sv.fatal 1
+        }
       }
     }
     hw.output
@@ -13503,6 +13580,9 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %65 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %65 {
+          sv.fatal 1
+        }
         sv.if %65 {
           sv.fatal 1
         }
@@ -14418,6 +14498,9 @@ module {
         }
         %487 = comb.and bin %STOP_COND_, %407 : i1
         sv.if %487 {
+          sv.fatal 1
+        }
+        sv.if %419 {
           sv.fatal 1
         }
         sv.if %419 {
@@ -16748,6 +16831,9 @@ module {
         sv.if %767 {
           sv.fatal 1
         }
+        sv.if %767 {
+          sv.fatal 1
+        }
         %897 = comb.and bin %STOP_COND_, %458 : i1
         sv.if %897 {
           sv.fatal 1
@@ -17665,12 +17751,20 @@ module {
         sv.if %474 {
           sv.fatal 1
         }
-        %475 = comb.and bin %STOP_COND_, %266 : i1
+        %475 = comb.and bin %STOP_COND_, %false : i1
         sv.if %475 {
           sv.fatal 1
         }
-        %476 = comb.and bin %STOP_COND_, %271 : i1
+        %476 = comb.and bin %STOP_COND_, %266 : i1
         sv.if %476 {
+          sv.fatal 1
+        }
+        %477 = comb.and bin %STOP_COND_, %271 : i1
+        sv.if %477 {
+          sv.fatal 1
+        }
+        %478 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %478 {
           sv.fatal 1
         }
       }
@@ -18978,713 +19072,800 @@ module {
         sv.if %976 {
           sv.fatal 1
         }
-        %977 = comb.and bin %STOP_COND_, %101 : i1
+        %977 = comb.and bin %STOP_COND_, %false : i1
         sv.if %977 {
           sv.fatal 1
         }
-        %978 = comb.and bin %STOP_COND_, %104 : i1
+        %978 = comb.and bin %STOP_COND_, %101 : i1
         sv.if %978 {
           sv.fatal 1
         }
-        %979 = comb.and bin %STOP_COND_, %108 : i1
+        %979 = comb.and bin %STOP_COND_, %104 : i1
         sv.if %979 {
           sv.fatal 1
         }
-        %980 = comb.and bin %STOP_COND_, %112 : i1
+        %980 = comb.and bin %STOP_COND_, %108 : i1
         sv.if %980 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %981 = comb.and bin %STOP_COND_, %115 : i1
+        %981 = comb.and bin %STOP_COND_, %112 : i1
         sv.if %981 {
           sv.fatal 1
         }
-        %982 = comb.and bin %STOP_COND_, %119 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %982 = comb.and bin %STOP_COND_, %115 : i1
         sv.if %982 {
           sv.fatal 1
         }
-        %983 = comb.and bin %STOP_COND_, %120 : i1
+        %983 = comb.and bin %STOP_COND_, %119 : i1
         sv.if %983 {
           sv.fatal 1
         }
-        %984 = comb.and bin %STOP_COND_, %121 : i1
+        %984 = comb.and bin %STOP_COND_, %false : i1
         sv.if %984 {
           sv.fatal 1
         }
-        %985 = comb.and bin %STOP_COND_, %122 : i1
+        %985 = comb.and bin %STOP_COND_, %120 : i1
         sv.if %985 {
           sv.fatal 1
         }
-        %986 = comb.and bin %STOP_COND_, %126 : i1
+        %986 = comb.and bin %STOP_COND_, %121 : i1
         sv.if %986 {
           sv.fatal 1
         }
-        %987 = comb.and bin %STOP_COND_, %127 : i1
+        %987 = comb.and bin %STOP_COND_, %122 : i1
         sv.if %987 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %988 = comb.and bin %STOP_COND_, %132 : i1
+        %988 = comb.and bin %STOP_COND_, %126 : i1
         sv.if %988 {
           sv.fatal 1
         }
-        %989 = comb.and bin %STOP_COND_, %138 : i1
+        %989 = comb.and bin %STOP_COND_, %127 : i1
         sv.if %989 {
           sv.fatal 1
         }
-        %990 = comb.and bin %STOP_COND_, %139 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %990 = comb.and bin %STOP_COND_, %132 : i1
         sv.if %990 {
           sv.fatal 1
         }
-        %991 = comb.and bin %STOP_COND_, %143 : i1
+        %991 = comb.and bin %STOP_COND_, %138 : i1
         sv.if %991 {
           sv.fatal 1
         }
-        %992 = comb.and bin %STOP_COND_, %147 : i1
+        %992 = comb.and bin %STOP_COND_, %false : i1
         sv.if %992 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %993 = comb.and bin %STOP_COND_, %158 : i1
+        %993 = comb.and bin %STOP_COND_, %139 : i1
         sv.if %993 {
           sv.fatal 1
         }
-        %994 = comb.and bin %STOP_COND_, %159 : i1
+        %994 = comb.and bin %STOP_COND_, %143 : i1
         sv.if %994 {
           sv.fatal 1
         }
-        %995 = comb.and bin %STOP_COND_, %160 : i1
+        %995 = comb.and bin %STOP_COND_, %147 : i1
         sv.if %995 {
           sv.fatal 1
         }
-        %996 = comb.and bin %STOP_COND_, %161 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %996 = comb.and bin %STOP_COND_, %158 : i1
         sv.if %996 {
           sv.fatal 1
         }
-        %997 = comb.and bin %STOP_COND_, %164 : i1
+        %997 = comb.and bin %STOP_COND_, %false : i1
         sv.if %997 {
           sv.fatal 1
         }
-        %998 = comb.and bin %STOP_COND_, %165 : i1
+        %998 = comb.and bin %STOP_COND_, %159 : i1
         sv.if %998 {
           sv.fatal 1
         }
-        %999 = comb.and bin %STOP_COND_, %166 : i1
+        %999 = comb.and bin %STOP_COND_, %160 : i1
         sv.if %999 {
           sv.fatal 1
         }
-        %1000 = comb.and bin %STOP_COND_, %172 : i1
+        %1000 = comb.and bin %STOP_COND_, %161 : i1
         sv.if %1000 {
           sv.fatal 1
         }
-        %1001 = comb.and bin %STOP_COND_, %180 : i1
+        %1001 = comb.and bin %STOP_COND_, %164 : i1
         sv.if %1001 {
           sv.fatal 1
         }
-        %1002 = comb.and bin %STOP_COND_, %181 : i1
+        %1002 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1002 {
           sv.fatal 1
         }
-        %1003 = comb.and bin %STOP_COND_, %185 : i1
+        %1003 = comb.and bin %STOP_COND_, %165 : i1
         sv.if %1003 {
           sv.fatal 1
         }
-        %1004 = comb.and bin %STOP_COND_, %186 : i1
+        %1004 = comb.and bin %STOP_COND_, %166 : i1
         sv.if %1004 {
           sv.fatal 1
         }
-        %1005 = comb.and bin %STOP_COND_, %189 : i1
+        %1005 = comb.and bin %STOP_COND_, %172 : i1
         sv.if %1005 {
           sv.fatal 1
         }
-        %1006 = comb.and bin %STOP_COND_, %190 : i1
+        %1006 = comb.and bin %STOP_COND_, %180 : i1
         sv.if %1006 {
           sv.fatal 1
         }
-        %1007 = comb.and bin %STOP_COND_, %195 : i1
+        %1007 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1007 {
           sv.fatal 1
         }
-        %1008 = comb.and bin %STOP_COND_, %196 : i1
+        %1008 = comb.and bin %STOP_COND_, %181 : i1
         sv.if %1008 {
           sv.fatal 1
         }
-        %1009 = comb.and bin %STOP_COND_, %202 : i1
+        %1009 = comb.and bin %STOP_COND_, %185 : i1
         sv.if %1009 {
           sv.fatal 1
         }
-        %1010 = comb.and bin %STOP_COND_, %203 : i1
+        %1010 = comb.and bin %STOP_COND_, %186 : i1
         sv.if %1010 {
           sv.fatal 1
         }
-        %1011 = comb.and bin %STOP_COND_, %207 : i1
+        %1011 = comb.and bin %STOP_COND_, %189 : i1
         sv.if %1011 {
           sv.fatal 1
         }
-        %1012 = comb.and bin %STOP_COND_, %208 : i1
+        %1012 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1012 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1013 = comb.and bin %STOP_COND_, %212 : i1
+        %1013 = comb.and bin %STOP_COND_, %190 : i1
         sv.if %1013 {
           sv.fatal 1
         }
-        %1014 = comb.and bin %STOP_COND_, %218 : i1
+        %1014 = comb.and bin %STOP_COND_, %195 : i1
         sv.if %1014 {
           sv.fatal 1
         }
-        %1015 = comb.and bin %STOP_COND_, %222 : i1
+        %1015 = comb.and bin %STOP_COND_, %196 : i1
         sv.if %1015 {
           sv.fatal 1
         }
-        %1016 = comb.and bin %STOP_COND_, %226 : i1
+        %1016 = comb.and bin %STOP_COND_, %202 : i1
         sv.if %1016 {
           sv.fatal 1
         }
-        %1017 = comb.and bin %STOP_COND_, %230 : i1
+        %1017 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1017 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1018 = comb.and bin %STOP_COND_, %233 : i1
+        %1018 = comb.and bin %STOP_COND_, %203 : i1
         sv.if %1018 {
           sv.fatal 1
         }
-        %1019 = comb.and bin %STOP_COND_, %237 : i1
+        %1019 = comb.and bin %STOP_COND_, %207 : i1
         sv.if %1019 {
           sv.fatal 1
         }
-        %1020 = comb.and bin %STOP_COND_, %241 : i1
+        %1020 = comb.and bin %STOP_COND_, %208 : i1
         sv.if %1020 {
           sv.fatal 1
         }
-        %1021 = comb.and bin %STOP_COND_, %242 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1021 = comb.and bin %STOP_COND_, %212 : i1
         sv.if %1021 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1022 = comb.and bin %STOP_COND_, %245 : i1
+        %1022 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1022 {
           sv.fatal 1
         }
-        %1023 = comb.and bin %STOP_COND_, %246 : i1
+        %1023 = comb.and bin %STOP_COND_, %218 : i1
         sv.if %1023 {
           sv.fatal 1
         }
-        %1024 = comb.and bin %STOP_COND_, %247 : i1
+        %1024 = comb.and bin %STOP_COND_, %222 : i1
         sv.if %1024 {
           sv.fatal 1
         }
-        %1025 = comb.and bin %STOP_COND_, %250 : i1
+        %1025 = comb.and bin %STOP_COND_, %226 : i1
         sv.if %1025 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1026 = comb.and bin %STOP_COND_, %253 : i1
+        %1026 = comb.and bin %STOP_COND_, %230 : i1
         sv.if %1026 {
           sv.fatal 1
         }
-        %1027 = comb.and bin %STOP_COND_, %254 : i1
+        %1027 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1027 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1028 = comb.and bin %STOP_COND_, %257 : i1
+        %1028 = comb.and bin %STOP_COND_, %233 : i1
         sv.if %1028 {
           sv.fatal 1
         }
-        %1029 = comb.and bin %STOP_COND_, %258 : i1
+        %1029 = comb.and bin %STOP_COND_, %237 : i1
         sv.if %1029 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1030 = comb.and bin %STOP_COND_, %261 : i1
+        %1030 = comb.and bin %STOP_COND_, %241 : i1
         sv.if %1030 {
           sv.fatal 1
         }
-        %1031 = comb.and bin %STOP_COND_, %262 : i1
+        %1031 = comb.and bin %STOP_COND_, %242 : i1
         sv.if %1031 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1032 = comb.and bin %STOP_COND_, %266 : i1
+        %1032 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1032 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1033 = comb.and bin %STOP_COND_, %369 : i1
+        %1033 = comb.and bin %STOP_COND_, %245 : i1
         sv.if %1033 {
           sv.fatal 1
         }
-        %1034 = comb.and bin %STOP_COND_, %372 : i1
+        %1034 = comb.and bin %STOP_COND_, %246 : i1
         sv.if %1034 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1035 = comb.and bin %STOP_COND_, %375 : i1
+        %1035 = comb.and bin %STOP_COND_, %247 : i1
         sv.if %1035 {
           sv.fatal 1
         }
-        %1036 = comb.and bin %STOP_COND_, %379 : i1
+        %1036 = comb.and bin %STOP_COND_, %250 : i1
         sv.if %1036 {
-          sv.fatal 1
-        }
-        %1037 = comb.and bin %STOP_COND_, %383 : i1
-        sv.if %1037 {
-          sv.fatal 1
-        }
-        %1038 = comb.and bin %STOP_COND_, %387 : i1
-        sv.if %1038 {
-          sv.fatal 1
-        }
-        %1039 = comb.and bin %STOP_COND_, %391 : i1
-        sv.if %1039 {
-          sv.fatal 1
-        }
-        %1040 = comb.and bin %STOP_COND_, %392 : i1
-        sv.if %1040 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1041 = comb.and bin %STOP_COND_, %393 : i1
+        %1037 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %1037 {
+          sv.fatal 1
+        }
+        %1038 = comb.and bin %STOP_COND_, %253 : i1
+        sv.if %1038 {
+          sv.fatal 1
+        }
+        %1039 = comb.and bin %STOP_COND_, %254 : i1
+        sv.if %1039 {
+          sv.fatal 1
+        }
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1040 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %1040 {
+          sv.fatal 1
+        }
+        %1041 = comb.and bin %STOP_COND_, %257 : i1
         sv.if %1041 {
           sv.fatal 1
         }
-        %1042 = comb.and bin %STOP_COND_, %397 : i1
+        %1042 = comb.and bin %STOP_COND_, %258 : i1
         sv.if %1042 {
           sv.fatal 1
         }
-        %1043 = comb.and bin %STOP_COND_, %398 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1043 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1043 {
           sv.fatal 1
         }
-        %1044 = comb.and bin %STOP_COND_, %399 : i1
+        %1044 = comb.and bin %STOP_COND_, %261 : i1
         sv.if %1044 {
           sv.fatal 1
         }
-        %1045 = comb.and bin %STOP_COND_, %402 : i1
+        %1045 = comb.and bin %STOP_COND_, %262 : i1
         sv.if %1045 {
           sv.fatal 1
         }
-        %1046 = comb.and bin %STOP_COND_, %403 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1046 = comb.and bin %STOP_COND_, %266 : i1
         sv.if %1046 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1047 = comb.and bin %STOP_COND_, %404 : i1
+        %1047 = comb.and bin %STOP_COND_, %369 : i1
         sv.if %1047 {
           sv.fatal 1
         }
-        %1048 = comb.and bin %STOP_COND_, %405 : i1
+        %1048 = comb.and bin %STOP_COND_, %372 : i1
         sv.if %1048 {
           sv.fatal 1
         }
-        %1049 = comb.and bin %STOP_COND_, %406 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1049 = comb.and bin %STOP_COND_, %375 : i1
         sv.if %1049 {
           sv.fatal 1
         }
-        %1050 = comb.and bin %STOP_COND_, %409 : i1
+        %1050 = comb.and bin %STOP_COND_, %379 : i1
         sv.if %1050 {
           sv.fatal 1
         }
-        %1051 = comb.and bin %STOP_COND_, %410 : i1
+        %1051 = comb.and bin %STOP_COND_, %383 : i1
         sv.if %1051 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1052 = comb.and bin %STOP_COND_, %411 : i1
+        %1052 = comb.and bin %STOP_COND_, %387 : i1
         sv.if %1052 {
           sv.fatal 1
         }
-        %1053 = comb.and bin %STOP_COND_, %412 : i1
+        %1053 = comb.and bin %STOP_COND_, %391 : i1
         sv.if %1053 {
           sv.fatal 1
         }
-        %1054 = comb.and bin %STOP_COND_, %418 : i1
+        %1054 = comb.and bin %STOP_COND_, %392 : i1
         sv.if %1054 {
           sv.fatal 1
         }
-        %1055 = comb.and bin %STOP_COND_, %421 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1055 = comb.and bin %STOP_COND_, %393 : i1
         sv.if %1055 {
           sv.fatal 1
         }
-        %1056 = comb.and bin %STOP_COND_, %422 : i1
+        %1056 = comb.and bin %STOP_COND_, %397 : i1
         sv.if %1056 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1057 = comb.and bin %STOP_COND_, %423 : i1
+        %1057 = comb.and bin %STOP_COND_, %398 : i1
         sv.if %1057 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1058 = comb.and bin %STOP_COND_, %424 : i1
+        %1058 = comb.and bin %STOP_COND_, %399 : i1
         sv.if %1058 {
           sv.fatal 1
         }
-        %1059 = comb.and bin %STOP_COND_, %427 : i1
+        %1059 = comb.and bin %STOP_COND_, %402 : i1
         sv.if %1059 {
           sv.fatal 1
         }
-        %1060 = comb.and bin %STOP_COND_, %428 : i1
+        %1060 = comb.and bin %STOP_COND_, %403 : i1
         sv.if %1060 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1061 = comb.and bin %STOP_COND_, %429 : i1
+        %1061 = comb.and bin %STOP_COND_, %404 : i1
         sv.if %1061 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1062 = comb.and bin %STOP_COND_, %430 : i1
+        %1062 = comb.and bin %STOP_COND_, %405 : i1
         sv.if %1062 {
           sv.fatal 1
         }
-        %1063 = comb.and bin %STOP_COND_, %433 : i1
+        %1063 = comb.and bin %STOP_COND_, %406 : i1
         sv.if %1063 {
           sv.fatal 1
         }
-        %1064 = comb.and bin %STOP_COND_, %434 : i1
+        %1064 = comb.and bin %STOP_COND_, %409 : i1
         sv.if %1064 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1065 = comb.and bin %STOP_COND_, %435 : i1
+        %1065 = comb.and bin %STOP_COND_, %410 : i1
         sv.if %1065 {
           sv.fatal 1
         }
-        %1066 = comb.and bin %STOP_COND_, %436 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1066 = comb.and bin %STOP_COND_, %411 : i1
         sv.if %1066 {
           sv.fatal 1
         }
-        %1067 = comb.and bin %STOP_COND_, %437 : i1
+        %1067 = comb.and bin %STOP_COND_, %412 : i1
         sv.if %1067 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1068 = comb.and bin %STOP_COND_, %486 : i1
+        %1068 = comb.and bin %STOP_COND_, %418 : i1
         sv.if %1068 {
           sv.fatal 1
         }
-        %1069 = comb.and bin %STOP_COND_, %490 : i1
+        %1069 = comb.and bin %STOP_COND_, %421 : i1
         sv.if %1069 {
           sv.fatal 1
         }
-        %1070 = comb.and bin %STOP_COND_, %493 : i1
+        %1070 = comb.and bin %STOP_COND_, %422 : i1
         sv.if %1070 {
           sv.fatal 1
         }
-        %1071 = comb.and bin %STOP_COND_, %498 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1071 = comb.and bin %STOP_COND_, %423 : i1
         sv.if %1071 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1072 = comb.and bin %STOP_COND_, %501 : i1
+        %1072 = comb.and bin %STOP_COND_, %424 : i1
         sv.if %1072 {
           sv.fatal 1
         }
-        %1073 = comb.and bin %STOP_COND_, %502 : i1
+        %1073 = comb.and bin %STOP_COND_, %427 : i1
         sv.if %1073 {
           sv.fatal 1
         }
-        %1074 = comb.and bin %STOP_COND_, %503 : i1
+        %1074 = comb.and bin %STOP_COND_, %428 : i1
         sv.if %1074 {
           sv.fatal 1
         }
-        %1075 = comb.and bin %STOP_COND_, %504 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1075 = comb.and bin %STOP_COND_, %429 : i1
         sv.if %1075 {
           sv.fatal 1
         }
-        %1076 = comb.and bin %STOP_COND_, %513 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1076 = comb.and bin %STOP_COND_, %430 : i1
         sv.if %1076 {
           sv.fatal 1
         }
-        %1077 = comb.and bin %STOP_COND_, %526 : i1
+        %1077 = comb.and bin %STOP_COND_, %433 : i1
         sv.if %1077 {
           sv.fatal 1
         }
-        %1078 = comb.and bin %STOP_COND_, %527 : i1
+        %1078 = comb.and bin %STOP_COND_, %434 : i1
         sv.if %1078 {
           sv.fatal 1
         }
-        %1079 = comb.and bin %STOP_COND_, %528 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1079 = comb.and bin %STOP_COND_, %435 : i1
         sv.if %1079 {
           sv.fatal 1
         }
-        %1080 = comb.and bin %STOP_COND_, %529 : i1
+        %1080 = comb.and bin %STOP_COND_, %436 : i1
         sv.if %1080 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1081 = comb.and bin %STOP_COND_, %532 : i1
+        %1081 = comb.and bin %STOP_COND_, %437 : i1
         sv.if %1081 {
           sv.fatal 1
         }
-        %1082 = comb.and bin %STOP_COND_, %536 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1082 = comb.and bin %STOP_COND_, %486 : i1
         sv.if %1082 {
           sv.fatal 1
         }
-        %1083 = comb.and bin %STOP_COND_, %537 : i1
+        %1083 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1083 {
           sv.fatal 1
         }
-        %1084 = comb.and bin %STOP_COND_, %538 : i1
+        %1084 = comb.and bin %STOP_COND_, %490 : i1
         sv.if %1084 {
           sv.fatal 1
         }
-        %1085 = comb.and bin %STOP_COND_, %539 : i1
+        %1085 = comb.and bin %STOP_COND_, %493 : i1
         sv.if %1085 {
           sv.fatal 1
         }
-        %1086 = comb.and bin %STOP_COND_, %542 : i1
+        %1086 = comb.and bin %STOP_COND_, %498 : i1
         sv.if %1086 {
           sv.fatal 1
         }
-        %1087 = comb.and bin %STOP_COND_, %543 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1087 = comb.and bin %STOP_COND_, %501 : i1
         sv.if %1087 {
           sv.fatal 1
         }
-        %1088 = comb.and bin %STOP_COND_, %547 : i1
+        %1088 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1088 {
           sv.fatal 1
         }
-        sv.if %974 {
-          sv.fatal 1
-        }
-        %1089 = comb.and bin %STOP_COND_, %550 : i1
+        %1089 = comb.and bin %STOP_COND_, %502 : i1
         sv.if %1089 {
           sv.fatal 1
         }
-        %1090 = comb.and bin %STOP_COND_, %551 : i1
+        %1090 = comb.and bin %STOP_COND_, %503 : i1
         sv.if %1090 {
           sv.fatal 1
         }
-        %1091 = comb.and bin %STOP_COND_, %552 : i1
+        %1091 = comb.and bin %STOP_COND_, %504 : i1
         sv.if %1091 {
           sv.fatal 1
         }
-        %1092 = comb.and bin %STOP_COND_, %555 : i1
+        %1092 = comb.and bin %STOP_COND_, %513 : i1
         sv.if %1092 {
           sv.fatal 1
         }
-        %1093 = comb.and bin %STOP_COND_, %556 : i1
+        %1093 = comb.and bin %STOP_COND_, %526 : i1
         sv.if %1093 {
           sv.fatal 1
         }
-        %1094 = comb.and bin %STOP_COND_, %557 : i1
+        %1094 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1094 {
+          sv.fatal 1
+        }
+        %1095 = comb.and bin %STOP_COND_, %527 : i1
+        sv.if %1095 {
+          sv.fatal 1
+        }
+        %1096 = comb.and bin %STOP_COND_, %528 : i1
+        sv.if %1096 {
+          sv.fatal 1
+        }
+        %1097 = comb.and bin %STOP_COND_, %529 : i1
+        sv.if %1097 {
           sv.fatal 1
         }
         sv.if %974 {
           sv.fatal 1
         }
-        %1095 = comb.and bin %STOP_COND_, %573 : i1
-        sv.if %1095 {
-          sv.fatal 1
-        }
-        %1096 = comb.and bin %STOP_COND_, %577 : i1
-        sv.if %1096 {
-          sv.fatal 1
-        }
-        %1097 = comb.and bin %STOP_COND_, %581 : i1
-        sv.if %1097 {
-          sv.fatal 1
-        }
-        %1098 = comb.and bin %STOP_COND_, %585 : i1
+        %1098 = comb.and bin %STOP_COND_, %532 : i1
         sv.if %1098 {
           sv.fatal 1
         }
-        %1099 = comb.and bin %STOP_COND_, %589 : i1
+        %1099 = comb.and bin %STOP_COND_, %536 : i1
         sv.if %1099 {
           sv.fatal 1
         }
-        %1100 = comb.and bin %STOP_COND_, %612 : i1
+        %1100 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1100 {
           sv.fatal 1
         }
-        %1101 = comb.and bin %STOP_COND_, %616 : i1
+        %1101 = comb.and bin %STOP_COND_, %537 : i1
         sv.if %1101 {
           sv.fatal 1
         }
-        %1102 = comb.and bin %STOP_COND_, %620 : i1
+        %1102 = comb.and bin %STOP_COND_, %538 : i1
         sv.if %1102 {
           sv.fatal 1
         }
-        %1103 = comb.and bin %STOP_COND_, %624 : i1
+        %1103 = comb.and bin %STOP_COND_, %539 : i1
         sv.if %1103 {
           sv.fatal 1
         }
-        %1104 = comb.and bin %STOP_COND_, %628 : i1
+        %1104 = comb.and bin %STOP_COND_, %542 : i1
         sv.if %1104 {
           sv.fatal 1
         }
-        %1105 = comb.and bin %STOP_COND_, %632 : i1
+        %1105 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1105 {
           sv.fatal 1
         }
-        %1106 = comb.and bin %STOP_COND_, %650 : i1
+        %1106 = comb.and bin %STOP_COND_, %543 : i1
         sv.if %1106 {
           sv.fatal 1
         }
-        %1107 = comb.and bin %STOP_COND_, %654 : i1
+        %1107 = comb.and bin %STOP_COND_, %547 : i1
         sv.if %1107 {
           sv.fatal 1
         }
-        %1108 = comb.and bin %STOP_COND_, %658 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1108 = comb.and bin %STOP_COND_, %550 : i1
         sv.if %1108 {
           sv.fatal 1
         }
-        %1109 = comb.and bin %STOP_COND_, %662 : i1
+        %1109 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1109 {
           sv.fatal 1
         }
-        %1110 = comb.and bin %STOP_COND_, %666 : i1
+        %1110 = comb.and bin %STOP_COND_, %551 : i1
         sv.if %1110 {
           sv.fatal 1
         }
-        %1111 = comb.and bin %STOP_COND_, %688 : i1
+        %1111 = comb.and bin %STOP_COND_, %552 : i1
         sv.if %1111 {
           sv.fatal 1
         }
-        %1112 = comb.and bin %STOP_COND_, %692 : i1
+        %1112 = comb.and bin %STOP_COND_, %555 : i1
         sv.if %1112 {
           sv.fatal 1
         }
-        %1113 = comb.and bin %STOP_COND_, %696 : i1
+        %1113 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1113 {
           sv.fatal 1
         }
-        %1114 = comb.and bin %STOP_COND_, %700 : i1
+        %1114 = comb.and bin %STOP_COND_, %556 : i1
         sv.if %1114 {
           sv.fatal 1
         }
-        %1115 = comb.and bin %STOP_COND_, %704 : i1
+        %1115 = comb.and bin %STOP_COND_, %557 : i1
         sv.if %1115 {
           sv.fatal 1
         }
-        %1116 = comb.and bin %STOP_COND_, %760 : i1
+        sv.if %974 {
+          sv.fatal 1
+        }
+        sv.if %974 {
+          sv.fatal 1
+        }
+        %1116 = comb.and bin %STOP_COND_, %573 : i1
         sv.if %1116 {
           sv.fatal 1
         }
-        %1117 = comb.and bin %STOP_COND_, %785 : i1
+        %1117 = comb.and bin %STOP_COND_, %577 : i1
         sv.if %1117 {
           sv.fatal 1
         }
-        %1118 = comb.and bin %STOP_COND_, %793 : i1
+        %1118 = comb.and bin %STOP_COND_, %581 : i1
         sv.if %1118 {
           sv.fatal 1
         }
-        %1119 = comb.and bin %STOP_COND_, %797 : i1
+        %1119 = comb.and bin %STOP_COND_, %585 : i1
         sv.if %1119 {
           sv.fatal 1
         }
-        %1120 = comb.and bin %STOP_COND_, %806 : i1
+        %1120 = comb.and bin %STOP_COND_, %589 : i1
         sv.if %1120 {
           sv.fatal 1
         }
-        %1121 = comb.and bin %STOP_COND_, %811 : i1
+        %1121 = comb.and bin %STOP_COND_, %612 : i1
         sv.if %1121 {
           sv.fatal 1
         }
-        %1122 = comb.and bin %STOP_COND_, %820 : i1
+        %1122 = comb.and bin %STOP_COND_, %616 : i1
         sv.if %1122 {
           sv.fatal 1
         }
-        %1123 = comb.and bin %STOP_COND_, %824 : i1
+        %1123 = comb.and bin %STOP_COND_, %620 : i1
         sv.if %1123 {
           sv.fatal 1
         }
-        %1124 = comb.and bin %STOP_COND_, %838 : i1
+        %1124 = comb.and bin %STOP_COND_, %624 : i1
         sv.if %1124 {
           sv.fatal 1
         }
-        %1125 = comb.and bin %STOP_COND_, %884 : i1
+        %1125 = comb.and bin %STOP_COND_, %628 : i1
         sv.if %1125 {
           sv.fatal 1
         }
-        %1126 = comb.and bin %STOP_COND_, %901 : i1
+        %1126 = comb.and bin %STOP_COND_, %632 : i1
         sv.if %1126 {
           sv.fatal 1
         }
-        %1127 = comb.and bin %STOP_COND_, %906 : i1
+        %1127 = comb.and bin %STOP_COND_, %650 : i1
         sv.if %1127 {
           sv.fatal 1
         }
-        %1128 = comb.and bin %STOP_COND_, %912 : i1
+        %1128 = comb.and bin %STOP_COND_, %654 : i1
         sv.if %1128 {
           sv.fatal 1
         }
-        %1129 = comb.and bin %STOP_COND_, %920 : i1
+        %1129 = comb.and bin %STOP_COND_, %658 : i1
         sv.if %1129 {
           sv.fatal 1
         }
-        %1130 = comb.and bin %STOP_COND_, %925 : i1
+        %1130 = comb.and bin %STOP_COND_, %662 : i1
         sv.if %1130 {
           sv.fatal 1
         }
-        %1131 = comb.and bin %STOP_COND_, %936 : i1
+        %1131 = comb.and bin %STOP_COND_, %666 : i1
         sv.if %1131 {
           sv.fatal 1
         }
-        %1132 = comb.and bin %STOP_COND_, %960 : i1
+        %1132 = comb.and bin %STOP_COND_, %688 : i1
         sv.if %1132 {
           sv.fatal 1
         }
-        %1133 = comb.and bin %STOP_COND_, %970 : i1
+        %1133 = comb.and bin %STOP_COND_, %692 : i1
         sv.if %1133 {
+          sv.fatal 1
+        }
+        %1134 = comb.and bin %STOP_COND_, %696 : i1
+        sv.if %1134 {
+          sv.fatal 1
+        }
+        %1135 = comb.and bin %STOP_COND_, %700 : i1
+        sv.if %1135 {
+          sv.fatal 1
+        }
+        %1136 = comb.and bin %STOP_COND_, %704 : i1
+        sv.if %1136 {
+          sv.fatal 1
+        }
+        %1137 = comb.and bin %STOP_COND_, %760 : i1
+        sv.if %1137 {
+          sv.fatal 1
+        }
+        %1138 = comb.and bin %STOP_COND_, %785 : i1
+        sv.if %1138 {
+          sv.fatal 1
+        }
+        %1139 = comb.and bin %STOP_COND_, %793 : i1
+        sv.if %1139 {
+          sv.fatal 1
+        }
+        %1140 = comb.and bin %STOP_COND_, %797 : i1
+        sv.if %1140 {
+          sv.fatal 1
+        }
+        %1141 = comb.and bin %STOP_COND_, %806 : i1
+        sv.if %1141 {
+          sv.fatal 1
+        }
+        %1142 = comb.and bin %STOP_COND_, %811 : i1
+        sv.if %1142 {
+          sv.fatal 1
+        }
+        %1143 = comb.and bin %STOP_COND_, %820 : i1
+        sv.if %1143 {
+          sv.fatal 1
+        }
+        %1144 = comb.and bin %STOP_COND_, %824 : i1
+        sv.if %1144 {
+          sv.fatal 1
+        }
+        %1145 = comb.and bin %STOP_COND_, %838 : i1
+        sv.if %1145 {
+          sv.fatal 1
+        }
+        %1146 = comb.and bin %STOP_COND_, %884 : i1
+        sv.if %1146 {
+          sv.fatal 1
+        }
+        %1147 = comb.and bin %STOP_COND_, %901 : i1
+        sv.if %1147 {
+          sv.fatal 1
+        }
+        %1148 = comb.and bin %STOP_COND_, %906 : i1
+        sv.if %1148 {
+          sv.fatal 1
+        }
+        %1149 = comb.and bin %STOP_COND_, %912 : i1
+        sv.if %1149 {
+          sv.fatal 1
+        }
+        %1150 = comb.and bin %STOP_COND_, %920 : i1
+        sv.if %1150 {
+          sv.fatal 1
+        }
+        %1151 = comb.and bin %STOP_COND_, %925 : i1
+        sv.if %1151 {
+          sv.fatal 1
+        }
+        %1152 = comb.and bin %STOP_COND_, %936 : i1
+        sv.if %1152 {
+          sv.fatal 1
+        }
+        %1153 = comb.and bin %STOP_COND_, %960 : i1
+        sv.if %1153 {
+          sv.fatal 1
+        }
+        %1154 = comb.and bin %STOP_COND_, %970 : i1
+        sv.if %1154 {
           sv.fatal 1
         }
       }
@@ -20381,6 +20562,9 @@ module {
         sv.if %257 {
           sv.fatal 1
         }
+        sv.if %257 {
+          sv.fatal 1
+        }
         %296 = comb.and bin %STOP_COND_, %254 : i1
         sv.if %296 {
           sv.fatal 1
@@ -20483,6 +20667,9 @@ module {
         }
         %106 = comb.and bin %STOP_COND_, %57 : i1
         sv.if %106 {
+          sv.fatal 1
+        }
+        sv.if %104 {
           sv.fatal 1
         }
       }
@@ -22858,36 +23045,40 @@ module {
         sv.if %1249 {
           sv.fatal 1
         }
-        %1250 = comb.and bin %STOP_COND_, %311 : i1
+        %1250 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1250 {
           sv.fatal 1
         }
-        %1251 = comb.and bin %STOP_COND_, %325 : i1
+        %1251 = comb.and bin %STOP_COND_, %311 : i1
         sv.if %1251 {
           sv.fatal 1
         }
-        %1252 = comb.and bin %STOP_COND_, %926 : i1
+        %1252 = comb.and bin %STOP_COND_, %325 : i1
         sv.if %1252 {
           sv.fatal 1
         }
-        %1253 = comb.and bin %STOP_COND_, %940 : i1
+        %1253 = comb.and bin %STOP_COND_, %926 : i1
         sv.if %1253 {
           sv.fatal 1
         }
-        %1254 = comb.and bin %STOP_COND_, %979 : i1
+        %1254 = comb.and bin %STOP_COND_, %940 : i1
         sv.if %1254 {
           sv.fatal 1
         }
-        %1255 = comb.and bin %STOP_COND_, %988 : i1
+        %1255 = comb.and bin %STOP_COND_, %979 : i1
         sv.if %1255 {
           sv.fatal 1
         }
-        %1256 = comb.and bin %STOP_COND_, %1077 : i1
+        %1256 = comb.and bin %STOP_COND_, %988 : i1
         sv.if %1256 {
           sv.fatal 1
         }
-        %1257 = comb.and bin %STOP_COND_, %1185 : i1
+        %1257 = comb.and bin %STOP_COND_, %1077 : i1
         sv.if %1257 {
+          sv.fatal 1
+        }
+        %1258 = comb.and bin %STOP_COND_, %1185 : i1
+        sv.if %1258 {
           sv.fatal 1
         }
       }
@@ -23091,6 +23282,9 @@ module {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
         %100 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %100 {
+          sv.fatal 1
+        }
         sv.if %100 {
           sv.fatal 1
         }
@@ -23588,6 +23782,9 @@ module {
         sv.if %1 {
           sv.fatal 1
         }
+        sv.if %1 {
+          sv.fatal 1
+        }
       }
     }
     hw.output %io_dpath_status_debug, %io_dpath_status_dprv, %io_dpath_pmp_0_cfg_l, %io_dpath_pmp_0_cfg_a, %io_dpath_pmp_0_cfg_w, %io_dpath_pmp_0_cfg_r, %io_dpath_pmp_0_addr, %io_dpath_pmp_0_mask, %io_dpath_pmp_1_cfg_l, %io_dpath_pmp_1_cfg_a, %io_dpath_pmp_1_cfg_w, %io_dpath_pmp_1_cfg_r, %io_dpath_pmp_1_addr, %io_dpath_pmp_1_mask, %io_dpath_pmp_2_cfg_l, %io_dpath_pmp_2_cfg_a, %io_dpath_pmp_2_cfg_w, %io_dpath_pmp_2_cfg_r, %io_dpath_pmp_2_addr, %io_dpath_pmp_2_mask, %io_dpath_pmp_3_cfg_l, %io_dpath_pmp_3_cfg_a, %io_dpath_pmp_3_cfg_w, %io_dpath_pmp_3_cfg_r, %io_dpath_pmp_3_addr, %io_dpath_pmp_3_mask, %io_dpath_pmp_4_cfg_l, %io_dpath_pmp_4_cfg_a, %io_dpath_pmp_4_cfg_w, %io_dpath_pmp_4_cfg_r, %io_dpath_pmp_4_addr, %io_dpath_pmp_4_mask, %io_dpath_pmp_5_cfg_l, %io_dpath_pmp_5_cfg_a, %io_dpath_pmp_5_cfg_w, %io_dpath_pmp_5_cfg_r, %io_dpath_pmp_5_addr, %io_dpath_pmp_5_mask, %io_dpath_pmp_6_cfg_l, %io_dpath_pmp_6_cfg_a, %io_dpath_pmp_6_cfg_w, %io_dpath_pmp_6_cfg_r, %io_dpath_pmp_6_addr, %io_dpath_pmp_6_mask, %io_dpath_pmp_7_cfg_l, %io_dpath_pmp_7_cfg_a, %io_dpath_pmp_7_cfg_w, %io_dpath_pmp_7_cfg_r, %io_dpath_pmp_7_addr, %io_dpath_pmp_7_mask, %io_dpath_status_debug, %io_dpath_pmp_0_cfg_l, %io_dpath_pmp_0_cfg_a, %io_dpath_pmp_0_cfg_x, %io_dpath_pmp_0_addr, %io_dpath_pmp_0_mask, %io_dpath_pmp_1_cfg_l, %io_dpath_pmp_1_cfg_a, %io_dpath_pmp_1_cfg_x, %io_dpath_pmp_1_addr, %io_dpath_pmp_1_mask, %io_dpath_pmp_2_cfg_l, %io_dpath_pmp_2_cfg_a, %io_dpath_pmp_2_cfg_x, %io_dpath_pmp_2_addr, %io_dpath_pmp_2_mask, %io_dpath_pmp_3_cfg_l, %io_dpath_pmp_3_cfg_a, %io_dpath_pmp_3_cfg_x, %io_dpath_pmp_3_addr, %io_dpath_pmp_3_mask, %io_dpath_pmp_4_cfg_l, %io_dpath_pmp_4_cfg_a, %io_dpath_pmp_4_cfg_x, %io_dpath_pmp_4_addr, %io_dpath_pmp_4_mask, %io_dpath_pmp_5_cfg_l, %io_dpath_pmp_5_cfg_a, %io_dpath_pmp_5_cfg_x, %io_dpath_pmp_5_addr, %io_dpath_pmp_5_mask, %io_dpath_pmp_6_cfg_l, %io_dpath_pmp_6_cfg_a, %io_dpath_pmp_6_cfg_x, %io_dpath_pmp_6_addr, %io_dpath_pmp_6_mask, %io_dpath_pmp_7_cfg_l, %io_dpath_pmp_7_cfg_a, %io_dpath_pmp_7_cfg_x, %io_dpath_pmp_7_addr, %io_dpath_pmp_7_mask, %io_dpath_customCSRs_csrs_0_value : i1, i2, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i2, i1, i1, i30, i32, i1, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i1, i2, i1, i30, i32, i64
@@ -23896,128 +24093,132 @@ module {
     %c0_i63 = hw.constant 0 : i63
     %c0_i185 = hw.constant 0 : i185
     %c-1_i2 = hw.constant -1 : i2
-    %nBufValid = seq.firreg %50 clock %clock reset sync %reset, %false {firrtl.random_init_start = 0 : ui64, sv.namehint = "_io_pc_T"} : i1
-    %buf_pc = seq.firreg %48 clock %clock {firrtl.random_init_start = 50 : ui64} : i34
-    %buf_data = seq.firreg %42 clock %clock {firrtl.random_init_start = 84 : ui64} : i32
-    %buf_xcpt_pf_inst = seq.firreg %32 clock %clock {firrtl.random_init_start = 118 : ui64} : i1
-    %buf_xcpt_ae_inst = seq.firreg %33 clock %clock {firrtl.random_init_start = 119 : ui64} : i1
-    %buf_replay = seq.firreg %34 clock %clock {firrtl.random_init_start = 120 : ui64} : i1
-    %0 = comb.extract %io_imem_bits_pc from 1 {sv.namehint = "pcWordBits"} : (i34) -> i1
-    %1 = comb.concat %false, %0 : i1, i1
-    %2 = comb.sub %c-2_i2, %1 {sv.namehint = "_nIC_T_2"} : i2
-    %3 = comb.concat %false, %nBufValid : i1, i1
-    %4 = comb.sub %104, %3 {sv.namehint = "_nICReady_T"} : i2
-    %5 = comb.mux bin %io_imem_valid, %2, %c0_i2 {sv.namehint = "_nValid_T"} : i2
-    %6 = comb.concat %false, %nBufValid : i1, i1
-    %7 = comb.add %5, %6 {sv.namehint = "_nValid_T_1"} : i2
-    %8 = comb.concat %false, %nBufValid : i1, i1
-    %9 = comb.icmp bin uge %104, %8 {sv.namehint = "_nBufValid_T"} : i2
-    %10 = comb.icmp bin uge %4, %2 {sv.namehint = "_io_imem_ready_T_2"} : i2
-    %11 = comb.sub %2, %4 {sv.namehint = "_nBufValid_T_6"} : i2
-    %12 = comb.extract %11 from 1 : (i2) -> i1
-    %13 = comb.xor bin %12, %true {sv.namehint = "_io_imem_ready_T_5"} : i1
-    %14 = comb.or bin %10, %13 {sv.namehint = "_io_imem_ready_T_6"} : i1
-    %15 = comb.and bin %io_inst_0_ready, %9, %14 {sv.namehint = "io_imem_ready"} : i1
-    %16 = comb.xor bin %nBufValid, %true {sv.namehint = "_nBufValid_T_1"} : i1
-    %17 = comb.or bin %9, %16 {sv.namehint = "_nBufValid_T_2"} : i1
-    %18 = comb.extract %104 from 0 : (i2) -> i1
-    %19 = comb.sub %nBufValid, %18 {sv.namehint = "_nBufValid_T_3"} : i1
-    %20 = comb.xor %17, %true : i1
-    %21 = comb.and %20, %19 {sv.namehint = "_nBufValid_T_5"} : i1
-    %22 = comb.icmp bin ult %4, %2 : i2
-    %23 = comb.extract %11 from 1 : (i2) -> i1
-    %24 = comb.xor bin %23, %true : i1
-    %25 = comb.and bin %io_imem_valid, %9, %22, %24 : i1
-    %26 = comb.concat %false, %0 : i1, i1
-    %27 = comb.add %26, %4 {sv.namehint = "_shamt_T"} : i2
-    %28 = comb.extract %11 from 0 : (i2) -> i1
-    %29 = comb.mux bin %25, %28, %21 : i1
-    %30 = comb.mux bin %io_inst_0_ready, %29, %nBufValid : i1
-    %31 = comb.and bin %io_inst_0_ready, %25 : i1
-    %32 = comb.mux bin %31, %io_imem_bits_xcpt_pf_inst, %buf_xcpt_pf_inst : i1
-    %33 = comb.mux bin %31, %io_imem_bits_xcpt_ae_inst, %buf_xcpt_ae_inst : i1
-    %34 = comb.mux bin %31, %io_imem_bits_replay, %buf_replay : i1
-    %35 = comb.extract %io_imem_bits_data from 16 {sv.namehint = "buf_data_data_hi"} : (i32) -> i16
-    %36 = comb.replicate %35 {sv.namehint = "buf_data_data_hi_1"} : (i16) -> i32
-    %37 = comb.concat %36, %io_imem_bits_data {sv.namehint = "buf_data_data"} : i32, i32
-    %38 = comb.concat %c0_i58, %27, %c0_i4 : i58, i2, i4
-    %39 = comb.shru bin %37, %38 {sv.namehint = "_buf_data_T_1"} : i64
-    %40 = comb.extract %39 from 0 {sv.namehint = "_buf_data_T_2"} : (i64) -> i16
-    %41 = comb.concat %c0_i16, %40 : i16, i16
-    %42 = comb.mux bin %31, %41, %buf_data : i32
-    %43 = comb.and bin %io_imem_bits_pc, %c-4_i34 {sv.namehint = "_buf_pc_T_1"} : i34
-    %44 = comb.concat %c0_i31, %4, %false : i31, i2, i1
-    %45 = comb.add %io_imem_bits_pc, %44 {sv.namehint = "_buf_pc_T_3"} : i34
-    %46 = comb.and bin %45, %c3_i34 {sv.namehint = "_buf_pc_T_5"} : i34
-    %47 = comb.or bin %43, %46 {sv.namehint = "_buf_pc_T_6"} : i34
-    %48 = comb.mux bin %31, %47, %buf_pc : i34
-    %49 = comb.xor %io_kill, %true : i1
-    %50 = comb.and %49, %30 : i1
-    %51 = comb.concat %false, %nBufValid : i1, i1
-    %52 = comb.add %51, %c-2_i2 {sv.namehint = "_icShiftAmt_T"} : i2
-    %53 = comb.concat %false, %0 : i1, i1
-    %54 = comb.sub %52, %53 {sv.namehint = "_icShiftAmt_T_2"} : i2
-    %55 = comb.extract %io_imem_bits_data from 0 {sv.namehint = "icData_hi"} : (i32) -> i16
-    %56 = comb.replicate %55 {sv.namehint = "icData_lo"} : (i16) -> i32
-    %57 = comb.extract %io_imem_bits_data from 16 {sv.namehint = "icData_data_hi"} : (i32) -> i16
-    %58 = comb.replicate %57 {sv.namehint = "icData_data_hi_1"} : (i16) -> i32
-    %59 = comb.replicate %58 {sv.namehint = "icData_data_hi_2"} : (i32) -> i64
-    %60 = comb.concat %c0_i63, %59, %io_imem_bits_data, %56 : i63, i64, i32, i32
-    %61 = comb.concat %c0_i185, %54, %c0_i4 : i185, i2, i4
-    %62 = comb.shl bin %60, %61 {sv.namehint = "_icData_T_1"} : i191
-    %63 = comb.extract %62 from 64 {sv.namehint = "icData"} : (i191) -> i32
-    %64 = comb.concat %c0_i58, %nBufValid, %c0_i4 : i58, i1, i4
-    %65 = comb.shl bin %c4294967295_i63, %64 {sv.namehint = "_icMask_T_2"} : i63
-    %66 = comb.extract %65 from 0 {sv.namehint = "icMask"} : (i63) -> i32
-    %67 = comb.and bin %63, %66 {sv.namehint = "_inst_T"} : i32
-    %68 = comb.xor bin %66, %c-1_i32 {sv.namehint = "_inst_T_1"} : i32
-    %69 = comb.and bin %buf_data, %68 {sv.namehint = "_inst_T_2"} : i32
-    %70 = comb.or bin %67, %69 {sv.namehint = "inst"} : i32
-    %71 = comb.concat %c0_i2, %7 : i2, i2
-    %72 = comb.shl bin %c1_i4, %71 {sv.namehint = "_valid_T"} : i4
-    %73 = comb.extract %72 from 0 : (i4) -> i2
-    %74 = comb.add %73, %c-1_i2 {sv.namehint = "_valid_T_1"} : i2
-    %75 = comb.shl bin %c1_i2, %8 {sv.namehint = "_bufMask_T"} : i2
-    %76 = comb.add %75, %c-1_i2 {sv.namehint = "_bufMask_T_1"} : i2
-    %77 = comb.extract %76 from 0 {sv.namehint = "_xcpt_T"} : (i2) -> i1
-    %78 = comb.mux bin %77, %buf_xcpt_pf_inst, %io_imem_bits_xcpt_pf_inst {sv.namehint = "xcpt_0_pf_inst"} : i1
-    %79 = comb.mux bin %77, %buf_xcpt_ae_inst, %io_imem_bits_xcpt_ae_inst {sv.namehint = "xcpt_0_ae_inst"} : i1
-    %80 = comb.extract %76 from 1 {sv.namehint = "_xcpt_T_1"} : (i2) -> i1
-    %81 = comb.mux bin %80, %buf_xcpt_pf_inst, %io_imem_bits_xcpt_pf_inst {sv.namehint = "xcpt_1_pf_inst"} : i1
-    %82 = comb.mux bin %80, %buf_xcpt_ae_inst, %io_imem_bits_xcpt_ae_inst {sv.namehint = "xcpt_1_ae_inst"} : i1
-    %83 = comb.mux bin %buf_replay, %76, %c0_i2 {sv.namehint = "buf_replay"} : i2
-    %84 = comb.xor bin %76, %c-1_i2 {sv.namehint = "_ic_replay_T"} : i2
-    %85 = comb.and bin %74, %84 {sv.namehint = "_ic_replay_T_1"} : i2
-    %86 = comb.mux bin %io_imem_bits_replay, %85, %c0_i2 {sv.namehint = "_ic_replay_T_2"} : i2
-    %87 = comb.or bin %83, %86 {sv.namehint = "ic_replay"} : i2
-    %88 = comb.mux bin %nBufValid, %buf_pc, %io_imem_bits_pc {sv.namehint = "io_pc"} : i34
-    %exp.io_out_bits, %exp.io_out_rd, %exp.io_out_rs1, %exp.io_out_rs2, %exp.io_rvc = hw.instance "exp" @RVCExpander(io_in: %70: i32) -> (io_out_bits: i32, io_out_rd: i5, io_out_rs1: i5, io_out_rs2: i5, io_rvc: i1) {sv.namehint = "exp.io_rvc"}
-    %89 = comb.extract %87 from 0 {sv.namehint = "_replay_T_1"} : (i2) -> i1
-    %90 = comb.xor bin %exp.io_rvc, %true {sv.namehint = "_replay_T_2"} : i1
-    %91 = comb.extract %87 from 1 {sv.namehint = "_replay_T_6"} : (i2) -> i1
-    %92 = comb.and bin %90, %91 {sv.namehint = "_replay_T_7"} : i1
-    %93 = comb.or bin %89, %92 {sv.namehint = "replay"} : i1
-    %94 = comb.extract %74 from 1 {sv.namehint = "_full_insn_T_3"} : (i2) -> i1
-    %95 = comb.extract %83 from 0 {sv.namehint = "_full_insn_T_6"} : (i2) -> i1
-    %96 = comb.or bin %exp.io_rvc, %94, %95 {sv.namehint = "full_insn"} : i1
-    %97 = comb.extract %74 from 0 {sv.namehint = "_io_inst_0_valid_T_1"} : (i2) -> i1
-    %98 = comb.and bin %97, %96 {sv.namehint = "io_inst_0_valid"} : i1
-    %99 = comb.concat %81, %82 {sv.namehint = "_io_inst_0_bits_xcpt1_T_4"} : i1, i1
-    %100 = comb.mux bin %exp.io_rvc, %c0_i2, %99 {sv.namehint = "_io_inst_0_bits_xcpt1_T_5"} : i2
-    %101 = comb.extract %100 from 0 {sv.namehint = "_io_inst_0_bits_xcpt1_T_6"} : (i2) -> i1
-    %102 = comb.extract %100 from 1 {sv.namehint = "_io_inst_0_bits_xcpt1_T_7"} : (i2) -> i1
-    %103 = comb.mux bin %exp.io_rvc, %c1_i2, %c-2_i2 {sv.namehint = "_nReady_T_4"} : i2
-    %104 = comb.mux bin %96, %103, %c0_i2 {sv.namehint = "nReady"} : i2
-    hw.output %15, %88, %98, %78, %79, %102, %101, %93, %exp.io_rvc, %exp.io_out_bits, %exp.io_out_rd, %exp.io_out_rs1, %exp.io_out_rs2, %70 : i1, i34, i1, i1, i1, i1, i1, i1, i1, i32, i5, i5, i5, i32
+    %0 = seq.from_clock %clock
+    %nBufValid = seq.firreg %51 clock %clock reset sync %reset, %false {firrtl.random_init_start = 0 : ui64, sv.namehint = "_io_pc_T"} : i1
+    %buf_pc = seq.firreg %49 clock %clock {firrtl.random_init_start = 50 : ui64} : i34
+    %buf_data = seq.firreg %43 clock %clock {firrtl.random_init_start = 84 : ui64} : i32
+    %buf_xcpt_pf_inst = seq.firreg %33 clock %clock {firrtl.random_init_start = 118 : ui64} : i1
+    %buf_xcpt_ae_inst = seq.firreg %34 clock %clock {firrtl.random_init_start = 119 : ui64} : i1
+    %buf_replay = seq.firreg %35 clock %clock {firrtl.random_init_start = 120 : ui64} : i1
+    %1 = comb.extract %io_imem_bits_pc from 1 {sv.namehint = "pcWordBits"} : (i34) -> i1
+    %2 = comb.concat %false, %1 : i1, i1
+    %3 = comb.sub %c-2_i2, %2 {sv.namehint = "_nIC_T_2"} : i2
+    %4 = comb.concat %false, %nBufValid : i1, i1
+    %5 = comb.sub %105, %4 {sv.namehint = "_nICReady_T"} : i2
+    %6 = comb.mux bin %io_imem_valid, %3, %c0_i2 {sv.namehint = "_nValid_T"} : i2
+    %7 = comb.concat %false, %nBufValid : i1, i1
+    %8 = comb.add %6, %7 {sv.namehint = "_nValid_T_1"} : i2
+    %9 = comb.concat %false, %nBufValid : i1, i1
+    %10 = comb.icmp bin uge %105, %9 {sv.namehint = "_nBufValid_T"} : i2
+    %11 = comb.icmp bin uge %5, %3 {sv.namehint = "_io_imem_ready_T_2"} : i2
+    %12 = comb.sub %3, %5 {sv.namehint = "_nBufValid_T_6"} : i2
+    %13 = comb.extract %12 from 1 : (i2) -> i1
+    %14 = comb.xor bin %13, %true {sv.namehint = "_io_imem_ready_T_5"} : i1
+    %15 = comb.or bin %11, %14 {sv.namehint = "_io_imem_ready_T_6"} : i1
+    %16 = comb.and bin %io_inst_0_ready, %10, %15 {sv.namehint = "io_imem_ready"} : i1
+    %17 = comb.xor bin %nBufValid, %true {sv.namehint = "_nBufValid_T_1"} : i1
+    %18 = comb.or bin %10, %17 {sv.namehint = "_nBufValid_T_2"} : i1
+    %19 = comb.extract %105 from 0 : (i2) -> i1
+    %20 = comb.sub %nBufValid, %19 {sv.namehint = "_nBufValid_T_3"} : i1
+    %21 = comb.xor %18, %true : i1
+    %22 = comb.and %21, %20 {sv.namehint = "_nBufValid_T_5"} : i1
+    %23 = comb.icmp bin ult %5, %3 : i2
+    %24 = comb.extract %12 from 1 : (i2) -> i1
+    %25 = comb.xor bin %24, %true : i1
+    %26 = comb.and bin %io_imem_valid, %10, %23, %25 : i1
+    %27 = comb.concat %false, %1 : i1, i1
+    %28 = comb.add %27, %5 {sv.namehint = "_shamt_T"} : i2
+    %29 = comb.extract %12 from 0 : (i2) -> i1
+    %30 = comb.mux bin %26, %29, %22 : i1
+    %31 = comb.mux bin %io_inst_0_ready, %30, %nBufValid : i1
+    %32 = comb.and bin %io_inst_0_ready, %26 : i1
+    %33 = comb.mux bin %32, %io_imem_bits_xcpt_pf_inst, %buf_xcpt_pf_inst : i1
+    %34 = comb.mux bin %32, %io_imem_bits_xcpt_ae_inst, %buf_xcpt_ae_inst : i1
+    %35 = comb.mux bin %32, %io_imem_bits_replay, %buf_replay : i1
+    %36 = comb.extract %io_imem_bits_data from 16 {sv.namehint = "buf_data_data_hi"} : (i32) -> i16
+    %37 = comb.replicate %36 {sv.namehint = "buf_data_data_hi_1"} : (i16) -> i32
+    %38 = comb.concat %37, %io_imem_bits_data {sv.namehint = "buf_data_data"} : i32, i32
+    %39 = comb.concat %c0_i58, %28, %c0_i4 : i58, i2, i4
+    %40 = comb.shru bin %38, %39 {sv.namehint = "_buf_data_T_1"} : i64
+    %41 = comb.extract %40 from 0 {sv.namehint = "_buf_data_T_2"} : (i64) -> i16
+    %42 = comb.concat %c0_i16, %41 : i16, i16
+    %43 = comb.mux bin %32, %42, %buf_data : i32
+    %44 = comb.and bin %io_imem_bits_pc, %c-4_i34 {sv.namehint = "_buf_pc_T_1"} : i34
+    %45 = comb.concat %c0_i31, %5, %false : i31, i2, i1
+    %46 = comb.add %io_imem_bits_pc, %45 {sv.namehint = "_buf_pc_T_3"} : i34
+    %47 = comb.and bin %46, %c3_i34 {sv.namehint = "_buf_pc_T_5"} : i34
+    %48 = comb.or bin %44, %47 {sv.namehint = "_buf_pc_T_6"} : i34
+    %49 = comb.mux bin %32, %48, %buf_pc : i34
+    %50 = comb.xor %io_kill, %true : i1
+    %51 = comb.and %50, %31 : i1
+    %52 = comb.concat %false, %nBufValid : i1, i1
+    %53 = comb.add %52, %c-2_i2 {sv.namehint = "_icShiftAmt_T"} : i2
+    %54 = comb.concat %false, %1 : i1, i1
+    %55 = comb.sub %53, %54 {sv.namehint = "_icShiftAmt_T_2"} : i2
+    %56 = comb.extract %io_imem_bits_data from 0 {sv.namehint = "icData_hi"} : (i32) -> i16
+    %57 = comb.replicate %56 {sv.namehint = "icData_lo"} : (i16) -> i32
+    %58 = comb.extract %io_imem_bits_data from 16 {sv.namehint = "icData_data_hi"} : (i32) -> i16
+    %59 = comb.replicate %58 {sv.namehint = "icData_data_hi_1"} : (i16) -> i32
+    %60 = comb.replicate %59 {sv.namehint = "icData_data_hi_2"} : (i32) -> i64
+    %61 = comb.concat %c0_i63, %60, %io_imem_bits_data, %57 : i63, i64, i32, i32
+    %62 = comb.concat %c0_i185, %55, %c0_i4 : i185, i2, i4
+    %63 = comb.shl bin %61, %62 {sv.namehint = "_icData_T_1"} : i191
+    %64 = comb.extract %63 from 64 {sv.namehint = "icData"} : (i191) -> i32
+    %65 = comb.concat %c0_i58, %nBufValid, %c0_i4 : i58, i1, i4
+    %66 = comb.shl bin %c4294967295_i63, %65 {sv.namehint = "_icMask_T_2"} : i63
+    %67 = comb.extract %66 from 0 {sv.namehint = "icMask"} : (i63) -> i32
+    %68 = comb.and bin %64, %67 {sv.namehint = "_inst_T"} : i32
+    %69 = comb.xor bin %67, %c-1_i32 {sv.namehint = "_inst_T_1"} : i32
+    %70 = comb.and bin %buf_data, %69 {sv.namehint = "_inst_T_2"} : i32
+    %71 = comb.or bin %68, %70 {sv.namehint = "inst"} : i32
+    %72 = comb.concat %c0_i2, %8 : i2, i2
+    %73 = comb.shl bin %c1_i4, %72 {sv.namehint = "_valid_T"} : i4
+    %74 = comb.extract %73 from 0 : (i4) -> i2
+    %75 = comb.add %74, %c-1_i2 {sv.namehint = "_valid_T_1"} : i2
+    %76 = comb.shl bin %c1_i2, %9 {sv.namehint = "_bufMask_T"} : i2
+    %77 = comb.add %76, %c-1_i2 {sv.namehint = "_bufMask_T_1"} : i2
+    %78 = comb.extract %77 from 0 {sv.namehint = "_xcpt_T"} : (i2) -> i1
+    %79 = comb.mux bin %78, %buf_xcpt_pf_inst, %io_imem_bits_xcpt_pf_inst {sv.namehint = "xcpt_0_pf_inst"} : i1
+    %80 = comb.mux bin %78, %buf_xcpt_ae_inst, %io_imem_bits_xcpt_ae_inst {sv.namehint = "xcpt_0_ae_inst"} : i1
+    %81 = comb.extract %77 from 1 {sv.namehint = "_xcpt_T_1"} : (i2) -> i1
+    %82 = comb.mux bin %81, %buf_xcpt_pf_inst, %io_imem_bits_xcpt_pf_inst {sv.namehint = "xcpt_1_pf_inst"} : i1
+    %83 = comb.mux bin %81, %buf_xcpt_ae_inst, %io_imem_bits_xcpt_ae_inst {sv.namehint = "xcpt_1_ae_inst"} : i1
+    %84 = comb.mux bin %buf_replay, %77, %c0_i2 {sv.namehint = "buf_replay"} : i2
+    %85 = comb.xor bin %77, %c-1_i2 {sv.namehint = "_ic_replay_T"} : i2
+    %86 = comb.and bin %75, %85 {sv.namehint = "_ic_replay_T_1"} : i2
+    %87 = comb.mux bin %io_imem_bits_replay, %86, %c0_i2 {sv.namehint = "_ic_replay_T_2"} : i2
+    %88 = comb.or bin %84, %87 {sv.namehint = "ic_replay"} : i2
+    sv.ifdef  "SYNTHESIS" {
+    } else {
+      sv.always posedge %0 {
+        %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
+        %106 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %106 {
+          sv.fatal 1
+        }
+      }
+    }
+    %89 = comb.mux bin %nBufValid, %buf_pc, %io_imem_bits_pc {sv.namehint = "io_pc"} : i34
+    %exp.io_out_bits, %exp.io_out_rd, %exp.io_out_rs1, %exp.io_out_rs2, %exp.io_rvc = hw.instance "exp" @RVCExpander(io_in: %71: i32) -> (io_out_bits: i32, io_out_rd: i5, io_out_rs1: i5, io_out_rs2: i5, io_rvc: i1) {sv.namehint = "exp.io_rvc"}
+    %90 = comb.extract %88 from 0 {sv.namehint = "_replay_T_1"} : (i2) -> i1
+    %91 = comb.xor bin %exp.io_rvc, %true {sv.namehint = "_replay_T_2"} : i1
+    %92 = comb.extract %88 from 1 {sv.namehint = "_replay_T_6"} : (i2) -> i1
+    %93 = comb.and bin %91, %92 {sv.namehint = "_replay_T_7"} : i1
+    %94 = comb.or bin %90, %93 {sv.namehint = "replay"} : i1
+    %95 = comb.extract %75 from 1 {sv.namehint = "_full_insn_T_3"} : (i2) -> i1
+    %96 = comb.extract %84 from 0 {sv.namehint = "_full_insn_T_6"} : (i2) -> i1
+    %97 = comb.or bin %exp.io_rvc, %95, %96 {sv.namehint = "full_insn"} : i1
+    %98 = comb.extract %75 from 0 {sv.namehint = "_io_inst_0_valid_T_1"} : (i2) -> i1
+    %99 = comb.and bin %98, %97 {sv.namehint = "io_inst_0_valid"} : i1
+    %100 = comb.concat %82, %83 {sv.namehint = "_io_inst_0_bits_xcpt1_T_4"} : i1, i1
+    %101 = comb.mux bin %exp.io_rvc, %c0_i2, %100 {sv.namehint = "_io_inst_0_bits_xcpt1_T_5"} : i2
+    %102 = comb.extract %101 from 0 {sv.namehint = "_io_inst_0_bits_xcpt1_T_6"} : (i2) -> i1
+    %103 = comb.extract %101 from 1 {sv.namehint = "_io_inst_0_bits_xcpt1_T_7"} : (i2) -> i1
+    %104 = comb.mux bin %exp.io_rvc, %c1_i2, %c-2_i2 {sv.namehint = "_nReady_T_4"} : i2
+    %105 = comb.mux bin %97, %104, %c0_i2 {sv.namehint = "nReady"} : i2
+    hw.output %16, %89, %99, %79, %80, %103, %102, %94, %exp.io_rvc, %exp.io_out_bits, %exp.io_out_rd, %exp.io_out_rs1, %exp.io_out_rs2, %71 : i1, i34, i1, i1, i1, i1, i1, i1, i1, i32, i5, i5, i5, i32
   }
   hw.module private @CSRFile(in %clock : !seq.clock, in %reset : i1, in %io_ungated_clock : !seq.clock, in %io_interrupts_debug : i1, in %io_interrupts_mtip : i1, in %io_interrupts_msip : i1, in %io_interrupts_meip : i1, in %io_rw_addr : i12, in %io_rw_cmd : i3, out io_rw_rdata : i64, in %io_rw_wdata : i64, in %io_decode_0_csr : i12, out io_decode_0_read_illegal : i1, out io_decode_0_write_illegal : i1, out io_decode_0_write_flush : i1, out io_decode_0_system_illegal : i1, out io_csr_stall : i1, out io_eret : i1, out io_singleStep : i1, out io_status_debug : i1, out io_status_wfi : i1, out io_status_isa : i32, out io_status_dprv : i2, out io_evec : i34, in %io_exception : i1, in %io_retire : i1, in %io_cause : i64, in %io_pc : i34, in %io_tval : i34, out io_time : i64, out io_interrupt : i1, out io_interrupt_cause : i64, out io_bp_0_control_action : i1, out io_bp_0_control_tmatch : i2, out io_bp_0_control_x : i1, out io_bp_0_control_w : i1, out io_bp_0_control_r : i1, out io_bp_0_address : i33, out io_pmp_0_cfg_l : i1, out io_pmp_0_cfg_a : i2, out io_pmp_0_cfg_x : i1, out io_pmp_0_cfg_w : i1, out io_pmp_0_cfg_r : i1, out io_pmp_0_addr : i30, out io_pmp_0_mask : i32, out io_pmp_1_cfg_l : i1, out io_pmp_1_cfg_a : i2, out io_pmp_1_cfg_x : i1, out io_pmp_1_cfg_w : i1, out io_pmp_1_cfg_r : i1, out io_pmp_1_addr : i30, out io_pmp_1_mask : i32, out io_pmp_2_cfg_l : i1, out io_pmp_2_cfg_a : i2, out io_pmp_2_cfg_x : i1, out io_pmp_2_cfg_w : i1, out io_pmp_2_cfg_r : i1, out io_pmp_2_addr : i30, out io_pmp_2_mask : i32, out io_pmp_3_cfg_l : i1, out io_pmp_3_cfg_a : i2, out io_pmp_3_cfg_x : i1, out io_pmp_3_cfg_w : i1, out io_pmp_3_cfg_r : i1, out io_pmp_3_addr : i30, out io_pmp_3_mask : i32, out io_pmp_4_cfg_l : i1, out io_pmp_4_cfg_a : i2, out io_pmp_4_cfg_x : i1, out io_pmp_4_cfg_w : i1, out io_pmp_4_cfg_r : i1, out io_pmp_4_addr : i30, out io_pmp_4_mask : i32, out io_pmp_5_cfg_l : i1, out io_pmp_5_cfg_a : i2, out io_pmp_5_cfg_x : i1, out io_pmp_5_cfg_w : i1, out io_pmp_5_cfg_r : i1, out io_pmp_5_addr : i30, out io_pmp_5_mask : i32, out io_pmp_6_cfg_l : i1, out io_pmp_6_cfg_a : i2, out io_pmp_6_cfg_x : i1, out io_pmp_6_cfg_w : i1, out io_pmp_6_cfg_r : i1, out io_pmp_6_addr : i30, out io_pmp_6_mask : i32, out io_pmp_7_cfg_l : i1, out io_pmp_7_cfg_a : i2, out io_pmp_7_cfg_x : i1, out io_pmp_7_cfg_w : i1, out io_pmp_7_cfg_r : i1, out io_pmp_7_addr : i30, out io_pmp_7_mask : i32, out io_inhibit_cycle : i1, out io_customCSRs_0_value : i64) {
-    %c0_i13 = hw.constant 0 : i13
-    %c0_i29 = hw.constant 0 : i29
-    %c-1_i31 = hw.constant -1 : i31
-    %c0_i61 = hw.constant 0 : i61
-    %c549755813888_i43 = hw.constant 549755813888 : i43
-    %c0_i15 = hw.constant 0 : i15
-    %c4_i4 = hw.constant 4 : i4
     %c1_i30 = hw.constant 1 : i30
     %c-1_i30 = hw.constant -1 : i30
     %c-1_i48 = hw.constant -1 : i48
@@ -24030,6 +24231,7 @@ module {
     %c16384_i16 = hw.constant 16384 : i16
     %c-1_i8 = hw.constant -1 : i8
     %c-1_i24 = hw.constant -1 : i24
+    %c0_i51 = hw.constant 0 : i51
     %c-9223372036854775808_i64 = hw.constant -9223372036854775808 : i64
     %c0_i60 = hw.constant 0 : i60
     %c0_i4 = hw.constant 0 : i4
@@ -24119,6 +24321,7 @@ module {
     %c5_i4 = hw.constant 5 : i4
     %c2184_i16 = hw.constant 2184 : i16
     %c2_i4 = hw.constant 2 : i4
+    %c0_i16 = hw.constant 0 : i16
     %c0_i30 = hw.constant 0 : i30
     %c0_i32 = hw.constant 0 : i32
     %c1_i2 = hw.constant 1 : i2
@@ -24181,919 +24384,945 @@ module {
     %c-1_i64 = hw.constant -1 : i64
     %c-1_i3 = hw.constant -1 : i3
     %0 = seq.from_clock %clock
-    %reg_mstatus_mpp = seq.firreg %449 clock %clock reset sync %reset, %c-1_i2 {firrtl.random_init_start = 90 : ui64, sv.namehint = "io_status_mpp"} : i2
-    %reg_mstatus_mpie = seq.firreg %525 clock %clock reset sync %reset, %false {firrtl.random_init_start = 95 : ui64, sv.namehint = "io_status_mpie"} : i1
-    %reg_mstatus_mie = seq.firreg %524 clock %clock reset sync %reset, %false {firrtl.random_init_start = 99 : ui64, sv.namehint = "io_status_mie"} : i1
-    %reg_dcsr_ebreakm = seq.firreg %584 clock %clock reset sync %reset, %false {firrtl.random_init_start = 119 : ui64, sv.namehint = "_causeIsDebugBreak_T_5"} : i1
-    %reg_dcsr_cause = seq.firreg %411 clock %clock reset sync %reset, %c0_i3 {firrtl.random_init_start = 126 : ui64} : i3
-    %reg_dcsr_step = seq.firreg %583 clock %clock reset sync %reset, %false {firrtl.random_init_start = 132 : ui64} : i1
-    %reg_debug = seq.firreg %434 clock %clock reset sync %reset, %false {firrtl.random_init_start = 135 : ui64, sv.namehint = "reg_debug"} : i1
-    %reg_dpc = seq.firreg %588 clock %clock {firrtl.random_init_start = 136 : ui64} : i34
-    %reg_dscratch = seq.firreg %590 clock %clock {firrtl.random_init_start = 170 : ui64} : i64
-    %reg_singleStepped = seq.firreg %397 clock %clock {firrtl.random_init_start = 234 : ui64} : i1
-    %reg_bp_0_control_dmode = seq.firreg %619 clock %clock reset sync %reset, %false {firrtl.random_init_start = 240 : ui64} : i1
-    %reg_bp_0_control_action = seq.firreg %621 clock %clock reset sync %reset, %false {firrtl.random_init_start = 287 : ui64, sv.namehint = "io_bp_0_control_action"} : i1
-    %reg_bp_0_control_tmatch = seq.firreg %603 clock %clock {firrtl.random_init_start = 291 : ui64, sv.namehint = "io_bp_0_control_tmatch"} : i2
-    %reg_bp_0_control_x = seq.firreg %604 clock %clock reset sync %reset, %false {firrtl.random_init_start = 297 : ui64, sv.namehint = "io_bp_0_control_x"} : i1
-    %reg_bp_0_control_w = seq.firreg %605 clock %clock reset sync %reset, %false {firrtl.random_init_start = 298 : ui64, sv.namehint = "io_bp_0_control_w"} : i1
-    %reg_bp_0_control_r = seq.firreg %606 clock %clock reset sync %reset, %false {firrtl.random_init_start = 299 : ui64, sv.namehint = "io_bp_0_control_r"} : i1
-    %reg_bp_0_address = seq.firreg %597 clock %clock {firrtl.random_init_start = 300 : ui64, sv.namehint = "io_bp_0_address"} : i33
-    %reg_pmp_0_cfg_l = seq.firreg %632 clock %clock reset sync %reset, %false {firrtl.random_init_start = 532 : ui64, sv.namehint = "pmp_cfg_l"} : i1
-    %reg_pmp_0_cfg_a = seq.firreg %633 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 535 : ui64, sv.namehint = "pmp_cfg_a"} : i2
-    %reg_pmp_0_cfg_x = seq.firreg %634 clock %clock {firrtl.random_init_start = 537 : ui64, sv.namehint = "pmp_cfg_x"} : i1
-    %reg_pmp_0_cfg_w = seq.firreg %637 clock %clock {firrtl.random_init_start = 538 : ui64, sv.namehint = "pmp_cfg_w"} : i1
-    %reg_pmp_0_cfg_r = seq.firreg %635 clock %clock {firrtl.random_init_start = 539 : ui64, sv.namehint = "pmp_cfg_r"} : i1
-    %reg_pmp_0_addr = seq.firreg %648 clock %clock {firrtl.random_init_start = 540 : ui64, sv.namehint = "pmp_addr"} : i30
-    %reg_pmp_1_cfg_l = seq.firreg %659 clock %clock reset sync %reset, %false {firrtl.random_init_start = 570 : ui64, sv.namehint = "pmp_1_cfg_l"} : i1
-    %reg_pmp_1_cfg_a = seq.firreg %660 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 573 : ui64, sv.namehint = "pmp_1_cfg_a"} : i2
-    %reg_pmp_1_cfg_x = seq.firreg %661 clock %clock {firrtl.random_init_start = 575 : ui64, sv.namehint = "pmp_1_cfg_x"} : i1
-    %reg_pmp_1_cfg_w = seq.firreg %664 clock %clock {firrtl.random_init_start = 576 : ui64, sv.namehint = "pmp_1_cfg_w"} : i1
-    %reg_pmp_1_cfg_r = seq.firreg %662 clock %clock {firrtl.random_init_start = 577 : ui64, sv.namehint = "pmp_1_cfg_r"} : i1
-    %reg_pmp_1_addr = seq.firreg %672 clock %clock {firrtl.random_init_start = 578 : ui64, sv.namehint = "pmp_1_addr"} : i30
-    %reg_pmp_2_cfg_l = seq.firreg %683 clock %clock reset sync %reset, %false {firrtl.random_init_start = 608 : ui64, sv.namehint = "pmp_2_cfg_l"} : i1
-    %reg_pmp_2_cfg_a = seq.firreg %684 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 611 : ui64, sv.namehint = "pmp_2_cfg_a"} : i2
-    %reg_pmp_2_cfg_x = seq.firreg %685 clock %clock {firrtl.random_init_start = 613 : ui64, sv.namehint = "pmp_2_cfg_x"} : i1
-    %reg_pmp_2_cfg_w = seq.firreg %688 clock %clock {firrtl.random_init_start = 614 : ui64, sv.namehint = "pmp_2_cfg_w"} : i1
-    %reg_pmp_2_cfg_r = seq.firreg %686 clock %clock {firrtl.random_init_start = 615 : ui64, sv.namehint = "pmp_2_cfg_r"} : i1
-    %reg_pmp_2_addr = seq.firreg %696 clock %clock {firrtl.random_init_start = 616 : ui64, sv.namehint = "pmp_2_addr"} : i30
-    %reg_pmp_3_cfg_l = seq.firreg %707 clock %clock reset sync %reset, %false {firrtl.random_init_start = 646 : ui64, sv.namehint = "pmp_3_cfg_l"} : i1
-    %reg_pmp_3_cfg_a = seq.firreg %708 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 649 : ui64, sv.namehint = "pmp_3_cfg_a"} : i2
-    %reg_pmp_3_cfg_x = seq.firreg %709 clock %clock {firrtl.random_init_start = 651 : ui64, sv.namehint = "pmp_3_cfg_x"} : i1
-    %reg_pmp_3_cfg_w = seq.firreg %712 clock %clock {firrtl.random_init_start = 652 : ui64, sv.namehint = "pmp_3_cfg_w"} : i1
-    %reg_pmp_3_cfg_r = seq.firreg %710 clock %clock {firrtl.random_init_start = 653 : ui64, sv.namehint = "pmp_3_cfg_r"} : i1
-    %reg_pmp_3_addr = seq.firreg %720 clock %clock {firrtl.random_init_start = 654 : ui64, sv.namehint = "pmp_3_addr"} : i30
-    %reg_pmp_4_cfg_l = seq.firreg %731 clock %clock reset sync %reset, %false {firrtl.random_init_start = 684 : ui64, sv.namehint = "pmp_4_cfg_l"} : i1
-    %reg_pmp_4_cfg_a = seq.firreg %732 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 687 : ui64, sv.namehint = "pmp_4_cfg_a"} : i2
-    %reg_pmp_4_cfg_x = seq.firreg %733 clock %clock {firrtl.random_init_start = 689 : ui64, sv.namehint = "pmp_4_cfg_x"} : i1
-    %reg_pmp_4_cfg_w = seq.firreg %736 clock %clock {firrtl.random_init_start = 690 : ui64, sv.namehint = "pmp_4_cfg_w"} : i1
-    %reg_pmp_4_cfg_r = seq.firreg %734 clock %clock {firrtl.random_init_start = 691 : ui64, sv.namehint = "pmp_4_cfg_r"} : i1
-    %reg_pmp_4_addr = seq.firreg %744 clock %clock {firrtl.random_init_start = 692 : ui64, sv.namehint = "pmp_4_addr"} : i30
-    %reg_pmp_5_cfg_l = seq.firreg %755 clock %clock reset sync %reset, %false {firrtl.random_init_start = 722 : ui64, sv.namehint = "pmp_5_cfg_l"} : i1
-    %reg_pmp_5_cfg_a = seq.firreg %756 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 725 : ui64, sv.namehint = "pmp_5_cfg_a"} : i2
-    %reg_pmp_5_cfg_x = seq.firreg %757 clock %clock {firrtl.random_init_start = 727 : ui64, sv.namehint = "pmp_5_cfg_x"} : i1
-    %reg_pmp_5_cfg_w = seq.firreg %760 clock %clock {firrtl.random_init_start = 728 : ui64, sv.namehint = "pmp_5_cfg_w"} : i1
-    %reg_pmp_5_cfg_r = seq.firreg %758 clock %clock {firrtl.random_init_start = 729 : ui64, sv.namehint = "pmp_5_cfg_r"} : i1
-    %reg_pmp_5_addr = seq.firreg %768 clock %clock {firrtl.random_init_start = 730 : ui64, sv.namehint = "pmp_5_addr"} : i30
-    %reg_pmp_6_cfg_l = seq.firreg %779 clock %clock reset sync %reset, %false {firrtl.random_init_start = 760 : ui64, sv.namehint = "pmp_6_cfg_l"} : i1
-    %reg_pmp_6_cfg_a = seq.firreg %780 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 763 : ui64, sv.namehint = "pmp_6_cfg_a"} : i2
-    %reg_pmp_6_cfg_x = seq.firreg %781 clock %clock {firrtl.random_init_start = 765 : ui64, sv.namehint = "pmp_6_cfg_x"} : i1
-    %reg_pmp_6_cfg_w = seq.firreg %784 clock %clock {firrtl.random_init_start = 766 : ui64, sv.namehint = "pmp_6_cfg_w"} : i1
-    %reg_pmp_6_cfg_r = seq.firreg %782 clock %clock {firrtl.random_init_start = 767 : ui64, sv.namehint = "pmp_6_cfg_r"} : i1
-    %reg_pmp_6_addr = seq.firreg %792 clock %clock {firrtl.random_init_start = 768 : ui64, sv.namehint = "pmp_6_addr"} : i30
-    %reg_pmp_7_cfg_l = seq.firreg %803 clock %clock reset sync %reset, %false {firrtl.random_init_start = 798 : ui64, sv.namehint = "pmp_7_cfg_l"} : i1
-    %reg_pmp_7_cfg_a = seq.firreg %804 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 801 : ui64, sv.namehint = "pmp_7_cfg_a"} : i2
-    %reg_pmp_7_cfg_x = seq.firreg %805 clock %clock {firrtl.random_init_start = 803 : ui64, sv.namehint = "pmp_7_cfg_x"} : i1
-    %reg_pmp_7_cfg_w = seq.firreg %808 clock %clock {firrtl.random_init_start = 804 : ui64, sv.namehint = "pmp_7_cfg_w"} : i1
-    %reg_pmp_7_cfg_r = seq.firreg %806 clock %clock {firrtl.random_init_start = 805 : ui64, sv.namehint = "pmp_7_cfg_r"} : i1
-    %reg_pmp_7_addr = seq.firreg %812 clock %clock {firrtl.random_init_start = 806 : ui64, sv.namehint = "pmp_7_addr"} : i30
-    %reg_mie = seq.firreg %542 clock %clock {firrtl.random_init_start = 836 : ui64} : i64
-    %reg_mepc = seq.firreg %546 clock %clock {firrtl.random_init_start = 1044 : ui64} : i34
-    %reg_mcause = seq.firreg %556 clock %clock reset sync %reset, %c0_i64 {firrtl.random_init_start = 1078 : ui64} : i64
-    %reg_mtval = seq.firreg %561 clock %clock {firrtl.random_init_start = 1142 : ui64} : i34
-    %reg_mscratch = seq.firreg %548 clock %clock {firrtl.random_init_start = 1176 : ui64} : i64
-    %reg_mtvec = seq.firreg %553 clock %clock reset sync %reset, %c0_i32 {firrtl.random_init_start = 1240 : ui64} : i32
-    %reg_wfi = seq.firreg %395 clock %io_ungated_clock reset sync %reset, %false {firrtl.random_init_start = 1896 : ui64, sv.namehint = "reg_wfi"} : i1
-    %reg_mcountinhibit = seq.firreg %566 clock %clock reset sync %reset, %c0_i3 {firrtl.random_init_start = 1905 : ui64} : i3
+    %reg_mstatus_mpp = seq.firreg %467 clock %clock reset sync %reset, %c-1_i2 {firrtl.random_init_start = 90 : ui64, sv.namehint = "io_status_mpp"} : i2
+    %reg_mstatus_mpie = seq.firreg %537 clock %clock reset sync %reset, %false {firrtl.random_init_start = 95 : ui64, sv.namehint = "io_status_mpie"} : i1
+    %reg_mstatus_mie = seq.firreg %536 clock %clock reset sync %reset, %false {firrtl.random_init_start = 99 : ui64, sv.namehint = "io_status_mie"} : i1
+    %reg_dcsr_ebreakm = seq.firreg %606 clock %clock reset sync %reset, %false {firrtl.random_init_start = 119 : ui64, sv.namehint = "_causeIsDebugBreak_T_5"} : i1
+    %reg_dcsr_cause = seq.firreg %429 clock %clock reset sync %reset, %c0_i3 {firrtl.random_init_start = 126 : ui64} : i3
+    %reg_dcsr_step = seq.firreg %605 clock %clock reset sync %reset, %false {firrtl.random_init_start = 132 : ui64} : i1
+    %reg_debug = seq.firreg %452 clock %clock reset sync %reset, %false {firrtl.random_init_start = 135 : ui64, sv.namehint = "reg_debug"} : i1
+    %reg_dpc = seq.firreg %610 clock %clock {firrtl.random_init_start = 136 : ui64} : i34
+    %reg_dscratch = seq.firreg %612 clock %clock {firrtl.random_init_start = 170 : ui64} : i64
+    %reg_singleStepped = seq.firreg %415 clock %clock {firrtl.random_init_start = 234 : ui64} : i1
+    %reg_bp_0_control_dmode = seq.firreg %641 clock %clock reset sync %reset, %false {firrtl.random_init_start = 240 : ui64} : i1
+    %reg_bp_0_control_action = seq.firreg %643 clock %clock reset sync %reset, %false {firrtl.random_init_start = 287 : ui64, sv.namehint = "io_bp_0_control_action"} : i1
+    %reg_bp_0_control_tmatch = seq.firreg %625 clock %clock {firrtl.random_init_start = 291 : ui64, sv.namehint = "io_bp_0_control_tmatch"} : i2
+    %reg_bp_0_control_x = seq.firreg %626 clock %clock reset sync %reset, %false {firrtl.random_init_start = 297 : ui64, sv.namehint = "io_bp_0_control_x"} : i1
+    %reg_bp_0_control_w = seq.firreg %627 clock %clock reset sync %reset, %false {firrtl.random_init_start = 298 : ui64, sv.namehint = "io_bp_0_control_w"} : i1
+    %reg_bp_0_control_r = seq.firreg %628 clock %clock reset sync %reset, %false {firrtl.random_init_start = 299 : ui64, sv.namehint = "io_bp_0_control_r"} : i1
+    %reg_bp_0_address = seq.firreg %619 clock %clock {firrtl.random_init_start = 300 : ui64, sv.namehint = "io_bp_0_address"} : i33
+    %reg_pmp_0_cfg_l = seq.firreg %654 clock %clock reset sync %reset, %false {firrtl.random_init_start = 532 : ui64, sv.namehint = "pmp_cfg_l"} : i1
+    %reg_pmp_0_cfg_a = seq.firreg %655 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 535 : ui64, sv.namehint = "pmp_cfg_a"} : i2
+    %reg_pmp_0_cfg_x = seq.firreg %656 clock %clock {firrtl.random_init_start = 537 : ui64, sv.namehint = "pmp_cfg_x"} : i1
+    %reg_pmp_0_cfg_w = seq.firreg %659 clock %clock {firrtl.random_init_start = 538 : ui64, sv.namehint = "pmp_cfg_w"} : i1
+    %reg_pmp_0_cfg_r = seq.firreg %657 clock %clock {firrtl.random_init_start = 539 : ui64, sv.namehint = "pmp_cfg_r"} : i1
+    %reg_pmp_0_addr = seq.firreg %670 clock %clock {firrtl.random_init_start = 540 : ui64, sv.namehint = "pmp_addr"} : i30
+    %reg_pmp_1_cfg_l = seq.firreg %681 clock %clock reset sync %reset, %false {firrtl.random_init_start = 570 : ui64, sv.namehint = "pmp_1_cfg_l"} : i1
+    %reg_pmp_1_cfg_a = seq.firreg %682 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 573 : ui64, sv.namehint = "pmp_1_cfg_a"} : i2
+    %reg_pmp_1_cfg_x = seq.firreg %683 clock %clock {firrtl.random_init_start = 575 : ui64, sv.namehint = "pmp_1_cfg_x"} : i1
+    %reg_pmp_1_cfg_w = seq.firreg %686 clock %clock {firrtl.random_init_start = 576 : ui64, sv.namehint = "pmp_1_cfg_w"} : i1
+    %reg_pmp_1_cfg_r = seq.firreg %684 clock %clock {firrtl.random_init_start = 577 : ui64, sv.namehint = "pmp_1_cfg_r"} : i1
+    %reg_pmp_1_addr = seq.firreg %694 clock %clock {firrtl.random_init_start = 578 : ui64, sv.namehint = "pmp_1_addr"} : i30
+    %reg_pmp_2_cfg_l = seq.firreg %705 clock %clock reset sync %reset, %false {firrtl.random_init_start = 608 : ui64, sv.namehint = "pmp_2_cfg_l"} : i1
+    %reg_pmp_2_cfg_a = seq.firreg %706 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 611 : ui64, sv.namehint = "pmp_2_cfg_a"} : i2
+    %reg_pmp_2_cfg_x = seq.firreg %707 clock %clock {firrtl.random_init_start = 613 : ui64, sv.namehint = "pmp_2_cfg_x"} : i1
+    %reg_pmp_2_cfg_w = seq.firreg %710 clock %clock {firrtl.random_init_start = 614 : ui64, sv.namehint = "pmp_2_cfg_w"} : i1
+    %reg_pmp_2_cfg_r = seq.firreg %708 clock %clock {firrtl.random_init_start = 615 : ui64, sv.namehint = "pmp_2_cfg_r"} : i1
+    %reg_pmp_2_addr = seq.firreg %718 clock %clock {firrtl.random_init_start = 616 : ui64, sv.namehint = "pmp_2_addr"} : i30
+    %reg_pmp_3_cfg_l = seq.firreg %729 clock %clock reset sync %reset, %false {firrtl.random_init_start = 646 : ui64, sv.namehint = "pmp_3_cfg_l"} : i1
+    %reg_pmp_3_cfg_a = seq.firreg %730 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 649 : ui64, sv.namehint = "pmp_3_cfg_a"} : i2
+    %reg_pmp_3_cfg_x = seq.firreg %731 clock %clock {firrtl.random_init_start = 651 : ui64, sv.namehint = "pmp_3_cfg_x"} : i1
+    %reg_pmp_3_cfg_w = seq.firreg %734 clock %clock {firrtl.random_init_start = 652 : ui64, sv.namehint = "pmp_3_cfg_w"} : i1
+    %reg_pmp_3_cfg_r = seq.firreg %732 clock %clock {firrtl.random_init_start = 653 : ui64, sv.namehint = "pmp_3_cfg_r"} : i1
+    %reg_pmp_3_addr = seq.firreg %742 clock %clock {firrtl.random_init_start = 654 : ui64, sv.namehint = "pmp_3_addr"} : i30
+    %reg_pmp_4_cfg_l = seq.firreg %753 clock %clock reset sync %reset, %false {firrtl.random_init_start = 684 : ui64, sv.namehint = "pmp_4_cfg_l"} : i1
+    %reg_pmp_4_cfg_a = seq.firreg %754 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 687 : ui64, sv.namehint = "pmp_4_cfg_a"} : i2
+    %reg_pmp_4_cfg_x = seq.firreg %755 clock %clock {firrtl.random_init_start = 689 : ui64, sv.namehint = "pmp_4_cfg_x"} : i1
+    %reg_pmp_4_cfg_w = seq.firreg %758 clock %clock {firrtl.random_init_start = 690 : ui64, sv.namehint = "pmp_4_cfg_w"} : i1
+    %reg_pmp_4_cfg_r = seq.firreg %756 clock %clock {firrtl.random_init_start = 691 : ui64, sv.namehint = "pmp_4_cfg_r"} : i1
+    %reg_pmp_4_addr = seq.firreg %766 clock %clock {firrtl.random_init_start = 692 : ui64, sv.namehint = "pmp_4_addr"} : i30
+    %reg_pmp_5_cfg_l = seq.firreg %777 clock %clock reset sync %reset, %false {firrtl.random_init_start = 722 : ui64, sv.namehint = "pmp_5_cfg_l"} : i1
+    %reg_pmp_5_cfg_a = seq.firreg %778 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 725 : ui64, sv.namehint = "pmp_5_cfg_a"} : i2
+    %reg_pmp_5_cfg_x = seq.firreg %779 clock %clock {firrtl.random_init_start = 727 : ui64, sv.namehint = "pmp_5_cfg_x"} : i1
+    %reg_pmp_5_cfg_w = seq.firreg %782 clock %clock {firrtl.random_init_start = 728 : ui64, sv.namehint = "pmp_5_cfg_w"} : i1
+    %reg_pmp_5_cfg_r = seq.firreg %780 clock %clock {firrtl.random_init_start = 729 : ui64, sv.namehint = "pmp_5_cfg_r"} : i1
+    %reg_pmp_5_addr = seq.firreg %790 clock %clock {firrtl.random_init_start = 730 : ui64, sv.namehint = "pmp_5_addr"} : i30
+    %reg_pmp_6_cfg_l = seq.firreg %801 clock %clock reset sync %reset, %false {firrtl.random_init_start = 760 : ui64, sv.namehint = "pmp_6_cfg_l"} : i1
+    %reg_pmp_6_cfg_a = seq.firreg %802 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 763 : ui64, sv.namehint = "pmp_6_cfg_a"} : i2
+    %reg_pmp_6_cfg_x = seq.firreg %803 clock %clock {firrtl.random_init_start = 765 : ui64, sv.namehint = "pmp_6_cfg_x"} : i1
+    %reg_pmp_6_cfg_w = seq.firreg %806 clock %clock {firrtl.random_init_start = 766 : ui64, sv.namehint = "pmp_6_cfg_w"} : i1
+    %reg_pmp_6_cfg_r = seq.firreg %804 clock %clock {firrtl.random_init_start = 767 : ui64, sv.namehint = "pmp_6_cfg_r"} : i1
+    %reg_pmp_6_addr = seq.firreg %814 clock %clock {firrtl.random_init_start = 768 : ui64, sv.namehint = "pmp_6_addr"} : i30
+    %reg_pmp_7_cfg_l = seq.firreg %825 clock %clock reset sync %reset, %false {firrtl.random_init_start = 798 : ui64, sv.namehint = "pmp_7_cfg_l"} : i1
+    %reg_pmp_7_cfg_a = seq.firreg %826 clock %clock reset sync %reset, %c0_i2 {firrtl.random_init_start = 801 : ui64, sv.namehint = "pmp_7_cfg_a"} : i2
+    %reg_pmp_7_cfg_x = seq.firreg %827 clock %clock {firrtl.random_init_start = 803 : ui64, sv.namehint = "pmp_7_cfg_x"} : i1
+    %reg_pmp_7_cfg_w = seq.firreg %830 clock %clock {firrtl.random_init_start = 804 : ui64, sv.namehint = "pmp_7_cfg_w"} : i1
+    %reg_pmp_7_cfg_r = seq.firreg %828 clock %clock {firrtl.random_init_start = 805 : ui64, sv.namehint = "pmp_7_cfg_r"} : i1
+    %reg_pmp_7_addr = seq.firreg %834 clock %clock {firrtl.random_init_start = 806 : ui64, sv.namehint = "pmp_7_addr"} : i30
+    %reg_mie = seq.firreg %564 clock %clock {firrtl.random_init_start = 836 : ui64} : i64
+    %reg_mepc = seq.firreg %568 clock %clock {firrtl.random_init_start = 1044 : ui64} : i34
+    %reg_mcause = seq.firreg %578 clock %clock reset sync %reset, %c0_i64 {firrtl.random_init_start = 1078 : ui64} : i64
+    %reg_mtval = seq.firreg %583 clock %clock {firrtl.random_init_start = 1142 : ui64} : i34
+    %reg_mscratch = seq.firreg %570 clock %clock {firrtl.random_init_start = 1176 : ui64} : i64
+    %reg_mtvec = seq.firreg %575 clock %clock reset sync %reset, %c0_i32 {firrtl.random_init_start = 1240 : ui64} : i32
+    %reg_wfi = seq.firreg %413 clock %io_ungated_clock reset sync %reset, %false {firrtl.random_init_start = 1896 : ui64, sv.namehint = "reg_wfi"} : i1
+    %reg_mcountinhibit = seq.firreg %588 clock %clock reset sync %reset, %c0_i3 {firrtl.random_init_start = 1905 : ui64} : i3
     %1 = comb.extract %reg_mcountinhibit from 0 {sv.namehint = "x75"} : (i3) -> i1
     %2 = comb.extract %reg_mcountinhibit from 2 {sv.namehint = "x67"} : (i3) -> i1
-    %value_lo = seq.firreg %577 clock %clock reset sync %reset, %c0_i6 {firrtl.random_init_start = 1908 : ui64} : i6
+    %value_lo = seq.firreg %599 clock %clock reset sync %reset, %c0_i6 {firrtl.random_init_start = 1908 : ui64} : i6
     %3 = comb.concat %false, %value_lo : i1, i6
     %4 = comb.concat %c0_i6, %io_retire : i6, i1
     %5 = comb.add bin %3, %4 {sv.namehint = "nextSmall"} : i7
     %6 = comb.xor bin %2, %true {sv.namehint = "_large_T_1"} : i1
     %7 = comb.extract %5 from 0 : (i7) -> i6
     %8 = comb.mux bin %2, %value_lo, %7 : i6
-    %value_hi = seq.firreg %579 clock %clock reset sync %reset, %c0_i58 {firrtl.random_init_start = 1914 : ui64} : i58
+    %value_hi = seq.firreg %601 clock %clock reset sync %reset, %c0_i58 {firrtl.random_init_start = 1914 : ui64} : i58
     %9 = comb.extract %5 from 6 {sv.namehint = "_large_T"} : (i7) -> i1
     %10 = comb.and bin %9, %6 {sv.namehint = "_large_T_2"} : i1
     %11 = comb.add %value_hi, %c1_i58 {sv.namehint = "_large_r_T"} : i58
     %12 = comb.mux bin %10, %11, %value_hi : i58
     %13 = comb.concat %value_hi, %value_lo {sv.namehint = "value"} : i58, i6
-    %14 = comb.xor bin %457, %true {sv.namehint = "x74"} : i1
-    %value_lo_1 = seq.firreg %571 clock %io_ungated_clock reset sync %reset, %c0_i6 {firrtl.random_init_start = 1972 : ui64} : i6
+    %14 = comb.xor bin %475, %true {sv.namehint = "x74"} : i1
+    %value_lo_1 = seq.firreg %593 clock %io_ungated_clock reset sync %reset, %c0_i6 {firrtl.random_init_start = 1972 : ui64} : i6
     %15 = comb.concat %false, %value_lo_1 : i1, i6
     %16 = comb.concat %c0_i6, %14 : i6, i1
     %17 = comb.add bin %15, %16 {sv.namehint = "nextSmall_1"} : i7
     %18 = comb.xor bin %1, %true {sv.namehint = "_large_T_4"} : i1
     %19 = comb.extract %17 from 0 : (i7) -> i6
     %20 = comb.mux bin %1, %value_lo_1, %19 : i6
-    %value_hi_1 = seq.firreg %575 clock %io_ungated_clock reset sync %reset, %c0_i58 {firrtl.random_init_start = 1978 : ui64} : i58
+    %value_hi_1 = seq.firreg %597 clock %io_ungated_clock reset sync %reset, %c0_i58 {firrtl.random_init_start = 1978 : ui64} : i58
     %21 = comb.extract %17 from 6 {sv.namehint = "_large_T_3"} : (i7) -> i1
     %22 = comb.and bin %21, %18 {sv.namehint = "_large_T_5"} : i1
     %23 = comb.add %value_hi_1, %c1_i58 {sv.namehint = "_large_r_T_2"} : i58
     %24 = comb.mux bin %22, %23, %value_hi_1 : i58
     %25 = comb.concat %value_hi_1, %value_lo_1 {sv.namehint = "io_time"} : i58, i6
-    %26 = comb.extract %reg_mie from 1 : (i64) -> i15
-    %27 = comb.concat %c0_i4, %io_interrupts_meip, %c0_i3, %io_interrupts_mtip, %c0_i3, %io_interrupts_msip, %c0_i2 : i4, i1, i3, i1, i3, i1, i2
-    %28 = comb.and %26, %27 : i15
-    %29 = comb.mux %reg_mstatus_mie, %28, %c0_i15 {sv.namehint = "m_interrupts"} : i15
-    %30 = comb.extract %29 from 14 {sv.namehint = "_which_T_12"} : (i15) -> i1
-    %31 = comb.extract %29 from 13 {sv.namehint = "_which_T_13"} : (i15) -> i1
-    %32 = comb.extract %29 from 12 {sv.namehint = "_which_T_14"} : (i15) -> i1
-    %33 = comb.extract %29 from 11 {sv.namehint = "_which_T_15"} : (i15) -> i1
-    %34 = comb.extract %29 from 10 {sv.namehint = "_which_T_16"} : (i15) -> i1
-    %35 = comb.extract %29 from 2 {sv.namehint = "_which_T_17"} : (i15) -> i1
-    %36 = comb.extract %29 from 6 {sv.namehint = "_which_T_18"} : (i15) -> i1
-    %37 = comb.extract %29 from 8 {sv.namehint = "_which_T_19"} : (i15) -> i1
-    %38 = comb.extract %29 from 0 {sv.namehint = "_which_T_20"} : (i15) -> i1
-    %39 = comb.extract %29 from 4 {sv.namehint = "_which_T_21"} : (i15) -> i1
-    %40 = comb.extract %29 from 7 {sv.namehint = "_which_T_22"} : (i15) -> i1
-    %41 = comb.mux bin %40, %c-8_i4, %c4_i4 {sv.namehint = "_which_T_52"} : i4
-    %42 = comb.mux bin %39, %c5_i4, %41 {sv.namehint = "_which_T_53"} : i4
-    %43 = comb.mux bin %38, %c1_i4, %42 {sv.namehint = "_which_T_54"} : i4
-    %44 = comb.mux bin %37, %c-7_i4, %43 {sv.namehint = "_which_T_55"} : i4
-    %45 = comb.mux bin %36, %c7_i4, %44 {sv.namehint = "_which_T_56"} : i4
-    %46 = comb.mux bin %35, %c3_i4, %45 {sv.namehint = "_which_T_57"} : i4
-    %47 = comb.mux bin %34, %c-5_i4, %46 {sv.namehint = "_which_T_58"} : i4
-    %48 = comb.mux bin %33, %c-4_i4, %47 {sv.namehint = "_which_T_59"} : i4
-    %49 = comb.mux bin %32, %c-3_i4, %48 {sv.namehint = "_which_T_60"} : i4
-    %50 = comb.mux bin %31, %c-2_i4, %49 {sv.namehint = "_which_T_61"} : i4
-    %51 = comb.mux bin %30, %c-1_i4, %50 {sv.namehint = "_which_T_63"} : i4
-    %52 = comb.mux bin %io_interrupts_debug, %c-2_i4, %51 {sv.namehint = "whichInterrupt"} : i4
-    %53 = comb.concat %c0_i60, %52 : i60, i4
-    %54 = comb.add %53, %c-9223372036854775808_i64 {sv.namehint = "_interruptCause_T_3"} : i64
-    %55 = comb.xor bin %371, %true {sv.namehint = "_io_interrupt_T"} : i1
-    %56 = comb.and bin %io_interrupts_debug, %55 {sv.namehint = "_io_interrupt_T_1"} : i1
-    %57 = comb.or bin %56, %reg_singleStepped {sv.namehint = "_io_interrupt_T_2"} : i1
-    %58 = comb.or bin %reg_debug, %io_status_cease_r {sv.namehint = "_io_interrupt_T_3"} : i1
-    %59 = comb.xor bin %58, %true {sv.namehint = "_io_interrupt_T_4"} : i1
-    %60 = comb.and bin %57, %59 {sv.namehint = "io_interrupt"} : i1
-    %61 = comb.extract %reg_pmp_0_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo"} : (i2) -> i1
-    %62 = comb.extract %reg_pmp_0_addr from 0 : (i30) -> i29
-    %63 = comb.concat %62, %61 : i29, i1
-    %64 = comb.add %63, %c1_i30 {sv.namehint = "_pmp_mask_T"} : i30
-    %65 = comb.xor %64, %c-1_i30 {sv.namehint = "_pmp_mask_T_2"} : i30
-    %66 = comb.extract %reg_pmp_0_addr from 0 : (i30) -> i29
-    %67 = comb.concat %66, %61 : i29, i1
-    %68 = comb.and %67, %65 {sv.namehint = "pmp_mask_hi"} : i30
-    %69 = comb.concat %68, %c-1_i2 {sv.namehint = "pmp_mask"} : i30, i2
-    %70 = comb.extract %reg_pmp_1_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_1"} : (i2) -> i1
-    %71 = comb.extract %reg_pmp_1_addr from 0 : (i30) -> i29
-    %72 = comb.concat %71, %70 : i29, i1
-    %73 = comb.add %72, %c1_i30 {sv.namehint = "_pmp_mask_T_4"} : i30
-    %74 = comb.xor %73, %c-1_i30 {sv.namehint = "_pmp_mask_T_6"} : i30
-    %75 = comb.extract %reg_pmp_1_addr from 0 : (i30) -> i29
-    %76 = comb.concat %75, %70 : i29, i1
-    %77 = comb.and %76, %74 {sv.namehint = "pmp_mask_hi_1"} : i30
-    %78 = comb.concat %77, %c-1_i2 {sv.namehint = "pmp_1_mask"} : i30, i2
-    %79 = comb.extract %reg_pmp_2_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_2"} : (i2) -> i1
-    %80 = comb.extract %reg_pmp_2_addr from 0 : (i30) -> i29
-    %81 = comb.concat %80, %79 : i29, i1
-    %82 = comb.add %81, %c1_i30 {sv.namehint = "_pmp_mask_T_8"} : i30
-    %83 = comb.xor %82, %c-1_i30 {sv.namehint = "_pmp_mask_T_10"} : i30
-    %84 = comb.extract %reg_pmp_2_addr from 0 : (i30) -> i29
-    %85 = comb.concat %84, %79 : i29, i1
-    %86 = comb.and %85, %83 {sv.namehint = "pmp_mask_hi_2"} : i30
-    %87 = comb.concat %86, %c-1_i2 {sv.namehint = "pmp_2_mask"} : i30, i2
-    %88 = comb.extract %reg_pmp_3_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_3"} : (i2) -> i1
-    %89 = comb.extract %reg_pmp_3_addr from 0 : (i30) -> i29
-    %90 = comb.concat %89, %88 : i29, i1
-    %91 = comb.add %90, %c1_i30 {sv.namehint = "_pmp_mask_T_12"} : i30
-    %92 = comb.xor %91, %c-1_i30 {sv.namehint = "_pmp_mask_T_14"} : i30
-    %93 = comb.extract %reg_pmp_3_addr from 0 : (i30) -> i29
-    %94 = comb.concat %93, %88 : i29, i1
-    %95 = comb.and %94, %92 {sv.namehint = "pmp_mask_hi_3"} : i30
-    %96 = comb.concat %95, %c-1_i2 {sv.namehint = "pmp_3_mask"} : i30, i2
-    %97 = comb.extract %reg_pmp_4_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_4"} : (i2) -> i1
-    %98 = comb.extract %reg_pmp_4_addr from 0 : (i30) -> i29
-    %99 = comb.concat %98, %97 : i29, i1
-    %100 = comb.add %99, %c1_i30 {sv.namehint = "_pmp_mask_T_16"} : i30
-    %101 = comb.xor %100, %c-1_i30 {sv.namehint = "_pmp_mask_T_18"} : i30
-    %102 = comb.extract %reg_pmp_4_addr from 0 : (i30) -> i29
-    %103 = comb.concat %102, %97 : i29, i1
-    %104 = comb.and %103, %101 {sv.namehint = "pmp_mask_hi_4"} : i30
-    %105 = comb.concat %104, %c-1_i2 {sv.namehint = "pmp_4_mask"} : i30, i2
-    %106 = comb.extract %reg_pmp_5_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_5"} : (i2) -> i1
-    %107 = comb.extract %reg_pmp_5_addr from 0 : (i30) -> i29
-    %108 = comb.concat %107, %106 : i29, i1
-    %109 = comb.add %108, %c1_i30 {sv.namehint = "_pmp_mask_T_20"} : i30
-    %110 = comb.xor %109, %c-1_i30 {sv.namehint = "_pmp_mask_T_22"} : i30
-    %111 = comb.extract %reg_pmp_5_addr from 0 : (i30) -> i29
-    %112 = comb.concat %111, %106 : i29, i1
-    %113 = comb.and %112, %110 {sv.namehint = "pmp_mask_hi_5"} : i30
-    %114 = comb.concat %113, %c-1_i2 {sv.namehint = "pmp_5_mask"} : i30, i2
-    %115 = comb.extract %reg_pmp_6_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_6"} : (i2) -> i1
-    %116 = comb.extract %reg_pmp_6_addr from 0 : (i30) -> i29
-    %117 = comb.concat %116, %115 : i29, i1
-    %118 = comb.add %117, %c1_i30 {sv.namehint = "_pmp_mask_T_24"} : i30
-    %119 = comb.xor %118, %c-1_i30 {sv.namehint = "_pmp_mask_T_26"} : i30
-    %120 = comb.extract %reg_pmp_6_addr from 0 : (i30) -> i29
-    %121 = comb.concat %120, %115 : i29, i1
-    %122 = comb.and %121, %119 {sv.namehint = "pmp_mask_hi_6"} : i30
-    %123 = comb.concat %122, %c-1_i2 {sv.namehint = "pmp_6_mask"} : i30, i2
-    %124 = comb.extract %reg_pmp_7_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_7"} : (i2) -> i1
-    %125 = comb.extract %reg_pmp_7_addr from 0 : (i30) -> i29
-    %126 = comb.concat %125, %124 : i29, i1
-    %127 = comb.add %126, %c1_i30 {sv.namehint = "_pmp_mask_T_28"} : i30
-    %128 = comb.xor %127, %c-1_i30 {sv.namehint = "_pmp_mask_T_30"} : i30
-    %129 = comb.extract %reg_pmp_7_addr from 0 : (i30) -> i29
-    %130 = comb.concat %129, %124 : i29, i1
-    %131 = comb.and %130, %128 {sv.namehint = "pmp_mask_hi_7"} : i30
-    %132 = comb.concat %131, %c-1_i2 {sv.namehint = "pmp_7_mask"} : i30, i2
-    %reg_misa = seq.firreg %536 clock %clock reset sync %reset, %c-9223372036846382843_i64 {firrtl.random_init_start = 2036 : ui64} : i64
-    %133 = comb.extract %reg_mtvec from 0 {sv.namehint = "_read_mtvec_T"} : (i32) -> i1
-    %134 = comb.mux bin %133, %c-2_i8, %c2_i8 {sv.namehint = "_read_mtvec_T_1"} : i8
-    %135 = comb.xor %134, %c-1_i8 : i8
-    %136 = comb.concat %c-1_i24, %135 {sv.namehint = "_read_mtvec_T_4"} : i24, i8
-    %137 = comb.and bin %reg_mtvec, %136 {sv.namehint = "read_mtvec_lo"} : i32
-    %138 = comb.extract %reg_bp_0_address from 32 : (i33) -> i1
-    %139 = comb.replicate %138 {sv.namehint = "hi_3"} : (i1) -> i31
-    %140 = comb.xor bin %reg_mepc, %c-1_i34 {sv.namehint = "_io_evec_T_15"} : i34
-    %141 = comb.extract %reg_misa from 2 {sv.namehint = "_io_evec_T_16"} : (i64) -> i1
-    %142 = comb.extract %140 from 2 : (i34) -> i32
-    %143 = comb.extract %140 from 0 : (i34) -> i2
-    %144 = comb.extract %140 from 3 : (i34) -> i31
-    %145 = comb.xor %144, %c-1_i31 {sv.namehint = "lo_4"} : i31
-    %146 = comb.extract %145 from 30 : (i31) -> i1
-    %147 = comb.replicate %146 {sv.namehint = "hi_5"} : (i1) -> i30
-    %148 = comb.extract %reg_mtval from 33 : (i34) -> i1
-    %149 = comb.replicate %148 {sv.namehint = "hi_6"} : (i1) -> i30
-    %150 = comb.xor bin %reg_dpc, %c-1_i34 {sv.namehint = "_io_evec_T_5"} : i34
-    %151 = comb.extract %150 from 2 : (i34) -> i32
-    %152 = comb.extract %150 from 0 : (i34) -> i2
-    %153 = comb.extract %150 from 3 : (i34) -> i31
-    %154 = comb.xor %153, %c-1_i31 {sv.namehint = "lo_6"} : i31
-    %155 = comb.extract %154 from 30 : (i31) -> i1
-    %156 = comb.replicate %155 {sv.namehint = "hi_8"} : (i1) -> i30
-    %157 = comb.concat %reg_pmp_7_cfg_l, %c0_i2, %reg_pmp_7_cfg_a, %reg_pmp_7_cfg_x, %reg_pmp_7_cfg_w, %reg_pmp_7_cfg_r, %reg_pmp_6_cfg_l, %c0_i2, %reg_pmp_6_cfg_a, %reg_pmp_6_cfg_x, %reg_pmp_6_cfg_w, %reg_pmp_6_cfg_r, %reg_pmp_5_cfg_l, %c0_i2, %reg_pmp_5_cfg_a, %reg_pmp_5_cfg_x, %reg_pmp_5_cfg_w, %reg_pmp_5_cfg_r, %reg_pmp_4_cfg_l, %c0_i2, %reg_pmp_4_cfg_a, %reg_pmp_4_cfg_x, %reg_pmp_4_cfg_w, %reg_pmp_4_cfg_r, %reg_pmp_3_cfg_l, %c0_i2, %reg_pmp_3_cfg_a, %reg_pmp_3_cfg_x, %reg_pmp_3_cfg_w, %reg_pmp_3_cfg_r, %reg_pmp_2_cfg_l, %c0_i2, %reg_pmp_2_cfg_a, %reg_pmp_2_cfg_x, %reg_pmp_2_cfg_w, %reg_pmp_2_cfg_r, %reg_pmp_1_cfg_l, %c0_i2, %reg_pmp_1_cfg_a, %reg_pmp_1_cfg_x, %reg_pmp_1_cfg_w, %reg_pmp_1_cfg_r, %reg_pmp_0_cfg_l, %c0_i2, %reg_pmp_0_cfg_a, %reg_pmp_0_cfg_x, %reg_pmp_0_cfg_w, %reg_pmp_0_cfg_r : i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1
-    %reg_custom_0 = seq.firreg %817 clock %clock reset sync %reset, %c520_i64 {firrtl.random_init_start = 2100 : ui64, sv.namehint = "reg_custom_0"} : i64
-    %158 = comb.icmp bin eq %io_rw_addr, %c1953_i12 : i12
-    %159 = comb.icmp bin eq %io_rw_addr, %c1954_i12 : i12
-    %160 = comb.icmp bin eq %io_rw_addr, %c769_i12 : i12
-    %161 = comb.icmp bin eq %io_rw_addr, %c768_i12 : i12
-    %162 = comb.icmp bin eq %io_rw_addr, %c773_i12 : i12
-    %163 = comb.icmp bin eq %io_rw_addr, %c772_i12 : i12
-    %164 = comb.icmp bin eq %io_rw_addr, %c832_i12 : i12
-    %165 = comb.icmp bin eq %io_rw_addr, %c833_i12 : i12
-    %166 = comb.icmp bin eq %io_rw_addr, %c835_i12 : i12
-    %167 = comb.icmp bin eq %io_rw_addr, %c834_i12 : i12
-    %168 = comb.icmp bin eq %io_rw_addr, %c1968_i12 : i12
-    %169 = comb.icmp bin eq %io_rw_addr, %c1969_i12 : i12
-    %170 = comb.icmp bin eq %io_rw_addr, %c1970_i12 : i12
-    %171 = comb.icmp bin eq %io_rw_addr, %c800_i12 : i12
-    %172 = comb.icmp bin eq %io_rw_addr, %c-1280_i12 : i12
-    %173 = comb.icmp bin eq %io_rw_addr, %c-1278_i12 : i12
-    %174 = comb.icmp bin eq %io_rw_addr, %c928_i12 : i12
-    %175 = comb.icmp bin eq %io_rw_addr, %c944_i12 : i12
-    %176 = comb.icmp bin eq %io_rw_addr, %c945_i12 : i12
-    %177 = comb.icmp bin eq %io_rw_addr, %c946_i12 : i12
-    %178 = comb.icmp bin eq %io_rw_addr, %c947_i12 : i12
-    %179 = comb.icmp bin eq %io_rw_addr, %c948_i12 : i12
-    %180 = comb.icmp bin eq %io_rw_addr, %c949_i12 : i12
-    %181 = comb.icmp bin eq %io_rw_addr, %c950_i12 : i12
-    %182 = comb.icmp bin eq %io_rw_addr, %c951_i12 : i12
-    %183 = comb.icmp bin eq %io_rw_addr, %c1985_i12 : i12
-    %184 = comb.icmp bin eq %io_rw_addr, %c-238_i12 : i12
-    %185 = comb.icmp bin eq %io_rw_addr, %c-237_i12 : i12
-    %186 = comb.extract %io_rw_cmd from 1 {sv.namehint = "_newBPC_T_25"} : (i3) -> i1
-    %187 = comb.mux bin %186, %516, %c0_i64 {sv.namehint = "_wdata_T_1"} : i64
-    %188 = comb.or bin %187, %io_rw_wdata {sv.namehint = "_wdata_T_2"} : i64
-    %189 = comb.extract %io_rw_cmd from 0 {sv.namehint = "_newBPC_T_28"} : (i3) -> i2
-    %190 = comb.icmp bin eq %189, %c-1_i2 {sv.namehint = "_wdata_T_4"} : i2
-    %191 = comb.mux bin %190, %io_rw_wdata, %c0_i64 {sv.namehint = "_wdata_T_5"} : i64
-    %192 = comb.xor bin %191, %c-1_i64 {sv.namehint = "_wdata_T_6"} : i64
-    %193 = comb.and bin %188, %192 {sv.namehint = "wdata"} : i64
-    %194 = comb.icmp bin eq %io_rw_cmd, %c-4_i3 {sv.namehint = "system_insn"} : i3
-    %195 = comb.extract %io_rw_addr from 9 : (i12) -> i1
-    %196 = comb.extract %io_rw_addr from 0 : (i12) -> i1
-    %197 = comb.concat %195, %196 : i1, i1
-    %198 = comb.icmp bin eq %197, %c0_i2 : i2
-    %199 = comb.extract %io_rw_addr from 8 : (i12) -> i1
-    %200 = comb.extract %io_rw_addr from 0 : (i12) -> i1
-    %201 = comb.concat %199, %200 : i1, i1
-    %202 = comb.icmp bin eq %201, %c1_i2 : i2
-    %203 = comb.extract %io_rw_addr from 9 : (i12) -> i1
-    %204 = comb.extract %io_rw_addr from 2 : (i12) -> i1
-    %205 = comb.concat %203, %204 : i1, i1
-    %206 = comb.icmp bin eq %205, %c-2_i2 : i2
-    %207 = comb.extract %io_rw_addr from 9 : (i12) -> i1
-    %208 = comb.extract %io_rw_addr from 1 : (i12) -> i1
-    %209 = comb.concat %207, %208 : i1, i1
-    %210 = comb.icmp bin eq %209, %c-2_i2 : i2
-    %211 = comb.extract %io_rw_addr from 8 : (i12) -> i2
-    %212 = comb.icmp bin eq %211, %c1_i2 : i2
-    %213 = comb.and bin %194, %198 {sv.namehint = "insn_call"} : i1
-    %214 = comb.and bin %194, %202 {sv.namehint = "insn_break"} : i1
-    %215 = comb.and bin %194, %206 {sv.namehint = "insn_ret"} : i1
-    %216 = comb.and bin %194, %210 {sv.namehint = "insn_cease"} : i1
-    %217 = comb.extract %io_decode_0_csr from 9 : (i12) -> i1
-    %218 = comb.extract %io_decode_0_csr from 2 : (i12) -> i1
+    %26 = comb.concat %c0_i4, %io_interrupts_meip, %c0_i3, %io_interrupts_mtip, %c0_i3, %io_interrupts_msip, %c0_i3 {sv.namehint = "read_mip"} : i4, i1, i3, i1, i3, i1, i3
+    %27 = comb.extract %reg_mie from 0 : (i64) -> i16
+    %28 = comb.and bin %27, %26 : i16
+    %29 = comb.mux %reg_mstatus_mie, %28, %c0_i16 {sv.namehint = "m_interrupts"} : i16
+    %30 = comb.extract %29 from 15 {sv.namehint = "_which_T_12"} : (i16) -> i1
+    %31 = comb.extract %29 from 14 {sv.namehint = "_which_T_13"} : (i16) -> i1
+    %32 = comb.extract %29 from 13 {sv.namehint = "_which_T_14"} : (i16) -> i1
+    %33 = comb.extract %29 from 12 {sv.namehint = "_which_T_15"} : (i16) -> i1
+    %34 = comb.extract %29 from 11 {sv.namehint = "_which_T_16"} : (i16) -> i1
+    %35 = comb.extract %29 from 3 {sv.namehint = "_which_T_17"} : (i16) -> i1
+    %36 = comb.extract %29 from 7 {sv.namehint = "_which_T_18"} : (i16) -> i1
+    %37 = comb.extract %29 from 9 {sv.namehint = "_which_T_19"} : (i16) -> i1
+    %38 = comb.extract %29 from 1 {sv.namehint = "_which_T_20"} : (i16) -> i1
+    %39 = comb.extract %29 from 5 {sv.namehint = "_which_T_21"} : (i16) -> i1
+    %40 = comb.extract %29 from 8 {sv.namehint = "_which_T_22"} : (i16) -> i1
+    %41 = comb.extract %29 from 0 {sv.namehint = "_which_T_23"} : (i16) -> i1
+    %42 = comb.extract %29 from 4 {sv.namehint = "_which_T_24"} : (i16) -> i1
+    %43 = comb.or bin %io_interrupts_debug, %30, %31, %32, %33, %34, %35, %36, %37, %38, %39, %40, %41, %42 {sv.namehint = "anyInterrupt"} : i1
+    %44 = comb.xor %41, %true : i1
+    %45 = comb.concat %false, %44, %c0_i2 {sv.namehint = "_which_T_51"} : i1, i1, i2
+    %46 = comb.mux bin %40, %c-8_i4, %45 {sv.namehint = "_which_T_52"} : i4
+    %47 = comb.mux bin %39, %c5_i4, %46 {sv.namehint = "_which_T_53"} : i4
+    %48 = comb.mux bin %38, %c1_i4, %47 {sv.namehint = "_which_T_54"} : i4
+    %49 = comb.mux bin %37, %c-7_i4, %48 {sv.namehint = "_which_T_55"} : i4
+    %50 = comb.mux bin %36, %c7_i4, %49 {sv.namehint = "_which_T_56"} : i4
+    %51 = comb.mux bin %35, %c3_i4, %50 {sv.namehint = "_which_T_57"} : i4
+    %52 = comb.mux bin %34, %c-5_i4, %51 {sv.namehint = "_which_T_58"} : i4
+    %53 = comb.mux bin %33, %c-4_i4, %52 {sv.namehint = "_which_T_59"} : i4
+    %54 = comb.mux bin %32, %c-3_i4, %53 {sv.namehint = "_which_T_60"} : i4
+    %55 = comb.mux bin %31, %c-2_i4, %54 {sv.namehint = "_which_T_61"} : i4
+    %56 = comb.mux bin %30, %c-1_i4, %55 {sv.namehint = "_which_T_63"} : i4
+    %57 = comb.mux bin %io_interrupts_debug, %c-2_i4, %56 {sv.namehint = "whichInterrupt"} : i4
+    %58 = comb.concat %c0_i60, %57 : i60, i4
+    %59 = comb.add %58, %c-9223372036854775808_i64 {sv.namehint = "_interruptCause_T_3"} : i64
+    %60 = comb.xor bin %389, %true {sv.namehint = "_io_interrupt_T"} : i1
+    %61 = comb.and bin %43, %60 {sv.namehint = "_io_interrupt_T_1"} : i1
+    %62 = comb.or bin %61, %reg_singleStepped {sv.namehint = "_io_interrupt_T_2"} : i1
+    %63 = comb.or bin %reg_debug, %io_status_cease_r {sv.namehint = "_io_interrupt_T_3"} : i1
+    %64 = comb.xor bin %63, %true {sv.namehint = "_io_interrupt_T_4"} : i1
+    %65 = comb.and bin %62, %64 {sv.namehint = "io_interrupt"} : i1
+    %66 = comb.extract %reg_pmp_0_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo"} : (i2) -> i1
+    %67 = comb.extract %reg_pmp_0_addr from 0 : (i30) -> i29
+    %68 = comb.concat %67, %66 : i29, i1
+    %69 = comb.add %68, %c1_i30 {sv.namehint = "_pmp_mask_T"} : i30
+    %70 = comb.xor %69, %c-1_i30 {sv.namehint = "_pmp_mask_T_2"} : i30
+    %71 = comb.extract %reg_pmp_0_addr from 0 : (i30) -> i29
+    %72 = comb.concat %71, %66 : i29, i1
+    %73 = comb.and %72, %70 {sv.namehint = "pmp_mask_hi"} : i30
+    %74 = comb.concat %73, %c-1_i2 {sv.namehint = "pmp_mask"} : i30, i2
+    %75 = comb.extract %reg_pmp_1_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_1"} : (i2) -> i1
+    %76 = comb.extract %reg_pmp_1_addr from 0 : (i30) -> i29
+    %77 = comb.concat %76, %75 : i29, i1
+    %78 = comb.add %77, %c1_i30 {sv.namehint = "_pmp_mask_T_4"} : i30
+    %79 = comb.xor %78, %c-1_i30 {sv.namehint = "_pmp_mask_T_6"} : i30
+    %80 = comb.extract %reg_pmp_1_addr from 0 : (i30) -> i29
+    %81 = comb.concat %80, %75 : i29, i1
+    %82 = comb.and %81, %79 {sv.namehint = "pmp_mask_hi_1"} : i30
+    %83 = comb.concat %82, %c-1_i2 {sv.namehint = "pmp_1_mask"} : i30, i2
+    %84 = comb.extract %reg_pmp_2_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_2"} : (i2) -> i1
+    %85 = comb.extract %reg_pmp_2_addr from 0 : (i30) -> i29
+    %86 = comb.concat %85, %84 : i29, i1
+    %87 = comb.add %86, %c1_i30 {sv.namehint = "_pmp_mask_T_8"} : i30
+    %88 = comb.xor %87, %c-1_i30 {sv.namehint = "_pmp_mask_T_10"} : i30
+    %89 = comb.extract %reg_pmp_2_addr from 0 : (i30) -> i29
+    %90 = comb.concat %89, %84 : i29, i1
+    %91 = comb.and %90, %88 {sv.namehint = "pmp_mask_hi_2"} : i30
+    %92 = comb.concat %91, %c-1_i2 {sv.namehint = "pmp_2_mask"} : i30, i2
+    %93 = comb.extract %reg_pmp_3_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_3"} : (i2) -> i1
+    %94 = comb.extract %reg_pmp_3_addr from 0 : (i30) -> i29
+    %95 = comb.concat %94, %93 : i29, i1
+    %96 = comb.add %95, %c1_i30 {sv.namehint = "_pmp_mask_T_12"} : i30
+    %97 = comb.xor %96, %c-1_i30 {sv.namehint = "_pmp_mask_T_14"} : i30
+    %98 = comb.extract %reg_pmp_3_addr from 0 : (i30) -> i29
+    %99 = comb.concat %98, %93 : i29, i1
+    %100 = comb.and %99, %97 {sv.namehint = "pmp_mask_hi_3"} : i30
+    %101 = comb.concat %100, %c-1_i2 {sv.namehint = "pmp_3_mask"} : i30, i2
+    %102 = comb.extract %reg_pmp_4_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_4"} : (i2) -> i1
+    %103 = comb.extract %reg_pmp_4_addr from 0 : (i30) -> i29
+    %104 = comb.concat %103, %102 : i29, i1
+    %105 = comb.add %104, %c1_i30 {sv.namehint = "_pmp_mask_T_16"} : i30
+    %106 = comb.xor %105, %c-1_i30 {sv.namehint = "_pmp_mask_T_18"} : i30
+    %107 = comb.extract %reg_pmp_4_addr from 0 : (i30) -> i29
+    %108 = comb.concat %107, %102 : i29, i1
+    %109 = comb.and %108, %106 {sv.namehint = "pmp_mask_hi_4"} : i30
+    %110 = comb.concat %109, %c-1_i2 {sv.namehint = "pmp_4_mask"} : i30, i2
+    %111 = comb.extract %reg_pmp_5_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_5"} : (i2) -> i1
+    %112 = comb.extract %reg_pmp_5_addr from 0 : (i30) -> i29
+    %113 = comb.concat %112, %111 : i29, i1
+    %114 = comb.add %113, %c1_i30 {sv.namehint = "_pmp_mask_T_20"} : i30
+    %115 = comb.xor %114, %c-1_i30 {sv.namehint = "_pmp_mask_T_22"} : i30
+    %116 = comb.extract %reg_pmp_5_addr from 0 : (i30) -> i29
+    %117 = comb.concat %116, %111 : i29, i1
+    %118 = comb.and %117, %115 {sv.namehint = "pmp_mask_hi_5"} : i30
+    %119 = comb.concat %118, %c-1_i2 {sv.namehint = "pmp_5_mask"} : i30, i2
+    %120 = comb.extract %reg_pmp_6_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_6"} : (i2) -> i1
+    %121 = comb.extract %reg_pmp_6_addr from 0 : (i30) -> i29
+    %122 = comb.concat %121, %120 : i29, i1
+    %123 = comb.add %122, %c1_i30 {sv.namehint = "_pmp_mask_T_24"} : i30
+    %124 = comb.xor %123, %c-1_i30 {sv.namehint = "_pmp_mask_T_26"} : i30
+    %125 = comb.extract %reg_pmp_6_addr from 0 : (i30) -> i29
+    %126 = comb.concat %125, %120 : i29, i1
+    %127 = comb.and %126, %124 {sv.namehint = "pmp_mask_hi_6"} : i30
+    %128 = comb.concat %127, %c-1_i2 {sv.namehint = "pmp_6_mask"} : i30, i2
+    %129 = comb.extract %reg_pmp_7_cfg_a from 0 {sv.namehint = "pmp_mask_base_lo_7"} : (i2) -> i1
+    %130 = comb.extract %reg_pmp_7_addr from 0 : (i30) -> i29
+    %131 = comb.concat %130, %129 : i29, i1
+    %132 = comb.add %131, %c1_i30 {sv.namehint = "_pmp_mask_T_28"} : i30
+    %133 = comb.xor %132, %c-1_i30 {sv.namehint = "_pmp_mask_T_30"} : i30
+    %134 = comb.extract %reg_pmp_7_addr from 0 : (i30) -> i29
+    %135 = comb.concat %134, %129 : i29, i1
+    %136 = comb.and %135, %133 {sv.namehint = "pmp_mask_hi_7"} : i30
+    %137 = comb.concat %136, %c-1_i2 {sv.namehint = "pmp_7_mask"} : i30, i2
+    %reg_misa = seq.firreg %558 clock %clock reset sync %reset, %c-9223372036846382843_i64 {firrtl.random_init_start = 2036 : ui64} : i64
+    %138 = comb.concat %c0_i51, %reg_mstatus_mpp, %c0_i3, %reg_mstatus_mpie, %c0_i3, %reg_mstatus_mie, %c0_i3 {sv.namehint = "read_mstatus"} : i51, i2, i3, i1, i3, i1, i3
+    %139 = comb.extract %reg_mtvec from 0 {sv.namehint = "_read_mtvec_T"} : (i32) -> i1
+    %140 = comb.mux bin %139, %c-2_i8, %c2_i8 {sv.namehint = "_read_mtvec_T_1"} : i8
+    %141 = comb.xor %140, %c-1_i8 : i8
+    %142 = comb.concat %c-1_i24, %141 {sv.namehint = "_read_mtvec_T_4"} : i24, i8
+    %143 = comb.and bin %reg_mtvec, %142 {sv.namehint = "read_mtvec_lo"} : i32
+    %144 = comb.concat %c0_i32, %143 {sv.namehint = "read_mtvec"} : i32, i32
+    %145 = comb.concat %c2_i4, %reg_bp_0_control_dmode, %c4398046511104_i46, %reg_bp_0_control_action, %c0_i3, %reg_bp_0_control_tmatch, %c-8_i4, %reg_bp_0_control_x, %reg_bp_0_control_w, %reg_bp_0_control_r : i4, i1, i46, i1, i3, i2, i4, i1, i1, i1
+    %146 = comb.extract %reg_bp_0_address from 32 : (i33) -> i1
+    %147 = comb.replicate %146 {sv.namehint = "hi_3"} : (i1) -> i31
+    %148 = comb.concat %147, %reg_bp_0_address : i31, i33
+    %149 = comb.xor bin %reg_mepc, %c-1_i34 {sv.namehint = "_io_evec_T_15"} : i34
+    %150 = comb.extract %reg_misa from 2 {sv.namehint = "_io_evec_T_16"} : (i64) -> i1
+    %151 = comb.xor %150, %true : i1
+    %152 = comb.concat %151, %true : i1, i1
+    %153 = comb.extract %149 from 2 : (i34) -> i32
+    %154 = comb.extract %149 from 0 : (i34) -> i2
+    %155 = comb.or bin %154, %152 : i2
+    %156 = comb.concat %153, %155 : i32, i2
+    %157 = comb.xor bin %156, %c-1_i34 {sv.namehint = "lo_4"} : i34
+    %158 = comb.extract %157 from 33 : (i34) -> i1
+    %159 = comb.replicate %158 {sv.namehint = "hi_5"} : (i1) -> i30
+    %160 = comb.concat %159, %157 : i30, i34
+    %161 = comb.extract %reg_mtval from 33 : (i34) -> i1
+    %162 = comb.replicate %161 {sv.namehint = "hi_6"} : (i1) -> i30
+    %163 = comb.concat %162, %reg_mtval : i30, i34
+    %164 = comb.concat %c16384_i16, %reg_dcsr_ebreakm, %c0_i6, %reg_dcsr_cause, %c0_i3, %reg_dcsr_step, %c-1_i2 : i16, i1, i6, i3, i3, i1, i2
+    %165 = comb.xor bin %reg_dpc, %c-1_i34 {sv.namehint = "_io_evec_T_5"} : i34
+    %166 = comb.extract %165 from 2 : (i34) -> i32
+    %167 = comb.extract %165 from 0 : (i34) -> i2
+    %168 = comb.or bin %167, %152 : i2
+    %169 = comb.concat %166, %168 : i32, i2
+    %170 = comb.xor bin %169, %c-1_i34 {sv.namehint = "lo_6"} : i34
+    %171 = comb.extract %170 from 33 : (i34) -> i1
+    %172 = comb.replicate %171 {sv.namehint = "hi_8"} : (i1) -> i30
+    %173 = comb.concat %172, %170 : i30, i34
+    %174 = comb.concat %reg_pmp_7_cfg_l, %c0_i2, %reg_pmp_7_cfg_a, %reg_pmp_7_cfg_x, %reg_pmp_7_cfg_w, %reg_pmp_7_cfg_r, %reg_pmp_6_cfg_l, %c0_i2, %reg_pmp_6_cfg_a, %reg_pmp_6_cfg_x, %reg_pmp_6_cfg_w, %reg_pmp_6_cfg_r, %reg_pmp_5_cfg_l, %c0_i2, %reg_pmp_5_cfg_a, %reg_pmp_5_cfg_x, %reg_pmp_5_cfg_w, %reg_pmp_5_cfg_r, %reg_pmp_4_cfg_l, %c0_i2, %reg_pmp_4_cfg_a, %reg_pmp_4_cfg_x, %reg_pmp_4_cfg_w, %reg_pmp_4_cfg_r, %reg_pmp_3_cfg_l, %c0_i2, %reg_pmp_3_cfg_a, %reg_pmp_3_cfg_x, %reg_pmp_3_cfg_w, %reg_pmp_3_cfg_r, %reg_pmp_2_cfg_l, %c0_i2, %reg_pmp_2_cfg_a, %reg_pmp_2_cfg_x, %reg_pmp_2_cfg_w, %reg_pmp_2_cfg_r, %reg_pmp_1_cfg_l, %c0_i2, %reg_pmp_1_cfg_a, %reg_pmp_1_cfg_x, %reg_pmp_1_cfg_w, %reg_pmp_1_cfg_r, %reg_pmp_0_cfg_l, %c0_i2, %reg_pmp_0_cfg_a, %reg_pmp_0_cfg_x, %reg_pmp_0_cfg_w, %reg_pmp_0_cfg_r : i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1, i1, i2, i2, i1, i1, i1
+    %reg_custom_0 = seq.firreg %839 clock %clock reset sync %reset, %c520_i64 {firrtl.random_init_start = 2100 : ui64, sv.namehint = "reg_custom_0"} : i64
+    %175 = comb.icmp bin eq %io_rw_addr, %c1953_i12 : i12
+    %176 = comb.icmp bin eq %io_rw_addr, %c1954_i12 : i12
+    %177 = comb.icmp bin eq %io_rw_addr, %c769_i12 : i12
+    %178 = comb.icmp bin eq %io_rw_addr, %c768_i12 : i12
+    %179 = comb.icmp bin eq %io_rw_addr, %c773_i12 : i12
+    %180 = comb.icmp bin eq %io_rw_addr, %c836_i12 : i12
+    %181 = comb.icmp bin eq %io_rw_addr, %c772_i12 : i12
+    %182 = comb.icmp bin eq %io_rw_addr, %c832_i12 : i12
+    %183 = comb.icmp bin eq %io_rw_addr, %c833_i12 : i12
+    %184 = comb.icmp bin eq %io_rw_addr, %c835_i12 : i12
+    %185 = comb.icmp bin eq %io_rw_addr, %c834_i12 : i12
+    %186 = comb.icmp bin eq %io_rw_addr, %c1968_i12 : i12
+    %187 = comb.icmp bin eq %io_rw_addr, %c1969_i12 : i12
+    %188 = comb.icmp bin eq %io_rw_addr, %c1970_i12 : i12
+    %189 = comb.icmp bin eq %io_rw_addr, %c800_i12 : i12
+    %190 = comb.icmp bin eq %io_rw_addr, %c-1280_i12 : i12
+    %191 = comb.icmp bin eq %io_rw_addr, %c-1278_i12 : i12
+    %192 = comb.icmp bin eq %io_rw_addr, %c928_i12 : i12
+    %193 = comb.icmp bin eq %io_rw_addr, %c944_i12 : i12
+    %194 = comb.icmp bin eq %io_rw_addr, %c945_i12 : i12
+    %195 = comb.icmp bin eq %io_rw_addr, %c946_i12 : i12
+    %196 = comb.icmp bin eq %io_rw_addr, %c947_i12 : i12
+    %197 = comb.icmp bin eq %io_rw_addr, %c948_i12 : i12
+    %198 = comb.icmp bin eq %io_rw_addr, %c949_i12 : i12
+    %199 = comb.icmp bin eq %io_rw_addr, %c950_i12 : i12
+    %200 = comb.icmp bin eq %io_rw_addr, %c951_i12 : i12
+    %201 = comb.icmp bin eq %io_rw_addr, %c1985_i12 : i12
+    %202 = comb.icmp bin eq %io_rw_addr, %c-238_i12 : i12
+    %203 = comb.icmp bin eq %io_rw_addr, %c-237_i12 : i12
+    %204 = comb.extract %io_rw_cmd from 1 {sv.namehint = "_newBPC_T_25"} : (i3) -> i1
+    %205 = comb.mux bin %204, %528, %c0_i64 {sv.namehint = "_wdata_T_1"} : i64
+    %206 = comb.or bin %205, %io_rw_wdata {sv.namehint = "_wdata_T_2"} : i64
+    %207 = comb.extract %io_rw_cmd from 0 {sv.namehint = "_newBPC_T_28"} : (i3) -> i2
+    %208 = comb.icmp bin eq %207, %c-1_i2 {sv.namehint = "_wdata_T_4"} : i2
+    %209 = comb.mux bin %208, %io_rw_wdata, %c0_i64 {sv.namehint = "_wdata_T_5"} : i64
+    %210 = comb.xor bin %209, %c-1_i64 {sv.namehint = "_wdata_T_6"} : i64
+    %211 = comb.and bin %206, %210 {sv.namehint = "wdata"} : i64
+    %212 = comb.icmp bin eq %io_rw_cmd, %c-4_i3 {sv.namehint = "system_insn"} : i3
+    %213 = comb.extract %io_rw_addr from 9 : (i12) -> i1
+    %214 = comb.extract %io_rw_addr from 0 : (i12) -> i1
+    %215 = comb.concat %213, %214 : i1, i1
+    %216 = comb.icmp bin eq %215, %c0_i2 : i2
+    %217 = comb.extract %io_rw_addr from 8 : (i12) -> i1
+    %218 = comb.extract %io_rw_addr from 0 : (i12) -> i1
     %219 = comb.concat %217, %218 : i1, i1
-    %220 = comb.icmp bin eq %219, %c-2_i2 {sv.namehint = "is_ret"} : i2
-    %221 = comb.icmp bin eq %io_decode_0_csr, %c1952_i12 {sv.namehint = "_io_decode_0_read_illegal_T_2"} : i12
-    %222 = comb.icmp bin eq %io_decode_0_csr, %c1953_i12 {sv.namehint = "_io_decode_0_read_illegal_T_3"} : i12
-    %223 = comb.icmp bin eq %io_decode_0_csr, %c1954_i12 {sv.namehint = "_io_decode_0_read_illegal_T_4"} : i12
-    %224 = comb.icmp bin eq %io_decode_0_csr, %c1955_i12 {sv.namehint = "_io_decode_0_read_illegal_T_5"} : i12
-    %225 = comb.icmp bin eq %io_decode_0_csr, %c769_i12 {sv.namehint = "_io_decode_0_read_illegal_T_6"} : i12
-    %226 = comb.icmp bin eq %io_decode_0_csr, %c768_i12 {sv.namehint = "_io_decode_0_read_illegal_T_7"} : i12
-    %227 = comb.icmp bin eq %io_decode_0_csr, %c773_i12 {sv.namehint = "_io_decode_0_read_illegal_T_8"} : i12
-    %228 = comb.icmp bin eq %io_decode_0_csr, %c836_i12 {sv.namehint = "_io_decode_0_read_illegal_T_9"} : i12
-    %229 = comb.icmp bin eq %io_decode_0_csr, %c772_i12 {sv.namehint = "_io_decode_0_read_illegal_T_10"} : i12
-    %230 = comb.icmp bin eq %io_decode_0_csr, %c832_i12 {sv.namehint = "_io_decode_0_read_illegal_T_11"} : i12
-    %231 = comb.icmp bin eq %io_decode_0_csr, %c833_i12 {sv.namehint = "_io_decode_0_read_illegal_T_12"} : i12
-    %232 = comb.icmp bin eq %io_decode_0_csr, %c835_i12 {sv.namehint = "_io_decode_0_read_illegal_T_13"} : i12
-    %233 = comb.icmp bin eq %io_decode_0_csr, %c834_i12 {sv.namehint = "_io_decode_0_read_illegal_T_14"} : i12
-    %234 = comb.icmp bin eq %io_decode_0_csr, %c-236_i12 {sv.namehint = "_io_decode_0_read_illegal_T_15"} : i12
-    %235 = comb.icmp bin eq %io_decode_0_csr, %c1968_i12 {sv.namehint = "_io_decode_0_read_illegal_T_16"} : i12
-    %236 = comb.icmp bin eq %io_decode_0_csr, %c1969_i12 {sv.namehint = "_io_decode_0_read_illegal_T_17"} : i12
-    %237 = comb.icmp bin eq %io_decode_0_csr, %c1970_i12 {sv.namehint = "_io_decode_0_read_illegal_T_18"} : i12
-    %238 = comb.icmp bin eq %io_decode_0_csr, %c800_i12 {sv.namehint = "_io_decode_0_read_illegal_T_19"} : i12
-    %239 = comb.icmp bin eq %io_decode_0_csr, %c-1280_i12 {sv.namehint = "_io_decode_0_read_illegal_T_20"} : i12
-    %240 = comb.icmp bin eq %io_decode_0_csr, %c-1278_i12 {sv.namehint = "_io_decode_0_read_illegal_T_21"} : i12
-    %241 = comb.icmp bin eq %io_decode_0_csr, %c803_i12 {sv.namehint = "_io_decode_0_read_illegal_T_22"} : i12
-    %242 = comb.icmp bin eq %io_decode_0_csr, %c-1277_i12 {sv.namehint = "_io_decode_0_read_illegal_T_23"} : i12
-    %243 = comb.icmp bin eq %io_decode_0_csr, %c804_i12 {sv.namehint = "_io_decode_0_read_illegal_T_24"} : i12
-    %244 = comb.icmp bin eq %io_decode_0_csr, %c-1276_i12 {sv.namehint = "_io_decode_0_read_illegal_T_25"} : i12
-    %245 = comb.icmp bin eq %io_decode_0_csr, %c805_i12 {sv.namehint = "_io_decode_0_read_illegal_T_26"} : i12
-    %246 = comb.icmp bin eq %io_decode_0_csr, %c-1275_i12 {sv.namehint = "_io_decode_0_read_illegal_T_27"} : i12
-    %247 = comb.icmp bin eq %io_decode_0_csr, %c806_i12 {sv.namehint = "_io_decode_0_read_illegal_T_28"} : i12
-    %248 = comb.icmp bin eq %io_decode_0_csr, %c-1274_i12 {sv.namehint = "_io_decode_0_read_illegal_T_29"} : i12
-    %249 = comb.icmp bin eq %io_decode_0_csr, %c807_i12 {sv.namehint = "_io_decode_0_read_illegal_T_30"} : i12
-    %250 = comb.icmp bin eq %io_decode_0_csr, %c-1273_i12 {sv.namehint = "_io_decode_0_read_illegal_T_31"} : i12
-    %251 = comb.icmp bin eq %io_decode_0_csr, %c808_i12 {sv.namehint = "_io_decode_0_read_illegal_T_32"} : i12
-    %252 = comb.icmp bin eq %io_decode_0_csr, %c-1272_i12 {sv.namehint = "_io_decode_0_read_illegal_T_33"} : i12
-    %253 = comb.icmp bin eq %io_decode_0_csr, %c809_i12 {sv.namehint = "_io_decode_0_read_illegal_T_34"} : i12
-    %254 = comb.icmp bin eq %io_decode_0_csr, %c-1271_i12 {sv.namehint = "_io_decode_0_read_illegal_T_35"} : i12
-    %255 = comb.icmp bin eq %io_decode_0_csr, %c810_i12 {sv.namehint = "_io_decode_0_read_illegal_T_36"} : i12
-    %256 = comb.icmp bin eq %io_decode_0_csr, %c-1270_i12 {sv.namehint = "_io_decode_0_read_illegal_T_37"} : i12
-    %257 = comb.icmp bin eq %io_decode_0_csr, %c811_i12 {sv.namehint = "_io_decode_0_read_illegal_T_38"} : i12
-    %258 = comb.icmp bin eq %io_decode_0_csr, %c-1269_i12 {sv.namehint = "_io_decode_0_read_illegal_T_39"} : i12
-    %259 = comb.icmp bin eq %io_decode_0_csr, %c812_i12 {sv.namehint = "_io_decode_0_read_illegal_T_40"} : i12
-    %260 = comb.icmp bin eq %io_decode_0_csr, %c-1268_i12 {sv.namehint = "_io_decode_0_read_illegal_T_41"} : i12
-    %261 = comb.icmp bin eq %io_decode_0_csr, %c813_i12 {sv.namehint = "_io_decode_0_read_illegal_T_42"} : i12
-    %262 = comb.icmp bin eq %io_decode_0_csr, %c-1267_i12 {sv.namehint = "_io_decode_0_read_illegal_T_43"} : i12
-    %263 = comb.icmp bin eq %io_decode_0_csr, %c814_i12 {sv.namehint = "_io_decode_0_read_illegal_T_44"} : i12
-    %264 = comb.icmp bin eq %io_decode_0_csr, %c-1266_i12 {sv.namehint = "_io_decode_0_read_illegal_T_45"} : i12
-    %265 = comb.icmp bin eq %io_decode_0_csr, %c815_i12 {sv.namehint = "_io_decode_0_read_illegal_T_46"} : i12
-    %266 = comb.icmp bin eq %io_decode_0_csr, %c-1265_i12 {sv.namehint = "_io_decode_0_read_illegal_T_47"} : i12
-    %267 = comb.icmp bin eq %io_decode_0_csr, %c816_i12 {sv.namehint = "_io_decode_0_read_illegal_T_48"} : i12
-    %268 = comb.icmp bin eq %io_decode_0_csr, %c-1264_i12 {sv.namehint = "_io_decode_0_read_illegal_T_49"} : i12
-    %269 = comb.icmp bin eq %io_decode_0_csr, %c817_i12 {sv.namehint = "_io_decode_0_read_illegal_T_50"} : i12
-    %270 = comb.icmp bin eq %io_decode_0_csr, %c-1263_i12 {sv.namehint = "_io_decode_0_read_illegal_T_51"} : i12
-    %271 = comb.icmp bin eq %io_decode_0_csr, %c818_i12 {sv.namehint = "_io_decode_0_read_illegal_T_52"} : i12
-    %272 = comb.icmp bin eq %io_decode_0_csr, %c-1262_i12 {sv.namehint = "_io_decode_0_read_illegal_T_53"} : i12
-    %273 = comb.icmp bin eq %io_decode_0_csr, %c819_i12 {sv.namehint = "_io_decode_0_read_illegal_T_54"} : i12
-    %274 = comb.icmp bin eq %io_decode_0_csr, %c-1261_i12 {sv.namehint = "_io_decode_0_read_illegal_T_55"} : i12
-    %275 = comb.icmp bin eq %io_decode_0_csr, %c820_i12 {sv.namehint = "_io_decode_0_read_illegal_T_56"} : i12
-    %276 = comb.icmp bin eq %io_decode_0_csr, %c-1260_i12 {sv.namehint = "_io_decode_0_read_illegal_T_57"} : i12
-    %277 = comb.icmp bin eq %io_decode_0_csr, %c821_i12 {sv.namehint = "_io_decode_0_read_illegal_T_58"} : i12
-    %278 = comb.icmp bin eq %io_decode_0_csr, %c-1259_i12 {sv.namehint = "_io_decode_0_read_illegal_T_59"} : i12
-    %279 = comb.icmp bin eq %io_decode_0_csr, %c822_i12 {sv.namehint = "_io_decode_0_read_illegal_T_60"} : i12
-    %280 = comb.icmp bin eq %io_decode_0_csr, %c-1258_i12 {sv.namehint = "_io_decode_0_read_illegal_T_61"} : i12
-    %281 = comb.icmp bin eq %io_decode_0_csr, %c823_i12 {sv.namehint = "_io_decode_0_read_illegal_T_62"} : i12
-    %282 = comb.icmp bin eq %io_decode_0_csr, %c-1257_i12 {sv.namehint = "_io_decode_0_read_illegal_T_63"} : i12
-    %283 = comb.icmp bin eq %io_decode_0_csr, %c824_i12 {sv.namehint = "_io_decode_0_read_illegal_T_64"} : i12
-    %284 = comb.icmp bin eq %io_decode_0_csr, %c-1256_i12 {sv.namehint = "_io_decode_0_read_illegal_T_65"} : i12
-    %285 = comb.icmp bin eq %io_decode_0_csr, %c825_i12 {sv.namehint = "_io_decode_0_read_illegal_T_66"} : i12
-    %286 = comb.icmp bin eq %io_decode_0_csr, %c-1255_i12 {sv.namehint = "_io_decode_0_read_illegal_T_67"} : i12
-    %287 = comb.icmp bin eq %io_decode_0_csr, %c826_i12 {sv.namehint = "_io_decode_0_read_illegal_T_68"} : i12
-    %288 = comb.icmp bin eq %io_decode_0_csr, %c-1254_i12 {sv.namehint = "_io_decode_0_read_illegal_T_69"} : i12
-    %289 = comb.icmp bin eq %io_decode_0_csr, %c827_i12 {sv.namehint = "_io_decode_0_read_illegal_T_70"} : i12
-    %290 = comb.icmp bin eq %io_decode_0_csr, %c-1253_i12 {sv.namehint = "_io_decode_0_read_illegal_T_71"} : i12
-    %291 = comb.icmp bin eq %io_decode_0_csr, %c828_i12 {sv.namehint = "_io_decode_0_read_illegal_T_72"} : i12
-    %292 = comb.icmp bin eq %io_decode_0_csr, %c-1252_i12 {sv.namehint = "_io_decode_0_read_illegal_T_73"} : i12
-    %293 = comb.icmp bin eq %io_decode_0_csr, %c829_i12 {sv.namehint = "_io_decode_0_read_illegal_T_74"} : i12
-    %294 = comb.icmp bin eq %io_decode_0_csr, %c-1251_i12 {sv.namehint = "_io_decode_0_read_illegal_T_75"} : i12
-    %295 = comb.icmp bin eq %io_decode_0_csr, %c830_i12 {sv.namehint = "_io_decode_0_read_illegal_T_76"} : i12
-    %296 = comb.icmp bin eq %io_decode_0_csr, %c-1250_i12 {sv.namehint = "_io_decode_0_read_illegal_T_77"} : i12
-    %297 = comb.icmp bin eq %io_decode_0_csr, %c831_i12 {sv.namehint = "_io_decode_0_read_illegal_T_78"} : i12
-    %298 = comb.icmp bin eq %io_decode_0_csr, %c-1249_i12 {sv.namehint = "_io_decode_0_read_illegal_T_79"} : i12
-    %299 = comb.icmp bin eq %io_decode_0_csr, %c928_i12 {sv.namehint = "_io_decode_0_read_illegal_T_80"} : i12
-    %300 = comb.icmp bin eq %io_decode_0_csr, %c930_i12 {sv.namehint = "_io_decode_0_read_illegal_T_81"} : i12
-    %301 = comb.icmp bin eq %io_decode_0_csr, %c944_i12 {sv.namehint = "_io_decode_0_read_illegal_T_82"} : i12
-    %302 = comb.icmp bin eq %io_decode_0_csr, %c945_i12 {sv.namehint = "_io_decode_0_read_illegal_T_83"} : i12
-    %303 = comb.icmp bin eq %io_decode_0_csr, %c946_i12 {sv.namehint = "_io_decode_0_read_illegal_T_84"} : i12
-    %304 = comb.icmp bin eq %io_decode_0_csr, %c947_i12 {sv.namehint = "_io_decode_0_read_illegal_T_85"} : i12
-    %305 = comb.icmp bin eq %io_decode_0_csr, %c948_i12 {sv.namehint = "_io_decode_0_read_illegal_T_86"} : i12
-    %306 = comb.icmp bin eq %io_decode_0_csr, %c949_i12 {sv.namehint = "_io_decode_0_read_illegal_T_87"} : i12
-    %307 = comb.icmp bin eq %io_decode_0_csr, %c950_i12 {sv.namehint = "_io_decode_0_read_illegal_T_88"} : i12
-    %308 = comb.icmp bin eq %io_decode_0_csr, %c951_i12 {sv.namehint = "_io_decode_0_read_illegal_T_89"} : i12
-    %309 = comb.icmp bin eq %io_decode_0_csr, %c952_i12 {sv.namehint = "_io_decode_0_read_illegal_T_90"} : i12
-    %310 = comb.icmp bin eq %io_decode_0_csr, %c953_i12 {sv.namehint = "_io_decode_0_read_illegal_T_91"} : i12
-    %311 = comb.icmp bin eq %io_decode_0_csr, %c954_i12 {sv.namehint = "_io_decode_0_read_illegal_T_92"} : i12
-    %312 = comb.icmp bin eq %io_decode_0_csr, %c955_i12 {sv.namehint = "_io_decode_0_read_illegal_T_93"} : i12
-    %313 = comb.icmp bin eq %io_decode_0_csr, %c956_i12 {sv.namehint = "_io_decode_0_read_illegal_T_94"} : i12
-    %314 = comb.icmp bin eq %io_decode_0_csr, %c957_i12 {sv.namehint = "_io_decode_0_read_illegal_T_95"} : i12
-    %315 = comb.icmp bin eq %io_decode_0_csr, %c958_i12 {sv.namehint = "_io_decode_0_read_illegal_T_96"} : i12
-    %316 = comb.icmp bin eq %io_decode_0_csr, %c959_i12 {sv.namehint = "_io_decode_0_read_illegal_T_97"} : i12
-    %317 = comb.icmp bin eq %io_decode_0_csr, %c1985_i12 {sv.namehint = "_io_decode_0_read_illegal_T_98"} : i12
-    %318 = comb.icmp bin eq %io_decode_0_csr, %c-238_i12 {sv.namehint = "_io_decode_0_read_illegal_T_99"} : i12
-    %319 = comb.icmp bin eq %io_decode_0_csr, %c-239_i12 {sv.namehint = "_io_decode_0_read_illegal_T_100"} : i12
-    %320 = comb.icmp bin eq %io_decode_0_csr, %c-237_i12 {sv.namehint = "_io_decode_0_read_illegal_T_101"} : i12
-    %321 = comb.or bin %221, %222, %223, %224, %225, %226, %227, %228, %229, %230, %231, %232, %233, %234, %235, %236, %237, %238, %239, %240, %241, %242, %243, %244, %245, %246, %247, %248, %249, %250, %251, %252, %253, %254, %255, %256, %257, %258, %259, %260, %261, %262, %263, %264, %265, %266, %267, %268, %269, %270, %271, %272, %273, %274, %275, %276, %277, %278, %279, %280, %281, %282, %283, %284, %285, %286, %287, %288, %289, %290, %291, %292, %293, %294, %295, %296, %297, %298, %299, %300, %301, %302, %303, %304, %305, %306, %307, %308, %309, %310, %311, %312, %313, %314, %315, %316, %317, %318, %319, %320 {sv.namehint = "_io_decode_0_read_illegal_T_200"} : i1
-    %322 = comb.xor bin %321, %true {sv.namehint = "_io_decode_0_read_illegal_T_201"} : i1
-    %323 = comb.extract %io_decode_0_csr from 10 : (i12) -> i2
-    %324 = comb.extract %io_decode_0_csr from 4 : (i12) -> i1
-    %325 = comb.concat %323, %324 : i2, i1
-    %326 = comb.icmp bin eq %325, %c3_i3 {sv.namehint = "_io_decode_0_read_illegal_T_220"} : i3
-    %327 = comb.xor bin %reg_debug, %true {sv.namehint = "_io_status_dprv_x87_T"} : i1
-    %328 = comb.and bin %326, %327 {sv.namehint = "_io_decode_0_read_illegal_T_222"} : i1
-    %329 = comb.or bin %322, %328 {sv.namehint = "io_decode_0_read_illegal"} : i1
-    %330 = comb.extract %io_decode_0_csr from 10 {sv.namehint = "_io_decode_0_write_illegal_T"} : (i12) -> i2
-    %331 = comb.icmp bin eq %330, %c-1_i2 {sv.namehint = "io_decode_0_write_illegal"} : i2
-    %332 = comb.icmp bin ugt %io_decode_0_csr, %c831_i12 {sv.namehint = "_io_decode_0_write_flush_T"} : i12
-    %333 = comb.icmp bin ult %io_decode_0_csr, %c836_i12 {sv.namehint = "_io_decode_0_write_flush_T_1"} : i12
-    %334 = comb.and bin %332, %333 {sv.namehint = "_io_decode_0_write_flush_T_2"} : i1
-    %335 = comb.icmp bin ugt %io_decode_0_csr, %c319_i12 {sv.namehint = "_io_decode_0_write_flush_T_3"} : i12
-    %336 = comb.icmp bin ult %io_decode_0_csr, %c324_i12 {sv.namehint = "_io_decode_0_write_flush_T_4"} : i12
-    %337 = comb.and bin %335, %336 {sv.namehint = "_io_decode_0_write_flush_T_5"} : i1
-    %338 = comb.or bin %334, %337 {sv.namehint = "_io_decode_0_write_flush_T_6"} : i1
-    %339 = comb.xor bin %338, %true {sv.namehint = "io_decode_0_write_flush"} : i1
-    %340 = comb.extract %io_decode_0_csr from 10 {sv.namehint = "_io_decode_0_system_illegal_T_8"} : (i12) -> i1
-    %341 = comb.extract %io_decode_0_csr from 7 {sv.namehint = "_io_decode_0_system_illegal_T_10"} : (i12) -> i1
-    %342 = comb.and bin %220, %340, %341, %327 {sv.namehint = "_io_decode_0_system_illegal_T_13"} : i1
-    %343 = comb.mux bin %214, %c3_i64, %io_cause {sv.namehint = "_cause_T_2"} : i64
-    %344 = comb.mux bin %213, %c11_i64, %343 {sv.namehint = "cause"} : i64
-    %345 = comb.extract %344 from 0 {sv.namehint = "cause_lsbs"} : (i64) -> i8
-    %346 = comb.extract %344 from 63 {sv.namehint = "_io_trace_0_interrupt_T"} : (i64) -> i1
-    %347 = comb.icmp bin eq %345, %c14_i8 {sv.namehint = "_causeIsDebugTrigger_T_2"} : i8
-    %348 = comb.and bin %346, %347 {sv.namehint = "causeIsDebugInt"} : i1
-    %349 = comb.xor bin %346, %true {sv.namehint = "_causeIsDebugTrigger_T_1"} : i1
-    %350 = comb.and bin %349, %347 {sv.namehint = "causeIsDebugTrigger"} : i1
-    %351 = comb.xor bin %346, %true {sv.namehint = "_causeIsDebugBreak_T_1"} : i1
-    %352 = comb.and bin %351, %214, %reg_dcsr_ebreakm {sv.namehint = "causeIsDebugBreak"} : i1
-    %353 = comb.or bin %reg_singleStepped, %348, %350, %352, %reg_debug {sv.namehint = "trapToDebug"} : i1
-    %354 = comb.xor %214, %true : i1
-    %355 = comb.concat %c-128_i8, %354, %c0_i3 {sv.namehint = "_debugTVec_T"} : i8, i1, i3
-    %356 = comb.mux bin %reg_debug, %355, %c-2048_i12 {sv.namehint = "debugTVec"} : i12
-    %357 = comb.extract %344 from 0 {sv.namehint = "_notDebugTVec_interruptOffset_T"} : (i64) -> i6
-    %358 = comb.extract %137 from 8 : (i32) -> i24
-    %359 = comb.extract %137 from 0 {sv.namehint = "_notDebugTVec_doVector_T"} : (i32) -> i1
-    %360 = comb.extract %344 from 6 {sv.namehint = "_notDebugTVec_doVector_T_3"} : (i64) -> i2
-    %361 = comb.icmp bin eq %360, %c0_i2 {sv.namehint = "_notDebugTVec_doVector_T_4"} : i2
-    %362 = comb.and bin %359, %346, %361 {sv.namehint = "notDebugTVec_doVector"} : i1
-    %363 = comb.extract %137 from 2 : (i32) -> i30
-    %364 = comb.concat %358, %357 : i24, i6
-    %365 = comb.mux bin %362, %364, %363 : i30
-    %366 = comb.concat %c0_i22, %356 : i22, i12
-    %367 = comb.concat %c0_i2, %365, %c0_i2 : i2, i30, i2
-    %368 = comb.mux %353, %366, %367 {sv.namehint = "tvec"} : i34
-    %369 = comb.or bin %213, %214 {sv.namehint = "_exception_T"} : i1
-    %370 = comb.or bin %369, %215 {sv.namehint = "io_eret"} : i1
-    %371 = comb.and bin %reg_dcsr_step, %327 {sv.namehint = "io_singleStep"} : i1
-    %372 = comb.extract %reg_misa from 0 {sv.namehint = "io_status_isa"} : (i64) -> i32
+    %220 = comb.icmp bin eq %219, %c1_i2 : i2
+    %221 = comb.extract %io_rw_addr from 9 : (i12) -> i1
+    %222 = comb.extract %io_rw_addr from 2 : (i12) -> i1
+    %223 = comb.concat %221, %222 : i1, i1
+    %224 = comb.icmp bin eq %223, %c-2_i2 : i2
+    %225 = comb.extract %io_rw_addr from 9 : (i12) -> i1
+    %226 = comb.extract %io_rw_addr from 1 : (i12) -> i1
+    %227 = comb.concat %225, %226 : i1, i1
+    %228 = comb.icmp bin eq %227, %c-2_i2 : i2
+    %229 = comb.extract %io_rw_addr from 8 : (i12) -> i2
+    %230 = comb.icmp bin eq %229, %c1_i2 : i2
+    %231 = comb.and bin %212, %216 {sv.namehint = "insn_call"} : i1
+    %232 = comb.and bin %212, %220 {sv.namehint = "insn_break"} : i1
+    %233 = comb.and bin %212, %224 {sv.namehint = "insn_ret"} : i1
+    %234 = comb.and bin %212, %228 {sv.namehint = "insn_cease"} : i1
+    %235 = comb.extract %io_decode_0_csr from 9 : (i12) -> i1
+    %236 = comb.extract %io_decode_0_csr from 2 : (i12) -> i1
+    %237 = comb.concat %235, %236 : i1, i1
+    %238 = comb.icmp bin eq %237, %c-2_i2 {sv.namehint = "is_ret"} : i2
+    %239 = comb.icmp bin eq %io_decode_0_csr, %c1952_i12 {sv.namehint = "_io_decode_0_read_illegal_T_2"} : i12
+    %240 = comb.icmp bin eq %io_decode_0_csr, %c1953_i12 {sv.namehint = "_io_decode_0_read_illegal_T_3"} : i12
+    %241 = comb.icmp bin eq %io_decode_0_csr, %c1954_i12 {sv.namehint = "_io_decode_0_read_illegal_T_4"} : i12
+    %242 = comb.icmp bin eq %io_decode_0_csr, %c1955_i12 {sv.namehint = "_io_decode_0_read_illegal_T_5"} : i12
+    %243 = comb.icmp bin eq %io_decode_0_csr, %c769_i12 {sv.namehint = "_io_decode_0_read_illegal_T_6"} : i12
+    %244 = comb.icmp bin eq %io_decode_0_csr, %c768_i12 {sv.namehint = "_io_decode_0_read_illegal_T_7"} : i12
+    %245 = comb.icmp bin eq %io_decode_0_csr, %c773_i12 {sv.namehint = "_io_decode_0_read_illegal_T_8"} : i12
+    %246 = comb.icmp bin eq %io_decode_0_csr, %c836_i12 {sv.namehint = "_io_decode_0_read_illegal_T_9"} : i12
+    %247 = comb.icmp bin eq %io_decode_0_csr, %c772_i12 {sv.namehint = "_io_decode_0_read_illegal_T_10"} : i12
+    %248 = comb.icmp bin eq %io_decode_0_csr, %c832_i12 {sv.namehint = "_io_decode_0_read_illegal_T_11"} : i12
+    %249 = comb.icmp bin eq %io_decode_0_csr, %c833_i12 {sv.namehint = "_io_decode_0_read_illegal_T_12"} : i12
+    %250 = comb.icmp bin eq %io_decode_0_csr, %c835_i12 {sv.namehint = "_io_decode_0_read_illegal_T_13"} : i12
+    %251 = comb.icmp bin eq %io_decode_0_csr, %c834_i12 {sv.namehint = "_io_decode_0_read_illegal_T_14"} : i12
+    %252 = comb.icmp bin eq %io_decode_0_csr, %c-236_i12 {sv.namehint = "_io_decode_0_read_illegal_T_15"} : i12
+    %253 = comb.icmp bin eq %io_decode_0_csr, %c1968_i12 {sv.namehint = "_io_decode_0_read_illegal_T_16"} : i12
+    %254 = comb.icmp bin eq %io_decode_0_csr, %c1969_i12 {sv.namehint = "_io_decode_0_read_illegal_T_17"} : i12
+    %255 = comb.icmp bin eq %io_decode_0_csr, %c1970_i12 {sv.namehint = "_io_decode_0_read_illegal_T_18"} : i12
+    %256 = comb.icmp bin eq %io_decode_0_csr, %c800_i12 {sv.namehint = "_io_decode_0_read_illegal_T_19"} : i12
+    %257 = comb.icmp bin eq %io_decode_0_csr, %c-1280_i12 {sv.namehint = "_io_decode_0_read_illegal_T_20"} : i12
+    %258 = comb.icmp bin eq %io_decode_0_csr, %c-1278_i12 {sv.namehint = "_io_decode_0_read_illegal_T_21"} : i12
+    %259 = comb.icmp bin eq %io_decode_0_csr, %c803_i12 {sv.namehint = "_io_decode_0_read_illegal_T_22"} : i12
+    %260 = comb.icmp bin eq %io_decode_0_csr, %c-1277_i12 {sv.namehint = "_io_decode_0_read_illegal_T_23"} : i12
+    %261 = comb.icmp bin eq %io_decode_0_csr, %c804_i12 {sv.namehint = "_io_decode_0_read_illegal_T_24"} : i12
+    %262 = comb.icmp bin eq %io_decode_0_csr, %c-1276_i12 {sv.namehint = "_io_decode_0_read_illegal_T_25"} : i12
+    %263 = comb.icmp bin eq %io_decode_0_csr, %c805_i12 {sv.namehint = "_io_decode_0_read_illegal_T_26"} : i12
+    %264 = comb.icmp bin eq %io_decode_0_csr, %c-1275_i12 {sv.namehint = "_io_decode_0_read_illegal_T_27"} : i12
+    %265 = comb.icmp bin eq %io_decode_0_csr, %c806_i12 {sv.namehint = "_io_decode_0_read_illegal_T_28"} : i12
+    %266 = comb.icmp bin eq %io_decode_0_csr, %c-1274_i12 {sv.namehint = "_io_decode_0_read_illegal_T_29"} : i12
+    %267 = comb.icmp bin eq %io_decode_0_csr, %c807_i12 {sv.namehint = "_io_decode_0_read_illegal_T_30"} : i12
+    %268 = comb.icmp bin eq %io_decode_0_csr, %c-1273_i12 {sv.namehint = "_io_decode_0_read_illegal_T_31"} : i12
+    %269 = comb.icmp bin eq %io_decode_0_csr, %c808_i12 {sv.namehint = "_io_decode_0_read_illegal_T_32"} : i12
+    %270 = comb.icmp bin eq %io_decode_0_csr, %c-1272_i12 {sv.namehint = "_io_decode_0_read_illegal_T_33"} : i12
+    %271 = comb.icmp bin eq %io_decode_0_csr, %c809_i12 {sv.namehint = "_io_decode_0_read_illegal_T_34"} : i12
+    %272 = comb.icmp bin eq %io_decode_0_csr, %c-1271_i12 {sv.namehint = "_io_decode_0_read_illegal_T_35"} : i12
+    %273 = comb.icmp bin eq %io_decode_0_csr, %c810_i12 {sv.namehint = "_io_decode_0_read_illegal_T_36"} : i12
+    %274 = comb.icmp bin eq %io_decode_0_csr, %c-1270_i12 {sv.namehint = "_io_decode_0_read_illegal_T_37"} : i12
+    %275 = comb.icmp bin eq %io_decode_0_csr, %c811_i12 {sv.namehint = "_io_decode_0_read_illegal_T_38"} : i12
+    %276 = comb.icmp bin eq %io_decode_0_csr, %c-1269_i12 {sv.namehint = "_io_decode_0_read_illegal_T_39"} : i12
+    %277 = comb.icmp bin eq %io_decode_0_csr, %c812_i12 {sv.namehint = "_io_decode_0_read_illegal_T_40"} : i12
+    %278 = comb.icmp bin eq %io_decode_0_csr, %c-1268_i12 {sv.namehint = "_io_decode_0_read_illegal_T_41"} : i12
+    %279 = comb.icmp bin eq %io_decode_0_csr, %c813_i12 {sv.namehint = "_io_decode_0_read_illegal_T_42"} : i12
+    %280 = comb.icmp bin eq %io_decode_0_csr, %c-1267_i12 {sv.namehint = "_io_decode_0_read_illegal_T_43"} : i12
+    %281 = comb.icmp bin eq %io_decode_0_csr, %c814_i12 {sv.namehint = "_io_decode_0_read_illegal_T_44"} : i12
+    %282 = comb.icmp bin eq %io_decode_0_csr, %c-1266_i12 {sv.namehint = "_io_decode_0_read_illegal_T_45"} : i12
+    %283 = comb.icmp bin eq %io_decode_0_csr, %c815_i12 {sv.namehint = "_io_decode_0_read_illegal_T_46"} : i12
+    %284 = comb.icmp bin eq %io_decode_0_csr, %c-1265_i12 {sv.namehint = "_io_decode_0_read_illegal_T_47"} : i12
+    %285 = comb.icmp bin eq %io_decode_0_csr, %c816_i12 {sv.namehint = "_io_decode_0_read_illegal_T_48"} : i12
+    %286 = comb.icmp bin eq %io_decode_0_csr, %c-1264_i12 {sv.namehint = "_io_decode_0_read_illegal_T_49"} : i12
+    %287 = comb.icmp bin eq %io_decode_0_csr, %c817_i12 {sv.namehint = "_io_decode_0_read_illegal_T_50"} : i12
+    %288 = comb.icmp bin eq %io_decode_0_csr, %c-1263_i12 {sv.namehint = "_io_decode_0_read_illegal_T_51"} : i12
+    %289 = comb.icmp bin eq %io_decode_0_csr, %c818_i12 {sv.namehint = "_io_decode_0_read_illegal_T_52"} : i12
+    %290 = comb.icmp bin eq %io_decode_0_csr, %c-1262_i12 {sv.namehint = "_io_decode_0_read_illegal_T_53"} : i12
+    %291 = comb.icmp bin eq %io_decode_0_csr, %c819_i12 {sv.namehint = "_io_decode_0_read_illegal_T_54"} : i12
+    %292 = comb.icmp bin eq %io_decode_0_csr, %c-1261_i12 {sv.namehint = "_io_decode_0_read_illegal_T_55"} : i12
+    %293 = comb.icmp bin eq %io_decode_0_csr, %c820_i12 {sv.namehint = "_io_decode_0_read_illegal_T_56"} : i12
+    %294 = comb.icmp bin eq %io_decode_0_csr, %c-1260_i12 {sv.namehint = "_io_decode_0_read_illegal_T_57"} : i12
+    %295 = comb.icmp bin eq %io_decode_0_csr, %c821_i12 {sv.namehint = "_io_decode_0_read_illegal_T_58"} : i12
+    %296 = comb.icmp bin eq %io_decode_0_csr, %c-1259_i12 {sv.namehint = "_io_decode_0_read_illegal_T_59"} : i12
+    %297 = comb.icmp bin eq %io_decode_0_csr, %c822_i12 {sv.namehint = "_io_decode_0_read_illegal_T_60"} : i12
+    %298 = comb.icmp bin eq %io_decode_0_csr, %c-1258_i12 {sv.namehint = "_io_decode_0_read_illegal_T_61"} : i12
+    %299 = comb.icmp bin eq %io_decode_0_csr, %c823_i12 {sv.namehint = "_io_decode_0_read_illegal_T_62"} : i12
+    %300 = comb.icmp bin eq %io_decode_0_csr, %c-1257_i12 {sv.namehint = "_io_decode_0_read_illegal_T_63"} : i12
+    %301 = comb.icmp bin eq %io_decode_0_csr, %c824_i12 {sv.namehint = "_io_decode_0_read_illegal_T_64"} : i12
+    %302 = comb.icmp bin eq %io_decode_0_csr, %c-1256_i12 {sv.namehint = "_io_decode_0_read_illegal_T_65"} : i12
+    %303 = comb.icmp bin eq %io_decode_0_csr, %c825_i12 {sv.namehint = "_io_decode_0_read_illegal_T_66"} : i12
+    %304 = comb.icmp bin eq %io_decode_0_csr, %c-1255_i12 {sv.namehint = "_io_decode_0_read_illegal_T_67"} : i12
+    %305 = comb.icmp bin eq %io_decode_0_csr, %c826_i12 {sv.namehint = "_io_decode_0_read_illegal_T_68"} : i12
+    %306 = comb.icmp bin eq %io_decode_0_csr, %c-1254_i12 {sv.namehint = "_io_decode_0_read_illegal_T_69"} : i12
+    %307 = comb.icmp bin eq %io_decode_0_csr, %c827_i12 {sv.namehint = "_io_decode_0_read_illegal_T_70"} : i12
+    %308 = comb.icmp bin eq %io_decode_0_csr, %c-1253_i12 {sv.namehint = "_io_decode_0_read_illegal_T_71"} : i12
+    %309 = comb.icmp bin eq %io_decode_0_csr, %c828_i12 {sv.namehint = "_io_decode_0_read_illegal_T_72"} : i12
+    %310 = comb.icmp bin eq %io_decode_0_csr, %c-1252_i12 {sv.namehint = "_io_decode_0_read_illegal_T_73"} : i12
+    %311 = comb.icmp bin eq %io_decode_0_csr, %c829_i12 {sv.namehint = "_io_decode_0_read_illegal_T_74"} : i12
+    %312 = comb.icmp bin eq %io_decode_0_csr, %c-1251_i12 {sv.namehint = "_io_decode_0_read_illegal_T_75"} : i12
+    %313 = comb.icmp bin eq %io_decode_0_csr, %c830_i12 {sv.namehint = "_io_decode_0_read_illegal_T_76"} : i12
+    %314 = comb.icmp bin eq %io_decode_0_csr, %c-1250_i12 {sv.namehint = "_io_decode_0_read_illegal_T_77"} : i12
+    %315 = comb.icmp bin eq %io_decode_0_csr, %c831_i12 {sv.namehint = "_io_decode_0_read_illegal_T_78"} : i12
+    %316 = comb.icmp bin eq %io_decode_0_csr, %c-1249_i12 {sv.namehint = "_io_decode_0_read_illegal_T_79"} : i12
+    %317 = comb.icmp bin eq %io_decode_0_csr, %c928_i12 {sv.namehint = "_io_decode_0_read_illegal_T_80"} : i12
+    %318 = comb.icmp bin eq %io_decode_0_csr, %c930_i12 {sv.namehint = "_io_decode_0_read_illegal_T_81"} : i12
+    %319 = comb.icmp bin eq %io_decode_0_csr, %c944_i12 {sv.namehint = "_io_decode_0_read_illegal_T_82"} : i12
+    %320 = comb.icmp bin eq %io_decode_0_csr, %c945_i12 {sv.namehint = "_io_decode_0_read_illegal_T_83"} : i12
+    %321 = comb.icmp bin eq %io_decode_0_csr, %c946_i12 {sv.namehint = "_io_decode_0_read_illegal_T_84"} : i12
+    %322 = comb.icmp bin eq %io_decode_0_csr, %c947_i12 {sv.namehint = "_io_decode_0_read_illegal_T_85"} : i12
+    %323 = comb.icmp bin eq %io_decode_0_csr, %c948_i12 {sv.namehint = "_io_decode_0_read_illegal_T_86"} : i12
+    %324 = comb.icmp bin eq %io_decode_0_csr, %c949_i12 {sv.namehint = "_io_decode_0_read_illegal_T_87"} : i12
+    %325 = comb.icmp bin eq %io_decode_0_csr, %c950_i12 {sv.namehint = "_io_decode_0_read_illegal_T_88"} : i12
+    %326 = comb.icmp bin eq %io_decode_0_csr, %c951_i12 {sv.namehint = "_io_decode_0_read_illegal_T_89"} : i12
+    %327 = comb.icmp bin eq %io_decode_0_csr, %c952_i12 {sv.namehint = "_io_decode_0_read_illegal_T_90"} : i12
+    %328 = comb.icmp bin eq %io_decode_0_csr, %c953_i12 {sv.namehint = "_io_decode_0_read_illegal_T_91"} : i12
+    %329 = comb.icmp bin eq %io_decode_0_csr, %c954_i12 {sv.namehint = "_io_decode_0_read_illegal_T_92"} : i12
+    %330 = comb.icmp bin eq %io_decode_0_csr, %c955_i12 {sv.namehint = "_io_decode_0_read_illegal_T_93"} : i12
+    %331 = comb.icmp bin eq %io_decode_0_csr, %c956_i12 {sv.namehint = "_io_decode_0_read_illegal_T_94"} : i12
+    %332 = comb.icmp bin eq %io_decode_0_csr, %c957_i12 {sv.namehint = "_io_decode_0_read_illegal_T_95"} : i12
+    %333 = comb.icmp bin eq %io_decode_0_csr, %c958_i12 {sv.namehint = "_io_decode_0_read_illegal_T_96"} : i12
+    %334 = comb.icmp bin eq %io_decode_0_csr, %c959_i12 {sv.namehint = "_io_decode_0_read_illegal_T_97"} : i12
+    %335 = comb.icmp bin eq %io_decode_0_csr, %c1985_i12 {sv.namehint = "_io_decode_0_read_illegal_T_98"} : i12
+    %336 = comb.icmp bin eq %io_decode_0_csr, %c-238_i12 {sv.namehint = "_io_decode_0_read_illegal_T_99"} : i12
+    %337 = comb.icmp bin eq %io_decode_0_csr, %c-239_i12 {sv.namehint = "_io_decode_0_read_illegal_T_100"} : i12
+    %338 = comb.icmp bin eq %io_decode_0_csr, %c-237_i12 {sv.namehint = "_io_decode_0_read_illegal_T_101"} : i12
+    %339 = comb.or bin %239, %240, %241, %242, %243, %244, %245, %246, %247, %248, %249, %250, %251, %252, %253, %254, %255, %256, %257, %258, %259, %260, %261, %262, %263, %264, %265, %266, %267, %268, %269, %270, %271, %272, %273, %274, %275, %276, %277, %278, %279, %280, %281, %282, %283, %284, %285, %286, %287, %288, %289, %290, %291, %292, %293, %294, %295, %296, %297, %298, %299, %300, %301, %302, %303, %304, %305, %306, %307, %308, %309, %310, %311, %312, %313, %314, %315, %316, %317, %318, %319, %320, %321, %322, %323, %324, %325, %326, %327, %328, %329, %330, %331, %332, %333, %334, %335, %336, %337, %338 {sv.namehint = "_io_decode_0_read_illegal_T_200"} : i1
+    %340 = comb.xor bin %339, %true {sv.namehint = "_io_decode_0_read_illegal_T_201"} : i1
+    %341 = comb.extract %io_decode_0_csr from 10 : (i12) -> i2
+    %342 = comb.extract %io_decode_0_csr from 4 : (i12) -> i1
+    %343 = comb.concat %341, %342 : i2, i1
+    %344 = comb.icmp bin eq %343, %c3_i3 {sv.namehint = "_io_decode_0_read_illegal_T_220"} : i3
+    %345 = comb.xor bin %reg_debug, %true {sv.namehint = "_io_status_dprv_x87_T"} : i1
+    %346 = comb.and bin %344, %345 {sv.namehint = "_io_decode_0_read_illegal_T_222"} : i1
+    %347 = comb.or bin %340, %346 {sv.namehint = "io_decode_0_read_illegal"} : i1
+    %348 = comb.extract %io_decode_0_csr from 10 {sv.namehint = "_io_decode_0_write_illegal_T"} : (i12) -> i2
+    %349 = comb.icmp bin eq %348, %c-1_i2 {sv.namehint = "io_decode_0_write_illegal"} : i2
+    %350 = comb.icmp bin ugt %io_decode_0_csr, %c831_i12 {sv.namehint = "_io_decode_0_write_flush_T"} : i12
+    %351 = comb.icmp bin ult %io_decode_0_csr, %c836_i12 {sv.namehint = "_io_decode_0_write_flush_T_1"} : i12
+    %352 = comb.and bin %350, %351 {sv.namehint = "_io_decode_0_write_flush_T_2"} : i1
+    %353 = comb.icmp bin ugt %io_decode_0_csr, %c319_i12 {sv.namehint = "_io_decode_0_write_flush_T_3"} : i12
+    %354 = comb.icmp bin ult %io_decode_0_csr, %c324_i12 {sv.namehint = "_io_decode_0_write_flush_T_4"} : i12
+    %355 = comb.and bin %353, %354 {sv.namehint = "_io_decode_0_write_flush_T_5"} : i1
+    %356 = comb.or bin %352, %355 {sv.namehint = "_io_decode_0_write_flush_T_6"} : i1
+    %357 = comb.xor bin %356, %true {sv.namehint = "io_decode_0_write_flush"} : i1
+    %358 = comb.extract %io_decode_0_csr from 10 {sv.namehint = "_io_decode_0_system_illegal_T_8"} : (i12) -> i1
+    %359 = comb.extract %io_decode_0_csr from 7 {sv.namehint = "_io_decode_0_system_illegal_T_10"} : (i12) -> i1
+    %360 = comb.and bin %238, %358, %359, %345 {sv.namehint = "_io_decode_0_system_illegal_T_13"} : i1
+    %361 = comb.mux bin %232, %c3_i64, %io_cause {sv.namehint = "_cause_T_2"} : i64
+    %362 = comb.mux bin %231, %c11_i64, %361 {sv.namehint = "cause"} : i64
+    %363 = comb.extract %362 from 0 {sv.namehint = "cause_lsbs"} : (i64) -> i8
+    %364 = comb.extract %362 from 63 {sv.namehint = "_io_trace_0_interrupt_T"} : (i64) -> i1
+    %365 = comb.icmp bin eq %363, %c14_i8 {sv.namehint = "_causeIsDebugTrigger_T_2"} : i8
+    %366 = comb.and bin %364, %365 {sv.namehint = "causeIsDebugInt"} : i1
+    %367 = comb.xor bin %364, %true {sv.namehint = "_causeIsDebugTrigger_T_1"} : i1
+    %368 = comb.and bin %367, %365 {sv.namehint = "causeIsDebugTrigger"} : i1
+    %369 = comb.xor bin %364, %true {sv.namehint = "_causeIsDebugBreak_T_1"} : i1
+    %370 = comb.and bin %369, %232, %reg_dcsr_ebreakm {sv.namehint = "causeIsDebugBreak"} : i1
+    %371 = comb.or bin %reg_singleStepped, %366, %368, %370, %reg_debug {sv.namehint = "trapToDebug"} : i1
+    %372 = comb.xor %232, %true : i1
+    %373 = comb.concat %c-128_i8, %372, %c0_i3 {sv.namehint = "_debugTVec_T"} : i8, i1, i3
+    %374 = comb.mux bin %reg_debug, %373, %c-2048_i12 {sv.namehint = "debugTVec"} : i12
+    %375 = comb.extract %362 from 0 {sv.namehint = "_notDebugTVec_interruptOffset_T"} : (i64) -> i6
+    %376 = comb.extract %143 from 8 : (i32) -> i24
+    %377 = comb.extract %143 from 0 {sv.namehint = "_notDebugTVec_doVector_T"} : (i32) -> i1
+    %378 = comb.extract %362 from 6 {sv.namehint = "_notDebugTVec_doVector_T_3"} : (i64) -> i2
+    %379 = comb.icmp bin eq %378, %c0_i2 {sv.namehint = "_notDebugTVec_doVector_T_4"} : i2
+    %380 = comb.and bin %377, %364, %379 {sv.namehint = "notDebugTVec_doVector"} : i1
+    %381 = comb.extract %143 from 2 : (i32) -> i30
+    %382 = comb.concat %376, %375 : i24, i6
+    %383 = comb.mux bin %380, %382, %381 : i30
+    %384 = comb.concat %c0_i22, %374 : i22, i12
+    %385 = comb.concat %c0_i2, %383, %c0_i2 : i2, i30, i2
+    %386 = comb.mux %371, %384, %385 {sv.namehint = "tvec"} : i34
+    %387 = comb.or bin %231, %232 {sv.namehint = "_exception_T"} : i1
+    %388 = comb.or bin %387, %233 {sv.namehint = "io_eret"} : i1
+    %389 = comb.and bin %reg_dcsr_step, %345 {sv.namehint = "io_singleStep"} : i1
+    %390 = comb.extract %reg_misa from 0 {sv.namehint = "io_status_isa"} : (i64) -> i32
     %io_status_dprv_REG = seq.firreg %c-1_i2 clock %clock {firrtl.random_init_start = 2356 : ui64, sv.namehint = "io_status_dprv"} : i2
-    %373 = comb.or bin %369, %io_exception {sv.namehint = "exception"} : i1
-    %374 = comb.concat %false, %215 : i1, i1
-    %375 = comb.concat %false, %213 : i1, i1
-    %376 = comb.add bin %374, %375 : i2
-    %377 = comb.concat %false, %214 : i1, i1
-    %378 = comb.concat %false, %io_exception : i1, i1
-    %379 = comb.add bin %377, %378 : i2
-    %380 = comb.concat %false, %376 : i1, i2
-    %381 = comb.concat %false, %379 : i1, i2
-    %382 = comb.add bin %380, %381 : i3
-    %383 = comb.icmp bin ult %382, %c2_i3 : i3
-    %384 = comb.or bin %383, %reset : i1
-    %385 = comb.xor bin %384, %true : i1
-    %386 = comb.and bin %194, %212, %55, %327 : i1
-    %387 = comb.or %386, %reg_wfi : i1
-    %388 = comb.extract %28 from 10 : (i15) -> i1
-    %389 = comb.extract %28 from 6 : (i15) -> i1
-    %390 = comb.extract %28 from 2 : (i15) -> i1
-    %391 = comb.concat %388, %389, %390 : i1, i1, i1
-    %392 = comb.icmp bin ne %391, %c0_i3 : i3
-    %393 = comb.or bin %392, %io_interrupts_debug, %373 : i1
-    %394 = comb.xor %393, %true : i1
-    %395 = comb.and %394, %387 : i1
-    %396 = comb.or %io_retire, %373, %reg_singleStepped : i1
-    %397 = comb.and %371, %396 : i1
-    %398 = comb.xor bin %reg_singleStepped, %true : i1
-    %399 = comb.xor bin %io_retire, %true : i1
-    %400 = comb.or bin %398, %399, %reset : i1
-    %401 = comb.xor bin %400, %true : i1
+    %391 = comb.or bin %387, %io_exception {sv.namehint = "exception"} : i1
+    %392 = comb.concat %false, %233 : i1, i1
+    %393 = comb.concat %false, %231 : i1, i1
+    %394 = comb.add bin %392, %393 : i2
+    %395 = comb.concat %false, %232 : i1, i1
+    %396 = comb.concat %false, %io_exception : i1, i1
+    %397 = comb.add bin %395, %396 : i2
+    %398 = comb.concat %false, %394 : i1, i2
+    %399 = comb.concat %false, %397 : i1, i2
+    %400 = comb.add bin %398, %399 : i3
+    %401 = comb.icmp bin ult %400, %c2_i3 : i3
+    %402 = comb.or bin %401, %reset : i1
+    %403 = comb.xor bin %402, %true : i1
+    %404 = comb.and bin %212, %230, %60, %345 : i1
+    %405 = comb.or %404, %reg_wfi : i1
+    %406 = comb.extract %28 from 11 : (i16) -> i1
+    %407 = comb.extract %28 from 7 : (i16) -> i1
+    %408 = comb.extract %28 from 3 : (i16) -> i1
+    %409 = comb.concat %406, %407, %408 : i1, i1, i1
+    %410 = comb.icmp bin ne %409, %c0_i3 : i3
+    %411 = comb.or bin %410, %io_interrupts_debug, %391 : i1
+    %412 = comb.xor %411, %true : i1
+    %413 = comb.and %412, %405 : i1
+    %414 = comb.or %io_retire, %391, %reg_singleStepped : i1
+    %415 = comb.and %389, %414 : i1
+    %416 = comb.xor bin %reg_singleStepped, %true : i1
+    %417 = comb.xor bin %io_retire, %true : i1
+    %418 = comb.or bin %416, %417, %reset : i1
+    %419 = comb.xor bin %418, %true : i1
     sv.ifdef  "SYNTHESIS" {
     } else {
       sv.always posedge %0 {
         %STOP_COND_ = sv.macro.ref @STOP_COND_() : () -> i1
-        %818 = comb.and bin %STOP_COND_, %385 : i1
-        sv.if %818 {
+        %840 = comb.and bin %STOP_COND_, %403 : i1
+        sv.if %840 {
           sv.fatal 1
         }
-        %819 = comb.and bin %STOP_COND_, %401 : i1
-        sv.if %819 {
+        %841 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %841 {
+          sv.fatal 1
+        }
+        %842 = comb.and bin %STOP_COND_, %419 : i1
+        sv.if %842 {
           sv.fatal 1
         }
       }
     }
-    %402 = comb.extract %io_pc from 1 : (i34) -> i33
-    %403 = comb.concat %402, %false {sv.namehint = "epc"} : i33, i1
-    %404 = comb.and bin %373, %353, %327 : i1
-    %405 = comb.or %404, %reg_debug : i1
-    %406 = comb.mux bin %404, %403, %reg_dpc : i34
-    %407 = comb.mux bin %350, %c-2_i2, %c1_i2 {sv.namehint = "_reg_dcsr_cause_T"} : i2
-    %408 = comb.mux bin %348, %c-1_i2, %407 {sv.namehint = "_reg_dcsr_cause_T_1"} : i2
-    %409 = comb.concat %false, %408 : i1, i2
-    %410 = comb.mux bin %reg_singleStepped, %c-4_i3, %409 {sv.namehint = "_reg_dcsr_cause_T_2"} : i3
-    %411 = comb.mux bin %404, %410, %reg_dcsr_cause : i3
-    %412 = comb.xor %373, %true : i1
-    %413 = comb.or %412, %353 : i1
-    %414 = comb.mux bin %413, %reg_mepc, %403 : i34
-    %415 = comb.xor %373, %true : i1
-    %416 = comb.or %415, %353 : i1
-    %417 = comb.mux bin %416, %reg_mcause, %344 : i64
-    %418 = comb.xor %373, %true : i1
-    %419 = comb.or %418, %353 : i1
-    %420 = comb.mux bin %419, %reg_mtval, %io_tval : i34
-    %421 = comb.xor %373, %true : i1
-    %422 = comb.or %421, %353 : i1
-    %423 = comb.mux bin %422, %reg_mstatus_mpie, %reg_mstatus_mie : i1
-    %424 = comb.xor %373, %true : i1
-    %425 = comb.or %424, %353 : i1
-    %426 = comb.xor %373, %true : i1
-    %427 = comb.or %426, %353 : i1
-    %428 = comb.and %427, %reg_mstatus_mie : i1
-    %429 = comb.extract %io_rw_addr from 10 : (i12) -> i1
-    %430 = comb.extract %io_rw_addr from 7 : (i12) -> i1
-    %431 = comb.and bin %429, %430 : i1
-    %432 = comb.and bin %215, %431 : i1
-    %433 = comb.xor %432, %true : i1
-    %434 = comb.and %433, %405 : i1
-    %435 = comb.xor %141, %true : i1
-    %436 = comb.concat %435, %true {sv.namehint = "_io_evec_T_7"} : i1, i1
-    %437 = comb.or bin %152, %436 : i2
-    %438 = comb.concat %151, %437 {sv.namehint = "_io_evec_T_8"} : i32, i2
-    %439 = comb.xor bin %438, %c-1_i34 {sv.namehint = "_io_evec_T_9"} : i34
-    %440 = comb.xor %215, %true : i1
-    %441 = comb.or %440, %431 : i1
-    %442 = comb.mux bin %441, %428, %reg_mstatus_mpie : i1
-    %443 = comb.xor %431, %true : i1
-    %444 = comb.and %215, %443 : i1
-    %445 = comb.or %444, %423 : i1
-    %446 = comb.xor %215, %true : i1
-    %447 = comb.or %446, %431 : i1
-    %448 = comb.and %447, %425 : i1
-    %449 = comb.mux bin %448, %reg_mstatus_mpp, %c-1_i2 : i2
-    %450 = comb.xor %141, %true : i1
-    %451 = comb.concat %450, %true {sv.namehint = "_io_evec_T_17"} : i1, i1
-    %452 = comb.or bin %143, %451 : i2
-    %453 = comb.concat %142, %452 {sv.namehint = "_io_evec_T_18"} : i32, i2
-    %454 = comb.xor bin %453, %c-1_i34 {sv.namehint = "_io_evec_T_19"} : i34
-    %455 = comb.mux bin %431, %439, %454 : i34
-    %456 = comb.mux bin %215, %455, %368 {sv.namehint = "io_evec"} : i34
-    %457 = comb.or bin %reg_wfi, %io_status_cease_r {sv.namehint = "io_csr_stall"} : i1
-    %io_status_cease_r = seq.firreg %458 clock %clock reset sync %reset, %false {firrtl.random_init_start = 2358 : ui64, sv.namehint = "io_status_cease"} : i1
-    %458 = comb.or %216, %io_status_cease_r : i1
-    %459 = comb.concat %c2_i4, %reg_bp_0_control_dmode, %c549755813888_i43 : i4, i1, i43
-    %460 = comb.mux %158, %459, %c0_i48 {sv.namehint = "_io_rw_rdata_T_1"} : i48
-    %461 = comb.extract %reg_bp_0_address from 16 : (i33) -> i17
-    %462 = comb.concat %139, %461 : i31, i17
-    %463 = comb.mux %159, %462, %c0_i48 {sv.namehint = "_io_rw_rdata_T_2"} : i48
-    %464 = comb.extract %reg_misa from 16 : (i64) -> i48
-    %465 = comb.mux %160, %464, %c0_i48 {sv.namehint = "_io_rw_rdata_T_4"} : i48
-    %466 = comb.extract %137 from 16 : (i32) -> i16
-    %467 = comb.concat %c0_i32, %466 : i32, i16
-    %468 = comb.mux %162, %467, %c0_i48 {sv.namehint = "_io_rw_rdata_T_6"} : i48
-    %469 = comb.extract %reg_mie from 3 : (i64) -> i61
-    %470 = comb.mux %163, %469, %c0_i61 {sv.namehint = "_io_rw_rdata_T_8"} : i61
-    %471 = comb.extract %reg_mscratch from 3 : (i64) -> i61
-    %472 = comb.mux %164, %471, %c0_i61 {sv.namehint = "_io_rw_rdata_T_9"} : i61
-    %473 = comb.concat %147, %145 : i30, i31
-    %474 = comb.mux %165, %473, %c0_i61 {sv.namehint = "_io_rw_rdata_T_10"} : i61
-    %475 = comb.extract %reg_mtval from 3 : (i34) -> i31
-    %476 = comb.concat %149, %475 : i30, i31
-    %477 = comb.mux %166, %476, %c0_i61 {sv.namehint = "_io_rw_rdata_T_11"} : i61
-    %478 = comb.extract %reg_mcause from 3 : (i64) -> i61
-    %479 = comb.mux %167, %478, %c0_i61 {sv.namehint = "_io_rw_rdata_T_12"} : i61
-    %480 = comb.concat %c16384_i16, %reg_dcsr_ebreakm, %c0_i6, %reg_dcsr_cause, %c0_i3 : i16, i1, i6, i3, i3
-    %481 = comb.mux %168, %480, %c0_i29 {sv.namehint = "_io_rw_rdata_T_14"} : i29
-    %482 = comb.concat %156, %154 : i30, i31
-    %483 = comb.mux %169, %482, %c0_i61 {sv.namehint = "_io_rw_rdata_T_15"} : i61
-    %484 = comb.extract %reg_dscratch from 3 : (i64) -> i61
-    %485 = comb.mux %170, %484, %c0_i61 {sv.namehint = "_io_rw_rdata_T_16"} : i61
-    %486 = comb.mux bin %172, %25, %c0_i64 {sv.namehint = "_io_rw_rdata_T_18"} : i64
-    %487 = comb.mux bin %173, %13, %c0_i64 {sv.namehint = "_io_rw_rdata_T_19"} : i64
-    %488 = comb.mux bin %174, %157, %c0_i64 {sv.namehint = "_io_rw_rdata_T_78"} : i64
-    %489 = comb.mux bin %175, %reg_pmp_0_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_80"} : i30
-    %490 = comb.mux bin %176, %reg_pmp_1_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_81"} : i30
-    %491 = comb.mux bin %177, %reg_pmp_2_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_82"} : i30
-    %492 = comb.mux bin %178, %reg_pmp_3_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_83"} : i30
-    %493 = comb.mux bin %179, %reg_pmp_4_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_84"} : i30
-    %494 = comb.mux bin %180, %reg_pmp_5_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_85"} : i30
-    %495 = comb.mux bin %181, %reg_pmp_6_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_86"} : i30
-    %496 = comb.mux bin %182, %reg_pmp_7_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_87"} : i30
-    %497 = comb.mux bin %183, %reg_custom_0, %c0_i64 {sv.namehint = "_io_rw_rdata_T_96"} : i64
-    %498 = comb.mux bin %185, %c538447876_i64, %c0_i64 {sv.namehint = "_io_rw_rdata_T_99"} : i64
-    %499 = comb.or %460, %463, %465, %468 {sv.namehint = "_io_rw_rdata_T_105"} : i48
-    %500 = comb.concat %499, %c0_i13 : i48, i13
-    %501 = comb.or %500, %470, %472, %474, %477, %479 {sv.namehint = "_io_rw_rdata_T_111"} : i61
-    %502 = comb.extract %501 from 29 : (i61) -> i32
-    %503 = comb.extract %501 from 0 : (i61) -> i29
-    %504 = comb.or %503, %481 : i29
-    %505 = comb.concat %502, %504 : i32, i29
-    %506 = comb.or %505, %483, %485 {sv.namehint = "_io_rw_rdata_T_115"} : i61
-    %507 = comb.concat %506, %c0_i3 {sv.namehint = "_io_rw_rdata_T_116"} : i61, i3
-    %508 = comb.or bin %507, %486, %487, %488 {sv.namehint = "_io_rw_rdata_T_178"} : i64
-    %509 = comb.extract %508 from 30 : (i64) -> i34
-    %510 = comb.extract %508 from 0 : (i64) -> i30
-    %511 = comb.or bin %510, %489, %490, %491, %492, %493, %494, %495, %496 : i30
-    %512 = comb.extract %511 from 1 : (i30) -> i29
-    %513 = comb.extract %511 from 0 : (i30) -> i1
-    %514 = comb.or %513, %184 : i1
-    %515 = comb.concat %509, %512, %514 : i34, i29, i1
-    %516 = comb.or %497, %498, %515 {sv.namehint = "_io_rw_rdata_T_198"} : i64
-    %517 = comb.icmp bin eq %io_rw_cmd, %c-2_i3 {sv.namehint = "_csr_wen_T"} : i3
-    %518 = comb.icmp bin eq %io_rw_cmd, %c-1_i3 {sv.namehint = "_csr_wen_T_1"} : i3
-    %519 = comb.icmp bin eq %io_rw_cmd, %c-3_i3 {sv.namehint = "_csr_wen_T_2"} : i3
-    %520 = comb.or bin %517, %518, %519 {sv.namehint = "csr_wen"} : i1
-    %521 = comb.extract %193 from 3 {sv.namehint = "new_mstatus_mie"} : (i64) -> i1
-    %522 = comb.extract %193 from 7 {sv.namehint = "new_mstatus_mpie"} : (i64) -> i1
-    %523 = comb.and bin %520, %161 : i1
-    %524 = comb.mux bin %523, %521, %442 : i1
-    %525 = comb.mux bin %523, %522, %445 : i1
-    %526 = comb.extract %io_pc from 1 : (i34) -> i1
-    %527 = comb.xor bin %526, %true : i1
-    %528 = comb.extract %188 from 2 : (i64) -> i1
-    %529 = comb.extract %192 from 2 : (i64) -> i1
-    %530 = comb.and bin %528, %529 : i1
-    %531 = comb.or bin %527, %530 : i1
-    %532 = comb.and bin %193, %c4101_i64 {sv.namehint = "_reg_misa_T_5"} : i64
-    %533 = comb.and bin %reg_misa, %c-4102_i64 {sv.namehint = "_reg_misa_T_7"} : i64
-    %534 = comb.or bin %532, %533 {sv.namehint = "_reg_misa_T_8"} : i64
-    %535 = comb.and bin %520, %160, %531 : i1
-    %536 = comb.mux bin %535, %534, %reg_misa : i64
-    %537 = comb.extract %188 from 0 : (i64) -> i16
-    %538 = comb.extract %192 from 0 : (i64) -> i16
-    %539 = comb.and bin %537, %538, %c2184_i16 : i16
-    %540 = comb.concat %c0_i48, %539 : i48, i16
-    %541 = comb.and bin %520, %163 : i1
-    %542 = comb.mux bin %541, %540, %reg_mie : i64
-    %543 = comb.extract %193 from 1 : (i64) -> i33
-    %544 = comb.concat %543, %false : i33, i1
-    %545 = comb.and bin %520, %165 : i1
-    %546 = comb.mux bin %545, %544, %414 : i34
-    %547 = comb.and bin %520, %164 : i1
-    %548 = comb.mux bin %547, %193, %reg_mscratch : i64
-    %549 = comb.extract %188 from 0 : (i64) -> i32
-    %550 = comb.extract %192 from 0 : (i64) -> i32
-    %551 = comb.and bin %549, %550 {sv.namehint = "_new_dcsr_WIRE"} : i32
-    %552 = comb.and bin %520, %162 : i1
-    %553 = comb.mux bin %552, %551, %reg_mtvec : i32
-    %554 = comb.and bin %193, %c-9223372036854775793_i64 {sv.namehint = "_reg_mcause_T"} : i64
-    %555 = comb.and bin %520, %167 : i1
-    %556 = comb.mux bin %555, %554, %417 : i64
-    %557 = comb.extract %188 from 0 : (i64) -> i34
-    %558 = comb.extract %192 from 0 : (i64) -> i34
-    %559 = comb.and bin %557, %558 {sv.namehint = "_lo_T_1"} : i34
-    %560 = comb.and bin %520, %166 : i1
-    %561 = comb.mux bin %560, %559, %420 : i34
-    %562 = comb.extract %188 from 0 : (i64) -> i3
-    %563 = comb.extract %192 from 0 : (i64) -> i3
-    %564 = comb.and bin %562, %563, %c-3_i3 : i3
-    %565 = comb.and bin %520, %171 : i1
-    %566 = comb.mux bin %565, %564, %reg_mcountinhibit : i3
-    %567 = comb.extract %188 from 0 : (i64) -> i6
-    %568 = comb.extract %192 from 0 : (i64) -> i6
-    %569 = comb.and bin %567, %568 : i6
-    %570 = comb.and bin %520, %172 : i1
-    %571 = comb.mux bin %570, %569, %20 : i6
-    %572 = comb.extract %188 from 6 : (i64) -> i58
-    %573 = comb.extract %192 from 6 : (i64) -> i58
-    %574 = comb.and bin %572, %573 {sv.namehint = "_hi_T"} : i58
-    %575 = comb.mux bin %570, %574, %24 : i58
-    %576 = comb.and bin %520, %173 : i1
-    %577 = comb.mux bin %576, %569, %8 : i6
-    %578 = comb.and bin %572, %573 {sv.namehint = "_hi_T_1"} : i58
-    %579 = comb.mux bin %576, %578, %12 : i58
-    %580 = comb.extract %551 from 2 {sv.namehint = "new_dcsr_step"} : (i32) -> i1
-    %581 = comb.extract %551 from 15 {sv.namehint = "new_dcsr_ebreakm"} : (i32) -> i1
-    %582 = comb.and bin %520, %168 : i1
-    %583 = comb.mux bin %582, %580, %reg_dcsr_step : i1
-    %584 = comb.mux bin %582, %581, %reg_dcsr_ebreakm : i1
-    %585 = comb.extract %193 from 1 : (i64) -> i33
-    %586 = comb.concat %585, %false : i33, i1
-    %587 = comb.and bin %520, %169 : i1
-    %588 = comb.mux bin %587, %586, %406 : i34
-    %589 = comb.and bin %520, %170 : i1
-    %590 = comb.mux bin %589, %193, %reg_dscratch : i64
-    %591 = comb.xor bin %reg_bp_0_control_dmode, %true : i1
-    %592 = comb.or bin %591, %reg_debug : i1
-    %593 = comb.extract %188 from 0 : (i64) -> i33
-    %594 = comb.extract %192 from 0 : (i64) -> i33
-    %595 = comb.and bin %593, %594 : i33
-    %596 = comb.and bin %520, %592, %159 : i1
-    %597 = comb.mux bin %596, %595, %reg_bp_0_address : i33
-    %598 = comb.extract %193 from 0 {sv.namehint = "_reg_bp_0_control_T"} : (i64) -> i1
-    %599 = comb.extract %193 from 1 {sv.namehint = "_reg_bp_0_control_T_1"} : (i64) -> i1
-    %600 = comb.extract %193 from 2 {sv.namehint = "_reg_bp_0_control_T_2"} : (i64) -> i1
-    %601 = comb.extract %193 from 7 {sv.namehint = "_reg_bp_0_control_T_7"} : (i64) -> i2
-    %602 = comb.and bin %520, %592, %158 : i1
-    %603 = comb.mux bin %602, %601, %reg_bp_0_control_tmatch : i2
-    %604 = comb.mux bin %602, %600, %reg_bp_0_control_x : i1
-    %605 = comb.mux bin %602, %599, %reg_bp_0_control_w : i1
-    %606 = comb.mux bin %602, %598, %reg_bp_0_control_r : i1
-    %607 = comb.concat %reg_bp_0_control_dmode, %c4398046511104_i46, %reg_bp_0_control_action : i1, i46, i1
-    %608 = comb.mux %186, %607, %c0_i48 {sv.namehint = "_newBPC_T_2"} : i48
-    %609 = comb.extract %io_rw_wdata from 12 : (i64) -> i48
-    %610 = comb.or %608, %609 {sv.namehint = "_newBPC_T_3"} : i48
-    %611 = comb.icmp bin eq %189, %c-1_i2 {sv.namehint = "_newBPC_T_5"} : i2
-    %612 = comb.extract %io_rw_wdata from 12 : (i64) -> i48
-    %613 = comb.mux %611, %612, %c0_i48 {sv.namehint = "_newBPC_T_6"} : i48
-    %614 = comb.xor %613, %c-1_i48 {sv.namehint = "_newBPC_T_7"} : i48
-    %615 = comb.and %610, %614 {sv.namehint = "_newBPC_T_8"} : i48
-    %616 = comb.extract %615 from 0 {sv.namehint = "newBPC_action"} : (i48) -> i1
-    %617 = comb.extract %615 from 47 {sv.namehint = "newBPC_dmode"} : (i48) -> i1
-    %618 = comb.and bin %617, %reg_debug {sv.namehint = "dMode"} : i1
-    %619 = comb.mux bin %602, %618, %reg_bp_0_control_dmode : i1
-    %620 = comb.and %618, %616 : i1
-    %621 = comb.mux bin %602, %620, %reg_bp_0_control_action : i1
-    %622 = comb.xor bin %reg_pmp_0_cfg_l, %true : i1
-    %623 = comb.extract %188 from 0 : (i64) -> i8
-    %624 = comb.extract %192 from 0 : (i64) -> i8
-    %625 = comb.and bin %623, %624 {sv.namehint = "_newCfg_WIRE"} : i8
-    %626 = comb.extract %625 from 0 {sv.namehint = "newCfg_r"} : (i8) -> i1
-    %627 = comb.extract %625 from 1 {sv.namehint = "newCfg_w"} : (i8) -> i1
-    %628 = comb.extract %625 from 2 {sv.namehint = "newCfg_x"} : (i8) -> i1
-    %629 = comb.extract %625 from 3 {sv.namehint = "newCfg_a"} : (i8) -> i2
-    %630 = comb.extract %625 from 7 {sv.namehint = "newCfg_l"} : (i8) -> i1
-    %631 = comb.and bin %520, %174, %622 : i1
-    %632 = comb.mux bin %631, %630, %reg_pmp_0_cfg_l : i1
-    %633 = comb.mux bin %631, %629, %reg_pmp_0_cfg_a : i2
-    %634 = comb.mux bin %631, %628, %reg_pmp_0_cfg_x : i1
-    %635 = comb.mux bin %631, %626, %reg_pmp_0_cfg_r : i1
-    %636 = comb.and bin %627, %626 {sv.namehint = "_reg_pmp_0_cfg_w_T"} : i1
-    %637 = comb.mux bin %631, %636, %reg_pmp_0_cfg_w : i1
-    %638 = comb.extract %reg_pmp_1_cfg_a from 1 : (i2) -> i1
-    %639 = comb.xor bin %638, %true : i1
-    %640 = comb.extract %reg_pmp_1_cfg_a from 0 : (i2) -> i1
-    %641 = comb.and bin %reg_pmp_1_cfg_l, %639, %640 : i1
-    %642 = comb.or bin %reg_pmp_0_cfg_l, %641 : i1
-    %643 = comb.xor bin %642, %true : i1
-    %644 = comb.extract %188 from 0 : (i64) -> i30
-    %645 = comb.extract %192 from 0 : (i64) -> i30
-    %646 = comb.and bin %644, %645 : i30
-    %647 = comb.and bin %520, %175, %643 : i1
-    %648 = comb.mux bin %647, %646, %reg_pmp_0_addr : i30
-    %649 = comb.xor bin %reg_pmp_1_cfg_l, %true : i1
-    %650 = comb.extract %188 from 8 : (i64) -> i8
-    %651 = comb.extract %192 from 8 : (i64) -> i8
-    %652 = comb.and bin %650, %651 {sv.namehint = "_newCfg_WIRE_1"} : i8
-    %653 = comb.extract %652 from 0 {sv.namehint = "newCfg_1_r"} : (i8) -> i1
-    %654 = comb.extract %652 from 1 {sv.namehint = "newCfg_1_w"} : (i8) -> i1
-    %655 = comb.extract %652 from 2 {sv.namehint = "newCfg_1_x"} : (i8) -> i1
-    %656 = comb.extract %652 from 3 {sv.namehint = "newCfg_1_a"} : (i8) -> i2
-    %657 = comb.extract %652 from 7 {sv.namehint = "newCfg_1_l"} : (i8) -> i1
-    %658 = comb.and bin %520, %174, %649 : i1
-    %659 = comb.mux bin %658, %657, %reg_pmp_1_cfg_l : i1
-    %660 = comb.mux bin %658, %656, %reg_pmp_1_cfg_a : i2
-    %661 = comb.mux bin %658, %655, %reg_pmp_1_cfg_x : i1
-    %662 = comb.mux bin %658, %653, %reg_pmp_1_cfg_r : i1
-    %663 = comb.and bin %654, %653 {sv.namehint = "_reg_pmp_1_cfg_w_T"} : i1
-    %664 = comb.mux bin %658, %663, %reg_pmp_1_cfg_w : i1
-    %665 = comb.extract %reg_pmp_2_cfg_a from 1 : (i2) -> i1
-    %666 = comb.xor bin %665, %true : i1
-    %667 = comb.extract %reg_pmp_2_cfg_a from 0 : (i2) -> i1
-    %668 = comb.and bin %reg_pmp_2_cfg_l, %666, %667 : i1
-    %669 = comb.or bin %reg_pmp_1_cfg_l, %668 : i1
-    %670 = comb.xor bin %669, %true : i1
-    %671 = comb.and bin %520, %176, %670 : i1
-    %672 = comb.mux bin %671, %646, %reg_pmp_1_addr : i30
-    %673 = comb.xor bin %reg_pmp_2_cfg_l, %true : i1
-    %674 = comb.extract %188 from 16 : (i64) -> i8
-    %675 = comb.extract %192 from 16 : (i64) -> i8
-    %676 = comb.and bin %674, %675 {sv.namehint = "_newCfg_WIRE_2"} : i8
-    %677 = comb.extract %676 from 0 {sv.namehint = "newCfg_2_r"} : (i8) -> i1
-    %678 = comb.extract %676 from 1 {sv.namehint = "newCfg_2_w"} : (i8) -> i1
-    %679 = comb.extract %676 from 2 {sv.namehint = "newCfg_2_x"} : (i8) -> i1
-    %680 = comb.extract %676 from 3 {sv.namehint = "newCfg_2_a"} : (i8) -> i2
-    %681 = comb.extract %676 from 7 {sv.namehint = "newCfg_2_l"} : (i8) -> i1
-    %682 = comb.and bin %520, %174, %673 : i1
-    %683 = comb.mux bin %682, %681, %reg_pmp_2_cfg_l : i1
-    %684 = comb.mux bin %682, %680, %reg_pmp_2_cfg_a : i2
-    %685 = comb.mux bin %682, %679, %reg_pmp_2_cfg_x : i1
-    %686 = comb.mux bin %682, %677, %reg_pmp_2_cfg_r : i1
-    %687 = comb.and bin %678, %677 {sv.namehint = "_reg_pmp_2_cfg_w_T"} : i1
-    %688 = comb.mux bin %682, %687, %reg_pmp_2_cfg_w : i1
-    %689 = comb.extract %reg_pmp_3_cfg_a from 1 : (i2) -> i1
-    %690 = comb.xor bin %689, %true : i1
-    %691 = comb.extract %reg_pmp_3_cfg_a from 0 : (i2) -> i1
-    %692 = comb.and bin %reg_pmp_3_cfg_l, %690, %691 : i1
-    %693 = comb.or bin %reg_pmp_2_cfg_l, %692 : i1
-    %694 = comb.xor bin %693, %true : i1
-    %695 = comb.and bin %520, %177, %694 : i1
-    %696 = comb.mux bin %695, %646, %reg_pmp_2_addr : i30
-    %697 = comb.xor bin %reg_pmp_3_cfg_l, %true : i1
-    %698 = comb.extract %188 from 24 : (i64) -> i8
-    %699 = comb.extract %192 from 24 : (i64) -> i8
-    %700 = comb.and bin %698, %699 {sv.namehint = "_newCfg_WIRE_3"} : i8
-    %701 = comb.extract %700 from 0 {sv.namehint = "newCfg_3_r"} : (i8) -> i1
-    %702 = comb.extract %700 from 1 {sv.namehint = "newCfg_3_w"} : (i8) -> i1
-    %703 = comb.extract %700 from 2 {sv.namehint = "newCfg_3_x"} : (i8) -> i1
-    %704 = comb.extract %700 from 3 {sv.namehint = "newCfg_3_a"} : (i8) -> i2
-    %705 = comb.extract %700 from 7 {sv.namehint = "newCfg_3_l"} : (i8) -> i1
-    %706 = comb.and bin %520, %174, %697 : i1
-    %707 = comb.mux bin %706, %705, %reg_pmp_3_cfg_l : i1
-    %708 = comb.mux bin %706, %704, %reg_pmp_3_cfg_a : i2
-    %709 = comb.mux bin %706, %703, %reg_pmp_3_cfg_x : i1
-    %710 = comb.mux bin %706, %701, %reg_pmp_3_cfg_r : i1
-    %711 = comb.and bin %702, %701 {sv.namehint = "_reg_pmp_3_cfg_w_T"} : i1
-    %712 = comb.mux bin %706, %711, %reg_pmp_3_cfg_w : i1
-    %713 = comb.extract %reg_pmp_4_cfg_a from 1 : (i2) -> i1
-    %714 = comb.xor bin %713, %true : i1
-    %715 = comb.extract %reg_pmp_4_cfg_a from 0 : (i2) -> i1
-    %716 = comb.and bin %reg_pmp_4_cfg_l, %714, %715 : i1
-    %717 = comb.or bin %reg_pmp_3_cfg_l, %716 : i1
-    %718 = comb.xor bin %717, %true : i1
-    %719 = comb.and bin %520, %178, %718 : i1
-    %720 = comb.mux bin %719, %646, %reg_pmp_3_addr : i30
-    %721 = comb.xor bin %reg_pmp_4_cfg_l, %true : i1
-    %722 = comb.extract %188 from 32 : (i64) -> i8
-    %723 = comb.extract %192 from 32 : (i64) -> i8
-    %724 = comb.and bin %722, %723 {sv.namehint = "_newCfg_WIRE_4"} : i8
-    %725 = comb.extract %724 from 0 {sv.namehint = "newCfg_4_r"} : (i8) -> i1
-    %726 = comb.extract %724 from 1 {sv.namehint = "newCfg_4_w"} : (i8) -> i1
-    %727 = comb.extract %724 from 2 {sv.namehint = "newCfg_4_x"} : (i8) -> i1
-    %728 = comb.extract %724 from 3 {sv.namehint = "newCfg_4_a"} : (i8) -> i2
-    %729 = comb.extract %724 from 7 {sv.namehint = "newCfg_4_l"} : (i8) -> i1
-    %730 = comb.and bin %520, %174, %721 : i1
-    %731 = comb.mux bin %730, %729, %reg_pmp_4_cfg_l : i1
-    %732 = comb.mux bin %730, %728, %reg_pmp_4_cfg_a : i2
-    %733 = comb.mux bin %730, %727, %reg_pmp_4_cfg_x : i1
-    %734 = comb.mux bin %730, %725, %reg_pmp_4_cfg_r : i1
-    %735 = comb.and bin %726, %725 {sv.namehint = "_reg_pmp_4_cfg_w_T"} : i1
-    %736 = comb.mux bin %730, %735, %reg_pmp_4_cfg_w : i1
-    %737 = comb.extract %reg_pmp_5_cfg_a from 1 : (i2) -> i1
-    %738 = comb.xor bin %737, %true : i1
-    %739 = comb.extract %reg_pmp_5_cfg_a from 0 : (i2) -> i1
-    %740 = comb.and bin %reg_pmp_5_cfg_l, %738, %739 : i1
-    %741 = comb.or bin %reg_pmp_4_cfg_l, %740 : i1
-    %742 = comb.xor bin %741, %true : i1
-    %743 = comb.and bin %520, %179, %742 : i1
-    %744 = comb.mux bin %743, %646, %reg_pmp_4_addr : i30
-    %745 = comb.xor bin %reg_pmp_5_cfg_l, %true : i1
-    %746 = comb.extract %188 from 40 : (i64) -> i8
-    %747 = comb.extract %192 from 40 : (i64) -> i8
-    %748 = comb.and bin %746, %747 {sv.namehint = "_newCfg_WIRE_5"} : i8
-    %749 = comb.extract %748 from 0 {sv.namehint = "newCfg_5_r"} : (i8) -> i1
-    %750 = comb.extract %748 from 1 {sv.namehint = "newCfg_5_w"} : (i8) -> i1
-    %751 = comb.extract %748 from 2 {sv.namehint = "newCfg_5_x"} : (i8) -> i1
-    %752 = comb.extract %748 from 3 {sv.namehint = "newCfg_5_a"} : (i8) -> i2
-    %753 = comb.extract %748 from 7 {sv.namehint = "newCfg_5_l"} : (i8) -> i1
-    %754 = comb.and bin %520, %174, %745 : i1
-    %755 = comb.mux bin %754, %753, %reg_pmp_5_cfg_l : i1
-    %756 = comb.mux bin %754, %752, %reg_pmp_5_cfg_a : i2
-    %757 = comb.mux bin %754, %751, %reg_pmp_5_cfg_x : i1
-    %758 = comb.mux bin %754, %749, %reg_pmp_5_cfg_r : i1
-    %759 = comb.and bin %750, %749 {sv.namehint = "_reg_pmp_5_cfg_w_T"} : i1
-    %760 = comb.mux bin %754, %759, %reg_pmp_5_cfg_w : i1
-    %761 = comb.extract %reg_pmp_6_cfg_a from 1 : (i2) -> i1
-    %762 = comb.xor bin %761, %true : i1
-    %763 = comb.extract %reg_pmp_6_cfg_a from 0 : (i2) -> i1
-    %764 = comb.and bin %reg_pmp_6_cfg_l, %762, %763 : i1
-    %765 = comb.or bin %reg_pmp_5_cfg_l, %764 : i1
-    %766 = comb.xor bin %765, %true : i1
-    %767 = comb.and bin %520, %180, %766 : i1
-    %768 = comb.mux bin %767, %646, %reg_pmp_5_addr : i30
-    %769 = comb.xor bin %reg_pmp_6_cfg_l, %true : i1
-    %770 = comb.extract %188 from 48 : (i64) -> i8
-    %771 = comb.extract %192 from 48 : (i64) -> i8
-    %772 = comb.and bin %770, %771 {sv.namehint = "_newCfg_WIRE_6"} : i8
-    %773 = comb.extract %772 from 0 {sv.namehint = "newCfg_6_r"} : (i8) -> i1
-    %774 = comb.extract %772 from 1 {sv.namehint = "newCfg_6_w"} : (i8) -> i1
-    %775 = comb.extract %772 from 2 {sv.namehint = "newCfg_6_x"} : (i8) -> i1
-    %776 = comb.extract %772 from 3 {sv.namehint = "newCfg_6_a"} : (i8) -> i2
-    %777 = comb.extract %772 from 7 {sv.namehint = "newCfg_6_l"} : (i8) -> i1
-    %778 = comb.and bin %520, %174, %769 : i1
-    %779 = comb.mux bin %778, %777, %reg_pmp_6_cfg_l : i1
-    %780 = comb.mux bin %778, %776, %reg_pmp_6_cfg_a : i2
-    %781 = comb.mux bin %778, %775, %reg_pmp_6_cfg_x : i1
-    %782 = comb.mux bin %778, %773, %reg_pmp_6_cfg_r : i1
-    %783 = comb.and bin %774, %773 {sv.namehint = "_reg_pmp_6_cfg_w_T"} : i1
-    %784 = comb.mux bin %778, %783, %reg_pmp_6_cfg_w : i1
-    %785 = comb.extract %reg_pmp_7_cfg_a from 1 : (i2) -> i1
-    %786 = comb.xor bin %785, %true : i1
-    %787 = comb.extract %reg_pmp_7_cfg_a from 0 : (i2) -> i1
-    %788 = comb.and bin %reg_pmp_7_cfg_l, %786, %787 : i1
-    %789 = comb.or bin %reg_pmp_6_cfg_l, %788 : i1
-    %790 = comb.xor bin %789, %true : i1
-    %791 = comb.and bin %520, %181, %790 : i1
-    %792 = comb.mux bin %791, %646, %reg_pmp_6_addr : i30
-    %793 = comb.xor bin %reg_pmp_7_cfg_l, %true : i1
-    %794 = comb.extract %188 from 56 : (i64) -> i8
-    %795 = comb.extract %192 from 56 : (i64) -> i8
-    %796 = comb.and bin %794, %795 {sv.namehint = "_newCfg_T_49"} : i8
-    %797 = comb.extract %796 from 0 {sv.namehint = "newCfg_7_r"} : (i8) -> i1
-    %798 = comb.extract %796 from 1 {sv.namehint = "newCfg_7_w"} : (i8) -> i1
-    %799 = comb.extract %796 from 2 {sv.namehint = "newCfg_7_x"} : (i8) -> i1
-    %800 = comb.extract %796 from 3 {sv.namehint = "newCfg_7_a"} : (i8) -> i2
-    %801 = comb.extract %796 from 7 {sv.namehint = "newCfg_7_l"} : (i8) -> i1
-    %802 = comb.and bin %520, %174, %793 : i1
-    %803 = comb.mux bin %802, %801, %reg_pmp_7_cfg_l : i1
-    %804 = comb.mux bin %802, %800, %reg_pmp_7_cfg_a : i2
-    %805 = comb.mux bin %802, %799, %reg_pmp_7_cfg_x : i1
-    %806 = comb.mux bin %802, %797, %reg_pmp_7_cfg_r : i1
-    %807 = comb.and bin %798, %797 {sv.namehint = "_reg_pmp_7_cfg_w_T"} : i1
-    %808 = comb.mux bin %802, %807, %reg_pmp_7_cfg_w : i1
-    %809 = comb.or bin %reg_pmp_7_cfg_l, %788 : i1
-    %810 = comb.xor bin %809, %true : i1
-    %811 = comb.and bin %520, %182, %810 : i1
-    %812 = comb.mux bin %811, %646, %reg_pmp_7_addr : i30
-    %813 = comb.and bin %193, %c520_i64 {sv.namehint = "_reg_custom_0_T"} : i64
-    %814 = comb.and bin %reg_custom_0, %c-521_i64 {sv.namehint = "_reg_custom_0_T_2"} : i64
-    %815 = comb.or bin %813, %814 {sv.namehint = "_reg_custom_0_T_3"} : i64
-    %816 = comb.and bin %520, %183 : i1
-    %817 = comb.mux bin %816, %815, %reg_custom_0 : i64
-    hw.output %516, %329, %331, %339, %342, %457, %370, %371, %reg_debug, %reg_wfi, %372, %io_status_dprv_REG, %456, %25, %60, %54, %reg_bp_0_control_action, %reg_bp_0_control_tmatch, %reg_bp_0_control_x, %reg_bp_0_control_w, %reg_bp_0_control_r, %reg_bp_0_address, %reg_pmp_0_cfg_l, %reg_pmp_0_cfg_a, %reg_pmp_0_cfg_x, %reg_pmp_0_cfg_w, %reg_pmp_0_cfg_r, %reg_pmp_0_addr, %69, %reg_pmp_1_cfg_l, %reg_pmp_1_cfg_a, %reg_pmp_1_cfg_x, %reg_pmp_1_cfg_w, %reg_pmp_1_cfg_r, %reg_pmp_1_addr, %78, %reg_pmp_2_cfg_l, %reg_pmp_2_cfg_a, %reg_pmp_2_cfg_x, %reg_pmp_2_cfg_w, %reg_pmp_2_cfg_r, %reg_pmp_2_addr, %87, %reg_pmp_3_cfg_l, %reg_pmp_3_cfg_a, %reg_pmp_3_cfg_x, %reg_pmp_3_cfg_w, %reg_pmp_3_cfg_r, %reg_pmp_3_addr, %96, %reg_pmp_4_cfg_l, %reg_pmp_4_cfg_a, %reg_pmp_4_cfg_x, %reg_pmp_4_cfg_w, %reg_pmp_4_cfg_r, %reg_pmp_4_addr, %105, %reg_pmp_5_cfg_l, %reg_pmp_5_cfg_a, %reg_pmp_5_cfg_x, %reg_pmp_5_cfg_w, %reg_pmp_5_cfg_r, %reg_pmp_5_addr, %114, %reg_pmp_6_cfg_l, %reg_pmp_6_cfg_a, %reg_pmp_6_cfg_x, %reg_pmp_6_cfg_w, %reg_pmp_6_cfg_r, %reg_pmp_6_addr, %123, %reg_pmp_7_cfg_l, %reg_pmp_7_cfg_a, %reg_pmp_7_cfg_x, %reg_pmp_7_cfg_w, %reg_pmp_7_cfg_r, %reg_pmp_7_addr, %132, %1, %reg_custom_0 : i64, i1, i1, i1, i1, i1, i1, i1, i1, i1, i32, i2, i34, i64, i1, i64, i1, i2, i1, i1, i1, i33, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i64
+    %420 = comb.extract %io_pc from 1 : (i34) -> i33
+    %421 = comb.concat %420, %false {sv.namehint = "epc"} : i33, i1
+    %422 = comb.and bin %391, %371, %345 : i1
+    %423 = comb.or %422, %reg_debug : i1
+    %424 = comb.mux bin %422, %421, %reg_dpc : i34
+    %425 = comb.mux bin %368, %c-2_i2, %c1_i2 {sv.namehint = "_reg_dcsr_cause_T"} : i2
+    %426 = comb.mux bin %366, %c-1_i2, %425 {sv.namehint = "_reg_dcsr_cause_T_1"} : i2
+    %427 = comb.concat %false, %426 : i1, i2
+    %428 = comb.mux bin %reg_singleStepped, %c-4_i3, %427 {sv.namehint = "_reg_dcsr_cause_T_2"} : i3
+    %429 = comb.mux bin %422, %428, %reg_dcsr_cause : i3
+    %430 = comb.xor %391, %true : i1
+    %431 = comb.or %430, %371 : i1
+    %432 = comb.mux bin %431, %reg_mepc, %421 : i34
+    %433 = comb.xor %391, %true : i1
+    %434 = comb.or %433, %371 : i1
+    %435 = comb.mux bin %434, %reg_mcause, %362 : i64
+    %436 = comb.xor %391, %true : i1
+    %437 = comb.or %436, %371 : i1
+    %438 = comb.mux bin %437, %reg_mtval, %io_tval : i34
+    %439 = comb.xor %391, %true : i1
+    %440 = comb.or %439, %371 : i1
+    %441 = comb.mux bin %440, %reg_mstatus_mpie, %reg_mstatus_mie : i1
+    %442 = comb.xor %391, %true : i1
+    %443 = comb.or %442, %371 : i1
+    %444 = comb.xor %391, %true : i1
+    %445 = comb.or %444, %371 : i1
+    %446 = comb.and %445, %reg_mstatus_mie : i1
+    %447 = comb.extract %io_rw_addr from 10 : (i12) -> i1
+    %448 = comb.extract %io_rw_addr from 7 : (i12) -> i1
+    %449 = comb.and bin %447, %448 : i1
+    %450 = comb.and bin %233, %449 : i1
+    %451 = comb.xor %450, %true : i1
+    %452 = comb.and %451, %423 : i1
+    %453 = comb.xor %150, %true : i1
+    %454 = comb.concat %453, %true {sv.namehint = "_io_evec_T_7"} : i1, i1
+    %455 = comb.or bin %167, %454 : i2
+    %456 = comb.concat %166, %455 {sv.namehint = "_io_evec_T_8"} : i32, i2
+    %457 = comb.xor bin %456, %c-1_i34 {sv.namehint = "_io_evec_T_9"} : i34
+    %458 = comb.xor %233, %true : i1
+    %459 = comb.or %458, %449 : i1
+    %460 = comb.mux bin %459, %446, %reg_mstatus_mpie : i1
+    %461 = comb.xor %449, %true : i1
+    %462 = comb.and %233, %461 : i1
+    %463 = comb.or %462, %441 : i1
+    %464 = comb.xor %233, %true : i1
+    %465 = comb.or %464, %449 : i1
+    %466 = comb.and %465, %443 : i1
+    %467 = comb.mux bin %466, %reg_mstatus_mpp, %c-1_i2 : i2
+    %468 = comb.xor %150, %true : i1
+    %469 = comb.concat %468, %true {sv.namehint = "_io_evec_T_17"} : i1, i1
+    %470 = comb.or bin %154, %469 : i2
+    %471 = comb.concat %153, %470 {sv.namehint = "_io_evec_T_18"} : i32, i2
+    %472 = comb.xor bin %471, %c-1_i34 {sv.namehint = "_io_evec_T_19"} : i34
+    %473 = comb.mux bin %449, %457, %472 : i34
+    %474 = comb.mux bin %233, %473, %386 {sv.namehint = "io_evec"} : i34
+    %475 = comb.or bin %reg_wfi, %io_status_cease_r {sv.namehint = "io_csr_stall"} : i1
+    %io_status_cease_r = seq.firreg %476 clock %clock reset sync %reset, %false {firrtl.random_init_start = 2358 : ui64, sv.namehint = "io_status_cease"} : i1
+    %476 = comb.or %234, %io_status_cease_r : i1
+    %477 = comb.mux bin %175, %145, %c0_i64 {sv.namehint = "_io_rw_rdata_T_1"} : i64
+    %478 = comb.mux bin %176, %148, %c0_i64 {sv.namehint = "_io_rw_rdata_T_2"} : i64
+    %479 = comb.mux bin %177, %reg_misa, %c0_i64 {sv.namehint = "_io_rw_rdata_T_4"} : i64
+    %480 = comb.mux bin %178, %138, %c0_i64 {sv.namehint = "_io_rw_rdata_T_5"} : i64
+    %481 = comb.mux bin %179, %144, %c0_i64 {sv.namehint = "_io_rw_rdata_T_6"} : i64
+    %482 = comb.mux bin %180, %26, %c0_i16 {sv.namehint = "_io_rw_rdata_T_7"} : i16
+    %483 = comb.mux bin %181, %reg_mie, %c0_i64 {sv.namehint = "_io_rw_rdata_T_8"} : i64
+    %484 = comb.mux bin %182, %reg_mscratch, %c0_i64 {sv.namehint = "_io_rw_rdata_T_9"} : i64
+    %485 = comb.mux bin %183, %160, %c0_i64 {sv.namehint = "_io_rw_rdata_T_10"} : i64
+    %486 = comb.mux bin %184, %163, %c0_i64 {sv.namehint = "_io_rw_rdata_T_11"} : i64
+    %487 = comb.mux bin %185, %reg_mcause, %c0_i64 {sv.namehint = "_io_rw_rdata_T_12"} : i64
+    %488 = comb.mux bin %186, %164, %c0_i32 {sv.namehint = "_io_rw_rdata_T_14"} : i32
+    %489 = comb.mux bin %187, %173, %c0_i64 {sv.namehint = "_io_rw_rdata_T_15"} : i64
+    %490 = comb.mux bin %188, %reg_dscratch, %c0_i64 {sv.namehint = "_io_rw_rdata_T_16"} : i64
+    %491 = comb.mux bin %189, %reg_mcountinhibit, %c0_i3 {sv.namehint = "_io_rw_rdata_T_17"} : i3
+    %492 = comb.mux bin %190, %25, %c0_i64 {sv.namehint = "_io_rw_rdata_T_18"} : i64
+    %493 = comb.mux bin %191, %13, %c0_i64 {sv.namehint = "_io_rw_rdata_T_19"} : i64
+    %494 = comb.mux bin %192, %174, %c0_i64 {sv.namehint = "_io_rw_rdata_T_78"} : i64
+    %495 = comb.mux bin %193, %reg_pmp_0_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_80"} : i30
+    %496 = comb.mux bin %194, %reg_pmp_1_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_81"} : i30
+    %497 = comb.mux bin %195, %reg_pmp_2_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_82"} : i30
+    %498 = comb.mux bin %196, %reg_pmp_3_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_83"} : i30
+    %499 = comb.mux bin %197, %reg_pmp_4_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_84"} : i30
+    %500 = comb.mux bin %198, %reg_pmp_5_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_85"} : i30
+    %501 = comb.mux bin %199, %reg_pmp_6_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_86"} : i30
+    %502 = comb.mux bin %200, %reg_pmp_7_addr, %c0_i30 {sv.namehint = "_io_rw_rdata_T_87"} : i30
+    %503 = comb.mux bin %201, %reg_custom_0, %c0_i64 {sv.namehint = "_io_rw_rdata_T_96"} : i64
+    %504 = comb.mux bin %203, %c538447876_i64, %c0_i64 {sv.namehint = "_io_rw_rdata_T_99"} : i64
+    %505 = comb.or bin %477, %478, %479, %480, %481 {sv.namehint = "_io_rw_rdata_T_105"} : i64
+    %506 = comb.extract %505 from 16 : (i64) -> i48
+    %507 = comb.extract %505 from 0 : (i64) -> i16
+    %508 = comb.or bin %507, %482 : i16
+    %509 = comb.concat %506, %508 {sv.namehint = "_io_rw_rdata_T_106"} : i48, i16
+    %510 = comb.or bin %509, %483, %484, %485, %486, %487 {sv.namehint = "_io_rw_rdata_T_111"} : i64
+    %511 = comb.extract %510 from 32 : (i64) -> i32
+    %512 = comb.extract %510 from 0 : (i64) -> i32
+    %513 = comb.or bin %512, %488 : i32
+    %514 = comb.concat %511, %513 {sv.namehint = "_io_rw_rdata_T_113"} : i32, i32
+    %515 = comb.or bin %514, %489, %490 {sv.namehint = "_io_rw_rdata_T_115"} : i64
+    %516 = comb.extract %515 from 3 : (i64) -> i61
+    %517 = comb.extract %515 from 0 : (i64) -> i3
+    %518 = comb.or bin %517, %491 : i3
+    %519 = comb.concat %516, %518 {sv.namehint = "_io_rw_rdata_T_116"} : i61, i3
+    %520 = comb.or bin %519, %492, %493, %494 {sv.namehint = "_io_rw_rdata_T_178"} : i64
+    %521 = comb.extract %520 from 30 : (i64) -> i34
+    %522 = comb.extract %520 from 0 : (i64) -> i30
+    %523 = comb.or bin %522, %495, %496, %497, %498, %499, %500, %501, %502 : i30
+    %524 = comb.extract %523 from 1 : (i30) -> i29
+    %525 = comb.extract %523 from 0 : (i30) -> i1
+    %526 = comb.or %525, %202 : i1
+    %527 = comb.concat %521, %524, %526 : i34, i29, i1
+    %528 = comb.or %503, %504, %527 {sv.namehint = "_io_rw_rdata_T_198"} : i64
+    %529 = comb.icmp bin eq %io_rw_cmd, %c-2_i3 {sv.namehint = "_csr_wen_T"} : i3
+    %530 = comb.icmp bin eq %io_rw_cmd, %c-1_i3 {sv.namehint = "_csr_wen_T_1"} : i3
+    %531 = comb.icmp bin eq %io_rw_cmd, %c-3_i3 {sv.namehint = "_csr_wen_T_2"} : i3
+    %532 = comb.or bin %529, %530, %531 {sv.namehint = "csr_wen"} : i1
+    %533 = comb.extract %211 from 3 {sv.namehint = "new_mstatus_mie"} : (i64) -> i1
+    %534 = comb.extract %211 from 7 {sv.namehint = "new_mstatus_mpie"} : (i64) -> i1
+    %535 = comb.and bin %532, %178 : i1
+    %536 = comb.mux bin %535, %533, %460 : i1
+    %537 = comb.mux bin %535, %534, %463 : i1
+    %538 = comb.extract %206 from 5 : (i64) -> i1
+    %539 = comb.extract %210 from 5 : (i64) -> i1
+    %540 = comb.and bin %538, %539 {sv.namehint = "f"} : i1
+    %541 = comb.extract %io_pc from 1 : (i34) -> i1
+    %542 = comb.xor bin %541, %true : i1
+    %543 = comb.extract %206 from 2 : (i64) -> i1
+    %544 = comb.extract %210 from 2 : (i64) -> i1
+    %545 = comb.and bin %543, %544 : i1
+    %546 = comb.or bin %542, %545 : i1
+    %547 = comb.xor bin %211, %c-1_i64 {sv.namehint = "_reg_misa_T"} : i64
+    %548 = comb.concat %540, %c0_i3 {sv.namehint = "_reg_misa_T_2"} : i1, i3
+    %549 = comb.extract %547 from 4 : (i64) -> i60
+    %550 = comb.extract %547 from 0 : (i64) -> i4
+    %551 = comb.or bin %550, %548 : i4
+    %552 = comb.concat %549, %551 {sv.namehint = "_reg_misa_T_3"} : i60, i4
+    %553 = comb.xor bin %552, %c-1_i64 {sv.namehint = "_reg_misa_T_4"} : i64
+    %554 = comb.and bin %553, %c4101_i64 {sv.namehint = "_reg_misa_T_5"} : i64
+    %555 = comb.and bin %reg_misa, %c-4102_i64 {sv.namehint = "_reg_misa_T_7"} : i64
+    %556 = comb.or bin %554, %555 {sv.namehint = "_reg_misa_T_8"} : i64
+    %557 = comb.and bin %532, %177, %546 : i1
+    %558 = comb.mux bin %557, %556, %reg_misa : i64
+    %559 = comb.extract %206 from 0 : (i64) -> i16
+    %560 = comb.extract %210 from 0 : (i64) -> i16
+    %561 = comb.and bin %559, %560, %c2184_i16 : i16
+    %562 = comb.concat %c0_i48, %561 : i48, i16
+    %563 = comb.and bin %532, %181 : i1
+    %564 = comb.mux bin %563, %562, %reg_mie : i64
+    %565 = comb.extract %211 from 1 : (i64) -> i33
+    %566 = comb.concat %565, %false : i33, i1
+    %567 = comb.and bin %532, %183 : i1
+    %568 = comb.mux bin %567, %566, %432 : i34
+    %569 = comb.and bin %532, %182 : i1
+    %570 = comb.mux bin %569, %211, %reg_mscratch : i64
+    %571 = comb.extract %206 from 0 : (i64) -> i32
+    %572 = comb.extract %210 from 0 : (i64) -> i32
+    %573 = comb.and bin %571, %572 {sv.namehint = "_new_dcsr_WIRE"} : i32
+    %574 = comb.and bin %532, %179 : i1
+    %575 = comb.mux bin %574, %573, %reg_mtvec : i32
+    %576 = comb.and bin %211, %c-9223372036854775793_i64 {sv.namehint = "_reg_mcause_T"} : i64
+    %577 = comb.and bin %532, %185 : i1
+    %578 = comb.mux bin %577, %576, %435 : i64
+    %579 = comb.extract %206 from 0 : (i64) -> i34
+    %580 = comb.extract %210 from 0 : (i64) -> i34
+    %581 = comb.and bin %579, %580 {sv.namehint = "_lo_T_1"} : i34
+    %582 = comb.and bin %532, %184 : i1
+    %583 = comb.mux bin %582, %581, %438 : i34
+    %584 = comb.extract %206 from 0 : (i64) -> i3
+    %585 = comb.extract %210 from 0 : (i64) -> i3
+    %586 = comb.and bin %584, %585, %c-3_i3 : i3
+    %587 = comb.and bin %532, %189 : i1
+    %588 = comb.mux bin %587, %586, %reg_mcountinhibit : i3
+    %589 = comb.extract %206 from 0 : (i64) -> i6
+    %590 = comb.extract %210 from 0 : (i64) -> i6
+    %591 = comb.and bin %589, %590 : i6
+    %592 = comb.and bin %532, %190 : i1
+    %593 = comb.mux bin %592, %591, %20 : i6
+    %594 = comb.extract %206 from 6 : (i64) -> i58
+    %595 = comb.extract %210 from 6 : (i64) -> i58
+    %596 = comb.and bin %594, %595 {sv.namehint = "_hi_T"} : i58
+    %597 = comb.mux bin %592, %596, %24 : i58
+    %598 = comb.and bin %532, %191 : i1
+    %599 = comb.mux bin %598, %591, %8 : i6
+    %600 = comb.and bin %594, %595 {sv.namehint = "_hi_T_1"} : i58
+    %601 = comb.mux bin %598, %600, %12 : i58
+    %602 = comb.extract %573 from 2 {sv.namehint = "new_dcsr_step"} : (i32) -> i1
+    %603 = comb.extract %573 from 15 {sv.namehint = "new_dcsr_ebreakm"} : (i32) -> i1
+    %604 = comb.and bin %532, %186 : i1
+    %605 = comb.mux bin %604, %602, %reg_dcsr_step : i1
+    %606 = comb.mux bin %604, %603, %reg_dcsr_ebreakm : i1
+    %607 = comb.extract %211 from 1 : (i64) -> i33
+    %608 = comb.concat %607, %false : i33, i1
+    %609 = comb.and bin %532, %187 : i1
+    %610 = comb.mux bin %609, %608, %424 : i34
+    %611 = comb.and bin %532, %188 : i1
+    %612 = comb.mux bin %611, %211, %reg_dscratch : i64
+    %613 = comb.xor bin %reg_bp_0_control_dmode, %true : i1
+    %614 = comb.or bin %613, %reg_debug : i1
+    %615 = comb.extract %206 from 0 : (i64) -> i33
+    %616 = comb.extract %210 from 0 : (i64) -> i33
+    %617 = comb.and bin %615, %616 : i33
+    %618 = comb.and bin %532, %614, %176 : i1
+    %619 = comb.mux bin %618, %617, %reg_bp_0_address : i33
+    %620 = comb.extract %211 from 0 {sv.namehint = "_reg_bp_0_control_T"} : (i64) -> i1
+    %621 = comb.extract %211 from 1 {sv.namehint = "_reg_bp_0_control_T_1"} : (i64) -> i1
+    %622 = comb.extract %211 from 2 {sv.namehint = "_reg_bp_0_control_T_2"} : (i64) -> i1
+    %623 = comb.extract %211 from 7 {sv.namehint = "_reg_bp_0_control_T_7"} : (i64) -> i2
+    %624 = comb.and bin %532, %614, %175 : i1
+    %625 = comb.mux bin %624, %623, %reg_bp_0_control_tmatch : i2
+    %626 = comb.mux bin %624, %622, %reg_bp_0_control_x : i1
+    %627 = comb.mux bin %624, %621, %reg_bp_0_control_w : i1
+    %628 = comb.mux bin %624, %620, %reg_bp_0_control_r : i1
+    %629 = comb.concat %reg_bp_0_control_dmode, %c4398046511104_i46, %reg_bp_0_control_action : i1, i46, i1
+    %630 = comb.mux %204, %629, %c0_i48 {sv.namehint = "_newBPC_T_2"} : i48
+    %631 = comb.extract %io_rw_wdata from 12 : (i64) -> i48
+    %632 = comb.or %630, %631 {sv.namehint = "_newBPC_T_3"} : i48
+    %633 = comb.icmp bin eq %207, %c-1_i2 {sv.namehint = "_newBPC_T_5"} : i2
+    %634 = comb.extract %io_rw_wdata from 12 : (i64) -> i48
+    %635 = comb.mux %633, %634, %c0_i48 {sv.namehint = "_newBPC_T_6"} : i48
+    %636 = comb.xor %635, %c-1_i48 {sv.namehint = "_newBPC_T_7"} : i48
+    %637 = comb.and %632, %636 {sv.namehint = "_newBPC_T_8"} : i48
+    %638 = comb.extract %637 from 0 {sv.namehint = "newBPC_action"} : (i48) -> i1
+    %639 = comb.extract %637 from 47 {sv.namehint = "newBPC_dmode"} : (i48) -> i1
+    %640 = comb.and bin %639, %reg_debug {sv.namehint = "dMode"} : i1
+    %641 = comb.mux bin %624, %640, %reg_bp_0_control_dmode : i1
+    %642 = comb.and %640, %638 : i1
+    %643 = comb.mux bin %624, %642, %reg_bp_0_control_action : i1
+    %644 = comb.xor bin %reg_pmp_0_cfg_l, %true : i1
+    %645 = comb.extract %206 from 0 : (i64) -> i8
+    %646 = comb.extract %210 from 0 : (i64) -> i8
+    %647 = comb.and bin %645, %646 {sv.namehint = "_newCfg_WIRE"} : i8
+    %648 = comb.extract %647 from 0 {sv.namehint = "newCfg_r"} : (i8) -> i1
+    %649 = comb.extract %647 from 1 {sv.namehint = "newCfg_w"} : (i8) -> i1
+    %650 = comb.extract %647 from 2 {sv.namehint = "newCfg_x"} : (i8) -> i1
+    %651 = comb.extract %647 from 3 {sv.namehint = "newCfg_a"} : (i8) -> i2
+    %652 = comb.extract %647 from 7 {sv.namehint = "newCfg_l"} : (i8) -> i1
+    %653 = comb.and bin %532, %192, %644 : i1
+    %654 = comb.mux bin %653, %652, %reg_pmp_0_cfg_l : i1
+    %655 = comb.mux bin %653, %651, %reg_pmp_0_cfg_a : i2
+    %656 = comb.mux bin %653, %650, %reg_pmp_0_cfg_x : i1
+    %657 = comb.mux bin %653, %648, %reg_pmp_0_cfg_r : i1
+    %658 = comb.and bin %649, %648 {sv.namehint = "_reg_pmp_0_cfg_w_T"} : i1
+    %659 = comb.mux bin %653, %658, %reg_pmp_0_cfg_w : i1
+    %660 = comb.extract %reg_pmp_1_cfg_a from 1 : (i2) -> i1
+    %661 = comb.xor bin %660, %true : i1
+    %662 = comb.extract %reg_pmp_1_cfg_a from 0 : (i2) -> i1
+    %663 = comb.and bin %reg_pmp_1_cfg_l, %661, %662 : i1
+    %664 = comb.or bin %reg_pmp_0_cfg_l, %663 : i1
+    %665 = comb.xor bin %664, %true : i1
+    %666 = comb.extract %206 from 0 : (i64) -> i30
+    %667 = comb.extract %210 from 0 : (i64) -> i30
+    %668 = comb.and bin %666, %667 : i30
+    %669 = comb.and bin %532, %193, %665 : i1
+    %670 = comb.mux bin %669, %668, %reg_pmp_0_addr : i30
+    %671 = comb.xor bin %reg_pmp_1_cfg_l, %true : i1
+    %672 = comb.extract %206 from 8 : (i64) -> i8
+    %673 = comb.extract %210 from 8 : (i64) -> i8
+    %674 = comb.and bin %672, %673 {sv.namehint = "_newCfg_WIRE_1"} : i8
+    %675 = comb.extract %674 from 0 {sv.namehint = "newCfg_1_r"} : (i8) -> i1
+    %676 = comb.extract %674 from 1 {sv.namehint = "newCfg_1_w"} : (i8) -> i1
+    %677 = comb.extract %674 from 2 {sv.namehint = "newCfg_1_x"} : (i8) -> i1
+    %678 = comb.extract %674 from 3 {sv.namehint = "newCfg_1_a"} : (i8) -> i2
+    %679 = comb.extract %674 from 7 {sv.namehint = "newCfg_1_l"} : (i8) -> i1
+    %680 = comb.and bin %532, %192, %671 : i1
+    %681 = comb.mux bin %680, %679, %reg_pmp_1_cfg_l : i1
+    %682 = comb.mux bin %680, %678, %reg_pmp_1_cfg_a : i2
+    %683 = comb.mux bin %680, %677, %reg_pmp_1_cfg_x : i1
+    %684 = comb.mux bin %680, %675, %reg_pmp_1_cfg_r : i1
+    %685 = comb.and bin %676, %675 {sv.namehint = "_reg_pmp_1_cfg_w_T"} : i1
+    %686 = comb.mux bin %680, %685, %reg_pmp_1_cfg_w : i1
+    %687 = comb.extract %reg_pmp_2_cfg_a from 1 : (i2) -> i1
+    %688 = comb.xor bin %687, %true : i1
+    %689 = comb.extract %reg_pmp_2_cfg_a from 0 : (i2) -> i1
+    %690 = comb.and bin %reg_pmp_2_cfg_l, %688, %689 : i1
+    %691 = comb.or bin %reg_pmp_1_cfg_l, %690 : i1
+    %692 = comb.xor bin %691, %true : i1
+    %693 = comb.and bin %532, %194, %692 : i1
+    %694 = comb.mux bin %693, %668, %reg_pmp_1_addr : i30
+    %695 = comb.xor bin %reg_pmp_2_cfg_l, %true : i1
+    %696 = comb.extract %206 from 16 : (i64) -> i8
+    %697 = comb.extract %210 from 16 : (i64) -> i8
+    %698 = comb.and bin %696, %697 {sv.namehint = "_newCfg_WIRE_2"} : i8
+    %699 = comb.extract %698 from 0 {sv.namehint = "newCfg_2_r"} : (i8) -> i1
+    %700 = comb.extract %698 from 1 {sv.namehint = "newCfg_2_w"} : (i8) -> i1
+    %701 = comb.extract %698 from 2 {sv.namehint = "newCfg_2_x"} : (i8) -> i1
+    %702 = comb.extract %698 from 3 {sv.namehint = "newCfg_2_a"} : (i8) -> i2
+    %703 = comb.extract %698 from 7 {sv.namehint = "newCfg_2_l"} : (i8) -> i1
+    %704 = comb.and bin %532, %192, %695 : i1
+    %705 = comb.mux bin %704, %703, %reg_pmp_2_cfg_l : i1
+    %706 = comb.mux bin %704, %702, %reg_pmp_2_cfg_a : i2
+    %707 = comb.mux bin %704, %701, %reg_pmp_2_cfg_x : i1
+    %708 = comb.mux bin %704, %699, %reg_pmp_2_cfg_r : i1
+    %709 = comb.and bin %700, %699 {sv.namehint = "_reg_pmp_2_cfg_w_T"} : i1
+    %710 = comb.mux bin %704, %709, %reg_pmp_2_cfg_w : i1
+    %711 = comb.extract %reg_pmp_3_cfg_a from 1 : (i2) -> i1
+    %712 = comb.xor bin %711, %true : i1
+    %713 = comb.extract %reg_pmp_3_cfg_a from 0 : (i2) -> i1
+    %714 = comb.and bin %reg_pmp_3_cfg_l, %712, %713 : i1
+    %715 = comb.or bin %reg_pmp_2_cfg_l, %714 : i1
+    %716 = comb.xor bin %715, %true : i1
+    %717 = comb.and bin %532, %195, %716 : i1
+    %718 = comb.mux bin %717, %668, %reg_pmp_2_addr : i30
+    %719 = comb.xor bin %reg_pmp_3_cfg_l, %true : i1
+    %720 = comb.extract %206 from 24 : (i64) -> i8
+    %721 = comb.extract %210 from 24 : (i64) -> i8
+    %722 = comb.and bin %720, %721 {sv.namehint = "_newCfg_WIRE_3"} : i8
+    %723 = comb.extract %722 from 0 {sv.namehint = "newCfg_3_r"} : (i8) -> i1
+    %724 = comb.extract %722 from 1 {sv.namehint = "newCfg_3_w"} : (i8) -> i1
+    %725 = comb.extract %722 from 2 {sv.namehint = "newCfg_3_x"} : (i8) -> i1
+    %726 = comb.extract %722 from 3 {sv.namehint = "newCfg_3_a"} : (i8) -> i2
+    %727 = comb.extract %722 from 7 {sv.namehint = "newCfg_3_l"} : (i8) -> i1
+    %728 = comb.and bin %532, %192, %719 : i1
+    %729 = comb.mux bin %728, %727, %reg_pmp_3_cfg_l : i1
+    %730 = comb.mux bin %728, %726, %reg_pmp_3_cfg_a : i2
+    %731 = comb.mux bin %728, %725, %reg_pmp_3_cfg_x : i1
+    %732 = comb.mux bin %728, %723, %reg_pmp_3_cfg_r : i1
+    %733 = comb.and bin %724, %723 {sv.namehint = "_reg_pmp_3_cfg_w_T"} : i1
+    %734 = comb.mux bin %728, %733, %reg_pmp_3_cfg_w : i1
+    %735 = comb.extract %reg_pmp_4_cfg_a from 1 : (i2) -> i1
+    %736 = comb.xor bin %735, %true : i1
+    %737 = comb.extract %reg_pmp_4_cfg_a from 0 : (i2) -> i1
+    %738 = comb.and bin %reg_pmp_4_cfg_l, %736, %737 : i1
+    %739 = comb.or bin %reg_pmp_3_cfg_l, %738 : i1
+    %740 = comb.xor bin %739, %true : i1
+    %741 = comb.and bin %532, %196, %740 : i1
+    %742 = comb.mux bin %741, %668, %reg_pmp_3_addr : i30
+    %743 = comb.xor bin %reg_pmp_4_cfg_l, %true : i1
+    %744 = comb.extract %206 from 32 : (i64) -> i8
+    %745 = comb.extract %210 from 32 : (i64) -> i8
+    %746 = comb.and bin %744, %745 {sv.namehint = "_newCfg_WIRE_4"} : i8
+    %747 = comb.extract %746 from 0 {sv.namehint = "newCfg_4_r"} : (i8) -> i1
+    %748 = comb.extract %746 from 1 {sv.namehint = "newCfg_4_w"} : (i8) -> i1
+    %749 = comb.extract %746 from 2 {sv.namehint = "newCfg_4_x"} : (i8) -> i1
+    %750 = comb.extract %746 from 3 {sv.namehint = "newCfg_4_a"} : (i8) -> i2
+    %751 = comb.extract %746 from 7 {sv.namehint = "newCfg_4_l"} : (i8) -> i1
+    %752 = comb.and bin %532, %192, %743 : i1
+    %753 = comb.mux bin %752, %751, %reg_pmp_4_cfg_l : i1
+    %754 = comb.mux bin %752, %750, %reg_pmp_4_cfg_a : i2
+    %755 = comb.mux bin %752, %749, %reg_pmp_4_cfg_x : i1
+    %756 = comb.mux bin %752, %747, %reg_pmp_4_cfg_r : i1
+    %757 = comb.and bin %748, %747 {sv.namehint = "_reg_pmp_4_cfg_w_T"} : i1
+    %758 = comb.mux bin %752, %757, %reg_pmp_4_cfg_w : i1
+    %759 = comb.extract %reg_pmp_5_cfg_a from 1 : (i2) -> i1
+    %760 = comb.xor bin %759, %true : i1
+    %761 = comb.extract %reg_pmp_5_cfg_a from 0 : (i2) -> i1
+    %762 = comb.and bin %reg_pmp_5_cfg_l, %760, %761 : i1
+    %763 = comb.or bin %reg_pmp_4_cfg_l, %762 : i1
+    %764 = comb.xor bin %763, %true : i1
+    %765 = comb.and bin %532, %197, %764 : i1
+    %766 = comb.mux bin %765, %668, %reg_pmp_4_addr : i30
+    %767 = comb.xor bin %reg_pmp_5_cfg_l, %true : i1
+    %768 = comb.extract %206 from 40 : (i64) -> i8
+    %769 = comb.extract %210 from 40 : (i64) -> i8
+    %770 = comb.and bin %768, %769 {sv.namehint = "_newCfg_WIRE_5"} : i8
+    %771 = comb.extract %770 from 0 {sv.namehint = "newCfg_5_r"} : (i8) -> i1
+    %772 = comb.extract %770 from 1 {sv.namehint = "newCfg_5_w"} : (i8) -> i1
+    %773 = comb.extract %770 from 2 {sv.namehint = "newCfg_5_x"} : (i8) -> i1
+    %774 = comb.extract %770 from 3 {sv.namehint = "newCfg_5_a"} : (i8) -> i2
+    %775 = comb.extract %770 from 7 {sv.namehint = "newCfg_5_l"} : (i8) -> i1
+    %776 = comb.and bin %532, %192, %767 : i1
+    %777 = comb.mux bin %776, %775, %reg_pmp_5_cfg_l : i1
+    %778 = comb.mux bin %776, %774, %reg_pmp_5_cfg_a : i2
+    %779 = comb.mux bin %776, %773, %reg_pmp_5_cfg_x : i1
+    %780 = comb.mux bin %776, %771, %reg_pmp_5_cfg_r : i1
+    %781 = comb.and bin %772, %771 {sv.namehint = "_reg_pmp_5_cfg_w_T"} : i1
+    %782 = comb.mux bin %776, %781, %reg_pmp_5_cfg_w : i1
+    %783 = comb.extract %reg_pmp_6_cfg_a from 1 : (i2) -> i1
+    %784 = comb.xor bin %783, %true : i1
+    %785 = comb.extract %reg_pmp_6_cfg_a from 0 : (i2) -> i1
+    %786 = comb.and bin %reg_pmp_6_cfg_l, %784, %785 : i1
+    %787 = comb.or bin %reg_pmp_5_cfg_l, %786 : i1
+    %788 = comb.xor bin %787, %true : i1
+    %789 = comb.and bin %532, %198, %788 : i1
+    %790 = comb.mux bin %789, %668, %reg_pmp_5_addr : i30
+    %791 = comb.xor bin %reg_pmp_6_cfg_l, %true : i1
+    %792 = comb.extract %206 from 48 : (i64) -> i8
+    %793 = comb.extract %210 from 48 : (i64) -> i8
+    %794 = comb.and bin %792, %793 {sv.namehint = "_newCfg_WIRE_6"} : i8
+    %795 = comb.extract %794 from 0 {sv.namehint = "newCfg_6_r"} : (i8) -> i1
+    %796 = comb.extract %794 from 1 {sv.namehint = "newCfg_6_w"} : (i8) -> i1
+    %797 = comb.extract %794 from 2 {sv.namehint = "newCfg_6_x"} : (i8) -> i1
+    %798 = comb.extract %794 from 3 {sv.namehint = "newCfg_6_a"} : (i8) -> i2
+    %799 = comb.extract %794 from 7 {sv.namehint = "newCfg_6_l"} : (i8) -> i1
+    %800 = comb.and bin %532, %192, %791 : i1
+    %801 = comb.mux bin %800, %799, %reg_pmp_6_cfg_l : i1
+    %802 = comb.mux bin %800, %798, %reg_pmp_6_cfg_a : i2
+    %803 = comb.mux bin %800, %797, %reg_pmp_6_cfg_x : i1
+    %804 = comb.mux bin %800, %795, %reg_pmp_6_cfg_r : i1
+    %805 = comb.and bin %796, %795 {sv.namehint = "_reg_pmp_6_cfg_w_T"} : i1
+    %806 = comb.mux bin %800, %805, %reg_pmp_6_cfg_w : i1
+    %807 = comb.extract %reg_pmp_7_cfg_a from 1 : (i2) -> i1
+    %808 = comb.xor bin %807, %true : i1
+    %809 = comb.extract %reg_pmp_7_cfg_a from 0 : (i2) -> i1
+    %810 = comb.and bin %reg_pmp_7_cfg_l, %808, %809 : i1
+    %811 = comb.or bin %reg_pmp_6_cfg_l, %810 : i1
+    %812 = comb.xor bin %811, %true : i1
+    %813 = comb.and bin %532, %199, %812 : i1
+    %814 = comb.mux bin %813, %668, %reg_pmp_6_addr : i30
+    %815 = comb.xor bin %reg_pmp_7_cfg_l, %true : i1
+    %816 = comb.extract %206 from 56 : (i64) -> i8
+    %817 = comb.extract %210 from 56 : (i64) -> i8
+    %818 = comb.and bin %816, %817 {sv.namehint = "_newCfg_T_49"} : i8
+    %819 = comb.extract %818 from 0 {sv.namehint = "newCfg_7_r"} : (i8) -> i1
+    %820 = comb.extract %818 from 1 {sv.namehint = "newCfg_7_w"} : (i8) -> i1
+    %821 = comb.extract %818 from 2 {sv.namehint = "newCfg_7_x"} : (i8) -> i1
+    %822 = comb.extract %818 from 3 {sv.namehint = "newCfg_7_a"} : (i8) -> i2
+    %823 = comb.extract %818 from 7 {sv.namehint = "newCfg_7_l"} : (i8) -> i1
+    %824 = comb.and bin %532, %192, %815 : i1
+    %825 = comb.mux bin %824, %823, %reg_pmp_7_cfg_l : i1
+    %826 = comb.mux bin %824, %822, %reg_pmp_7_cfg_a : i2
+    %827 = comb.mux bin %824, %821, %reg_pmp_7_cfg_x : i1
+    %828 = comb.mux bin %824, %819, %reg_pmp_7_cfg_r : i1
+    %829 = comb.and bin %820, %819 {sv.namehint = "_reg_pmp_7_cfg_w_T"} : i1
+    %830 = comb.mux bin %824, %829, %reg_pmp_7_cfg_w : i1
+    %831 = comb.or bin %reg_pmp_7_cfg_l, %810 : i1
+    %832 = comb.xor bin %831, %true : i1
+    %833 = comb.and bin %532, %200, %832 : i1
+    %834 = comb.mux bin %833, %668, %reg_pmp_7_addr : i30
+    %835 = comb.and bin %211, %c520_i64 {sv.namehint = "_reg_custom_0_T"} : i64
+    %836 = comb.and bin %reg_custom_0, %c-521_i64 {sv.namehint = "_reg_custom_0_T_2"} : i64
+    %837 = comb.or bin %835, %836 {sv.namehint = "_reg_custom_0_T_3"} : i64
+    %838 = comb.and bin %532, %201 : i1
+    %839 = comb.mux bin %838, %837, %reg_custom_0 : i64
+    hw.output %528, %347, %349, %357, %360, %475, %388, %389, %reg_debug, %reg_wfi, %390, %io_status_dprv_REG, %474, %25, %65, %59, %reg_bp_0_control_action, %reg_bp_0_control_tmatch, %reg_bp_0_control_x, %reg_bp_0_control_w, %reg_bp_0_control_r, %reg_bp_0_address, %reg_pmp_0_cfg_l, %reg_pmp_0_cfg_a, %reg_pmp_0_cfg_x, %reg_pmp_0_cfg_w, %reg_pmp_0_cfg_r, %reg_pmp_0_addr, %74, %reg_pmp_1_cfg_l, %reg_pmp_1_cfg_a, %reg_pmp_1_cfg_x, %reg_pmp_1_cfg_w, %reg_pmp_1_cfg_r, %reg_pmp_1_addr, %83, %reg_pmp_2_cfg_l, %reg_pmp_2_cfg_a, %reg_pmp_2_cfg_x, %reg_pmp_2_cfg_w, %reg_pmp_2_cfg_r, %reg_pmp_2_addr, %92, %reg_pmp_3_cfg_l, %reg_pmp_3_cfg_a, %reg_pmp_3_cfg_x, %reg_pmp_3_cfg_w, %reg_pmp_3_cfg_r, %reg_pmp_3_addr, %101, %reg_pmp_4_cfg_l, %reg_pmp_4_cfg_a, %reg_pmp_4_cfg_x, %reg_pmp_4_cfg_w, %reg_pmp_4_cfg_r, %reg_pmp_4_addr, %110, %reg_pmp_5_cfg_l, %reg_pmp_5_cfg_a, %reg_pmp_5_cfg_x, %reg_pmp_5_cfg_w, %reg_pmp_5_cfg_r, %reg_pmp_5_addr, %119, %reg_pmp_6_cfg_l, %reg_pmp_6_cfg_a, %reg_pmp_6_cfg_x, %reg_pmp_6_cfg_w, %reg_pmp_6_cfg_r, %reg_pmp_6_addr, %128, %reg_pmp_7_cfg_l, %reg_pmp_7_cfg_a, %reg_pmp_7_cfg_x, %reg_pmp_7_cfg_w, %reg_pmp_7_cfg_r, %reg_pmp_7_addr, %137, %1, %reg_custom_0 : i64, i1, i1, i1, i1, i1, i1, i1, i1, i1, i32, i2, i34, i64, i1, i64, i1, i2, i1, i1, i1, i33, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i2, i1, i1, i1, i30, i32, i1, i64
   }
   hw.module private @BreakpointUnit(in %io_status_debug : i1, in %io_bp_0_control_action : i1, in %io_bp_0_control_tmatch : i2, in %io_bp_0_control_x : i1, in %io_bp_0_control_w : i1, in %io_bp_0_control_r : i1, in %io_bp_0_address : i33, in %io_pc : i33, in %io_ea : i33, out io_xcpt_if : i1, out io_xcpt_ld : i1, out io_xcpt_st : i1, out io_debug_if : i1, out io_debug_ld : i1, out io_debug_st : i1) {
     %c-1_i33 = hw.constant -1 : i33
@@ -25314,142 +25543,146 @@ module {
     %103 = comb.extract %80 from 7 : (i55) -> i8
     %104 = comb.or %103, %86 : i8
     %105 = comb.extract %73 from 1 : (i8) -> i1
-    %106 = comb.extract %21 from 19 : (i32) -> i1
-    %107 = comb.extract %80 from 0 : (i55) -> i3
-    %108 = comb.concat %107, %false : i3, i1
-    %109 = comb.or %108, %89 : i4
-    %110 = comb.extract %21 from 25 : (i32) -> i1
-    %111 = comb.extract %21 from 27 : (i32) -> i1
-    %112 = comb.extract %21 from 29 : (i32) -> i1
-    %113 = comb.concat %81, %94, %95, %97, %100, %102, %104, %105, %87, %106, %88, %109, %110, %90, %111, %91, %112, %92, %77 : i1, i32, i1, i1, i2, i4, i8, i1, i1, i1, i1, i4, i1, i1, i1, i1, i1, i1, i1
-    %114 = comb.mux bin %29, %26, %113 {sv.namehint = "shin"} : i64
-    %115 = comb.extract %114 from 63 {sv.namehint = "_shout_r_T_1"} : (i64) -> i1
-    %116 = comb.and bin %0, %115 {sv.namehint = "shout_r_hi"} : i1
-    %117 = comb.concat %116, %114 {sv.namehint = "_shout_r_T_2"} : i1, i64
-    %118 = comb.concat %c0_i59, %23, %24 : i59, i1, i5
-    %119 = comb.shrs bin %117, %118 {sv.namehint = "_shout_r_T_4"} : i65
-    %120 = comb.extract %119 from 0 {sv.namehint = "shout_r"} : (i65) -> i64
-    %121 = comb.extract %119 from 16 : (i65) -> i8
-    %122 = comb.extract %119 from 32 : (i65) -> i8
-    %123 = comb.extract %119 from 24 : (i65) -> i8
-    %124 = comb.concat %123, %122 : i8, i8
-    %125 = comb.extract %119 from 28 : (i65) -> i4
-    %126 = comb.concat %121, %125 : i8, i4
-    %127 = comb.and %126, %c-241_i12 : i12
-    %128 = comb.extract %119 from 8 : (i65) -> i4
-    %129 = comb.extract %119 from 16 : (i65) -> i4
-    %130 = comb.and %124, %c3855_i16 : i16
-    %131 = comb.extract %119 from 40 : (i65) -> i4
-    %132 = comb.extract %119 from 48 : (i65) -> i4
-    %133 = comb.extract %119 from 12 : (i65) -> i4
-    %134 = comb.concat %133, %129 : i4, i4
-    %135 = comb.concat %127, %c0_i4 : i12, i4
-    %136 = comb.or %135, %130 : i16
-    %137 = comb.extract %119 from 36 : (i65) -> i4
-    %138 = comb.extract %119 from 44 : (i65) -> i4
-    %139 = comb.concat %138, %132 : i4, i4
-    %140 = comb.extract %119 from 46 : (i65) -> i2
-    %141 = comb.concat %128, %133, %129, %136, %137, %131, %140 : i4, i4, i4, i16, i4, i4, i2
-    %142 = comb.and %141, %c-54975581389_i38 : i38
-    %143 = comb.extract %119 from 4 : (i65) -> i2
-    %144 = comb.extract %119 from 8 : (i65) -> i2
-    %145 = comb.and %134, %c51_i8 : i8
-    %146 = comb.and %136, %c13107_i16 : i16
-    %147 = comb.extract %119 from 36 : (i65) -> i2
-    %148 = comb.extract %119 from 40 : (i65) -> i2
-    %149 = comb.and %139, %c51_i8 : i8
-    %150 = comb.extract %119 from 52 : (i65) -> i2
-    %151 = comb.extract %119 from 56 : (i65) -> i2
-    %152 = comb.extract %119 from 6 : (i65) -> i2
-    %153 = comb.concat %152, %144 : i2, i2
-    %154 = comb.extract %142 from 30 : (i38) -> i8
-    %155 = comb.or %154, %145 : i8
-    %156 = comb.extract %142 from 14 : (i38) -> i16
-    %157 = comb.or %156, %146 : i16
-    %158 = comb.extract %136 from 2 : (i16) -> i2
-    %159 = comb.extract %142 from 10 : (i38) -> i2
-    %160 = comb.or %159, %147 : i2
-    %161 = comb.extract %119 from 38 : (i65) -> i2
-    %162 = comb.concat %161, %148 : i2, i2
-    %163 = comb.extract %142 from 0 : (i38) -> i6
-    %164 = comb.concat %163, %c0_i2 : i6, i2
-    %165 = comb.or %164, %149 : i8
-    %166 = comb.extract %119 from 50 : (i65) -> i2
-    %167 = comb.extract %119 from 54 : (i65) -> i2
-    %168 = comb.concat %167, %151 : i2, i2
-    %169 = comb.extract %119 from 63 : (i65) -> i1
-    %170 = comb.extract %119 from 55 : (i65) -> i1
-    %171 = comb.concat %143, %152, %144, %155, %157, %158, %160, %161, %148, %165, %166, %150, %170 : i2, i2, i2, i8, i16, i2, i2, i2, i2, i8, i2, i2, i1
-    %172 = comb.and %171, %c-750599937895083_i51 : i51
-    %173 = comb.extract %119 from 0 : (i65) -> i1
-    %174 = comb.extract %119 from 2 : (i65) -> i1
-    %175 = comb.extract %119 from 4 : (i65) -> i1
-    %176 = comb.and %153, %c5_i4 : i4
-    %177 = comb.and %155, %c85_i8 : i8
-    %178 = comb.and %157, %c21845_i16 : i16
-    %179 = comb.extract %136 from 2 : (i16) -> i1
-    %180 = comb.and %160, %c1_i2 : i2
-    %181 = comb.and %162, %c5_i4 : i4
-    %182 = comb.and %165, %c85_i8 : i8
-    %183 = comb.extract %119 from 50 : (i65) -> i1
-    %184 = comb.extract %119 from 52 : (i65) -> i1
-    %185 = comb.and %168, %c5_i4 : i4
-    %186 = comb.extract %119 from 58 : (i65) -> i1
-    %187 = comb.extract %119 from 60 : (i65) -> i1
-    %188 = comb.extract %119 from 62 : (i65) -> i1
-    %189 = comb.extract %119 from 1 : (i65) -> i1
-    %190 = comb.extract %119 from 3 : (i65) -> i1
-    %191 = comb.extract %172 from 47 : (i51) -> i4
-    %192 = comb.or %191, %176 : i4
-    %193 = comb.extract %172 from 39 : (i51) -> i8
-    %194 = comb.or %193, %177 : i8
-    %195 = comb.extract %172 from 23 : (i51) -> i16
-    %196 = comb.or %195, %178 : i16
-    %197 = comb.extract %157 from 1 : (i16) -> i1
-    %198 = comb.extract %172 from 21 : (i51) -> i1
-    %199 = comb.or %198, %179 : i1
-    %200 = comb.extract %136 from 3 : (i16) -> i1
-    %201 = comb.concat %200, %false : i1, i1
-    %202 = comb.or %201, %180 : i2
-    %203 = comb.extract %172 from 15 : (i51) -> i4
-    %204 = comb.or %203, %181 : i4
-    %205 = comb.extract %172 from 7 : (i51) -> i8
-    %206 = comb.or %205, %182 : i8
-    %207 = comb.extract %165 from 1 : (i8) -> i1
-    %208 = comb.extract %119 from 51 : (i65) -> i1
-    %209 = comb.extract %172 from 0 : (i51) -> i3
-    %210 = comb.concat %209, %false : i3, i1
-    %211 = comb.or %210, %185 : i4
-    %212 = comb.extract %119 from 57 : (i65) -> i1
-    %213 = comb.extract %119 from 59 : (i65) -> i1
-    %214 = comb.extract %119 from 61 : (i65) -> i1
-    %215 = comb.concat %173, %189, %174, %190, %175, %192, %194, %196, %197, %199, %202, %204, %206, %207, %183, %208, %184, %211, %212, %186, %213, %187, %214, %188, %169 : i1, i1, i1, i1, i1, i4, i8, i16, i1, i1, i2, i4, i8, i1, i1, i1, i1, i4, i1, i1, i1, i1, i1, i1, i1
-    %216 = comb.or bin %27, %28 {sv.namehint = "_shout_T_2"} : i1
-    %217 = comb.mux bin %216, %120, %c0_i64 {sv.namehint = "_shout_T_3"} : i64
-    %218 = comb.icmp bin eq %io_fn, %c1_i4 {sv.namehint = "_shout_T_4"} : i4
-    %219 = comb.mux bin %218, %215, %c0_i64 {sv.namehint = "_shout_T_5"} : i64
-    %220 = comb.icmp bin eq %io_fn, %c4_i4 {sv.namehint = "_logic_T"} : i4
-    %221 = comb.icmp bin eq %io_fn, %c6_i4 {sv.namehint = "_logic_T_4"} : i4
-    %222 = comb.or bin %220, %221 {sv.namehint = "_logic_T_2"} : i1
-    %223 = comb.mux bin %222, %3, %c0_i64 {sv.namehint = "_logic_T_3"} : i64
-    %224 = comb.icmp bin eq %io_fn, %c7_i4 {sv.namehint = "_logic_T_5"} : i4
-    %225 = comb.or bin %221, %224 {sv.namehint = "_logic_T_6"} : i1
-    %226 = comb.and bin %io_in1, %io_in2 {sv.namehint = "_logic_T_7"} : i64
-    %227 = comb.mux bin %225, %226, %c0_i64 {sv.namehint = "_logic_T_8"} : i64
-    %228 = comb.icmp bin ugt %io_fn, %c-5_i4 {sv.namehint = "_shift_logic_T"} : i4
-    %229 = comb.and bin %228, %12 {sv.namehint = "_shift_logic_T_1"} : i1
-    %230 = comb.concat %c0_i63, %229 : i63, i1
-    %231 = comb.or bin %230, %223, %227, %217, %219 {sv.namehint = "shift_logic"} : i64
-    %232 = comb.icmp bin eq %io_fn, %c0_i4 {sv.namehint = "_out_T"} : i4
-    %233 = comb.icmp bin eq %io_fn, %c-6_i4 {sv.namehint = "_out_T_1"} : i4
-    %234 = comb.or bin %232, %233 {sv.namehint = "_out_T_2"} : i1
-    %235 = comb.mux bin %234, %5, %231 {sv.namehint = "out"} : i64
-    %236 = comb.extract %235 from 31 {sv.namehint = "_io_out_T_1"} : (i64) -> i1
-    %237 = comb.replicate %236 {sv.namehint = "io_out_hi"} : (i1) -> i32
-    %238 = comb.extract %235 from 0 {sv.namehint = "io_out_lo"} : (i64) -> i32
-    %239 = comb.concat %237, %238 {sv.namehint = "_io_out_T_2"} : i32, i32
-    %240 = comb.mux bin %io_dw, %235, %239 {sv.namehint = "io_out"} : i64
-    hw.output %240, %5, %16 : i64, i64, i1
+    %106 = comb.extract %80 from 5 : (i55) -> i1
+    %107 = comb.or %106, %87 : i1
+    %108 = comb.extract %21 from 19 : (i32) -> i1
+    %109 = comb.extract %80 from 0 : (i55) -> i3
+    %110 = comb.concat %109, %false : i3, i1
+    %111 = comb.or %110, %89 : i4
+    %112 = comb.extract %21 from 25 : (i32) -> i1
+    %113 = comb.extract %21 from 27 : (i32) -> i1
+    %114 = comb.extract %21 from 29 : (i32) -> i1
+    %115 = comb.concat %81, %94, %95, %97, %100, %102, %104, %105, %107, %108, %88, %111, %112, %90, %113, %91, %114, %92, %77 : i1, i32, i1, i1, i2, i4, i8, i1, i1, i1, i1, i4, i1, i1, i1, i1, i1, i1, i1
+    %116 = comb.mux bin %29, %26, %115 {sv.namehint = "shin"} : i64
+    %117 = comb.extract %116 from 63 {sv.namehint = "_shout_r_T_1"} : (i64) -> i1
+    %118 = comb.and bin %0, %117 {sv.namehint = "shout_r_hi"} : i1
+    %119 = comb.concat %118, %116 {sv.namehint = "_shout_r_T_2"} : i1, i64
+    %120 = comb.concat %c0_i59, %23, %24 : i59, i1, i5
+    %121 = comb.shrs bin %119, %120 {sv.namehint = "_shout_r_T_4"} : i65
+    %122 = comb.extract %121 from 0 {sv.namehint = "shout_r"} : (i65) -> i64
+    %123 = comb.extract %121 from 16 : (i65) -> i8
+    %124 = comb.extract %121 from 32 : (i65) -> i8
+    %125 = comb.extract %121 from 24 : (i65) -> i8
+    %126 = comb.concat %125, %124 : i8, i8
+    %127 = comb.extract %121 from 28 : (i65) -> i4
+    %128 = comb.concat %123, %127 : i8, i4
+    %129 = comb.and %128, %c-241_i12 : i12
+    %130 = comb.extract %121 from 8 : (i65) -> i4
+    %131 = comb.extract %121 from 16 : (i65) -> i4
+    %132 = comb.and %126, %c3855_i16 : i16
+    %133 = comb.extract %121 from 40 : (i65) -> i4
+    %134 = comb.extract %121 from 48 : (i65) -> i4
+    %135 = comb.extract %121 from 12 : (i65) -> i4
+    %136 = comb.concat %135, %131 : i4, i4
+    %137 = comb.concat %129, %c0_i4 : i12, i4
+    %138 = comb.or %137, %132 : i16
+    %139 = comb.extract %121 from 36 : (i65) -> i4
+    %140 = comb.extract %121 from 44 : (i65) -> i4
+    %141 = comb.concat %140, %134 : i4, i4
+    %142 = comb.extract %121 from 46 : (i65) -> i2
+    %143 = comb.concat %130, %135, %131, %138, %139, %133, %142 : i4, i4, i4, i16, i4, i4, i2
+    %144 = comb.and %143, %c-54975581389_i38 : i38
+    %145 = comb.extract %121 from 4 : (i65) -> i2
+    %146 = comb.extract %121 from 8 : (i65) -> i2
+    %147 = comb.and %136, %c51_i8 : i8
+    %148 = comb.and %138, %c13107_i16 : i16
+    %149 = comb.extract %121 from 36 : (i65) -> i2
+    %150 = comb.extract %121 from 40 : (i65) -> i2
+    %151 = comb.and %141, %c51_i8 : i8
+    %152 = comb.extract %121 from 52 : (i65) -> i2
+    %153 = comb.extract %121 from 56 : (i65) -> i2
+    %154 = comb.extract %121 from 6 : (i65) -> i2
+    %155 = comb.concat %154, %146 : i2, i2
+    %156 = comb.extract %144 from 30 : (i38) -> i8
+    %157 = comb.or %156, %147 : i8
+    %158 = comb.extract %144 from 14 : (i38) -> i16
+    %159 = comb.or %158, %148 : i16
+    %160 = comb.extract %138 from 2 : (i16) -> i2
+    %161 = comb.extract %144 from 10 : (i38) -> i2
+    %162 = comb.or %161, %149 : i2
+    %163 = comb.extract %121 from 38 : (i65) -> i2
+    %164 = comb.concat %163, %150 : i2, i2
+    %165 = comb.extract %144 from 0 : (i38) -> i6
+    %166 = comb.concat %165, %c0_i2 : i6, i2
+    %167 = comb.or %166, %151 : i8
+    %168 = comb.extract %121 from 50 : (i65) -> i2
+    %169 = comb.extract %121 from 54 : (i65) -> i2
+    %170 = comb.concat %169, %153 : i2, i2
+    %171 = comb.extract %121 from 63 : (i65) -> i1
+    %172 = comb.extract %121 from 55 : (i65) -> i1
+    %173 = comb.concat %145, %154, %146, %157, %159, %160, %162, %163, %150, %167, %168, %152, %172 : i2, i2, i2, i8, i16, i2, i2, i2, i2, i8, i2, i2, i1
+    %174 = comb.and %173, %c-750599937895083_i51 : i51
+    %175 = comb.extract %121 from 0 : (i65) -> i1
+    %176 = comb.extract %121 from 2 : (i65) -> i1
+    %177 = comb.extract %121 from 4 : (i65) -> i1
+    %178 = comb.and %155, %c5_i4 : i4
+    %179 = comb.and %157, %c85_i8 : i8
+    %180 = comb.and %159, %c21845_i16 : i16
+    %181 = comb.extract %138 from 2 : (i16) -> i1
+    %182 = comb.and %162, %c1_i2 : i2
+    %183 = comb.and %164, %c5_i4 : i4
+    %184 = comb.and %167, %c85_i8 : i8
+    %185 = comb.extract %121 from 50 : (i65) -> i1
+    %186 = comb.extract %121 from 52 : (i65) -> i1
+    %187 = comb.and %170, %c5_i4 : i4
+    %188 = comb.extract %121 from 58 : (i65) -> i1
+    %189 = comb.extract %121 from 60 : (i65) -> i1
+    %190 = comb.extract %121 from 62 : (i65) -> i1
+    %191 = comb.extract %121 from 1 : (i65) -> i1
+    %192 = comb.extract %121 from 3 : (i65) -> i1
+    %193 = comb.extract %174 from 47 : (i51) -> i4
+    %194 = comb.or %193, %178 : i4
+    %195 = comb.extract %174 from 39 : (i51) -> i8
+    %196 = comb.or %195, %179 : i8
+    %197 = comb.extract %174 from 23 : (i51) -> i16
+    %198 = comb.or %197, %180 : i16
+    %199 = comb.extract %159 from 1 : (i16) -> i1
+    %200 = comb.extract %174 from 21 : (i51) -> i1
+    %201 = comb.or %200, %181 : i1
+    %202 = comb.extract %138 from 3 : (i16) -> i1
+    %203 = comb.concat %202, %false : i1, i1
+    %204 = comb.or %203, %182 : i2
+    %205 = comb.extract %174 from 15 : (i51) -> i4
+    %206 = comb.or %205, %183 : i4
+    %207 = comb.extract %174 from 7 : (i51) -> i8
+    %208 = comb.or %207, %184 : i8
+    %209 = comb.extract %167 from 1 : (i8) -> i1
+    %210 = comb.extract %174 from 5 : (i51) -> i1
+    %211 = comb.or %210, %185 : i1
+    %212 = comb.extract %121 from 51 : (i65) -> i1
+    %213 = comb.extract %174 from 0 : (i51) -> i3
+    %214 = comb.concat %213, %false : i3, i1
+    %215 = comb.or %214, %187 : i4
+    %216 = comb.extract %121 from 57 : (i65) -> i1
+    %217 = comb.extract %121 from 59 : (i65) -> i1
+    %218 = comb.extract %121 from 61 : (i65) -> i1
+    %219 = comb.concat %175, %191, %176, %192, %177, %194, %196, %198, %199, %201, %204, %206, %208, %209, %211, %212, %186, %215, %216, %188, %217, %189, %218, %190, %171 : i1, i1, i1, i1, i1, i4, i8, i16, i1, i1, i2, i4, i8, i1, i1, i1, i1, i4, i1, i1, i1, i1, i1, i1, i1
+    %220 = comb.or bin %27, %28 {sv.namehint = "_shout_T_2"} : i1
+    %221 = comb.mux bin %220, %122, %c0_i64 {sv.namehint = "_shout_T_3"} : i64
+    %222 = comb.icmp bin eq %io_fn, %c1_i4 {sv.namehint = "_shout_T_4"} : i4
+    %223 = comb.mux bin %222, %219, %c0_i64 {sv.namehint = "_shout_T_5"} : i64
+    %224 = comb.icmp bin eq %io_fn, %c4_i4 {sv.namehint = "_logic_T"} : i4
+    %225 = comb.icmp bin eq %io_fn, %c6_i4 {sv.namehint = "_logic_T_4"} : i4
+    %226 = comb.or bin %224, %225 {sv.namehint = "_logic_T_2"} : i1
+    %227 = comb.mux bin %226, %3, %c0_i64 {sv.namehint = "_logic_T_3"} : i64
+    %228 = comb.icmp bin eq %io_fn, %c7_i4 {sv.namehint = "_logic_T_5"} : i4
+    %229 = comb.or bin %225, %228 {sv.namehint = "_logic_T_6"} : i1
+    %230 = comb.and bin %io_in1, %io_in2 {sv.namehint = "_logic_T_7"} : i64
+    %231 = comb.mux bin %229, %230, %c0_i64 {sv.namehint = "_logic_T_8"} : i64
+    %232 = comb.icmp bin ugt %io_fn, %c-5_i4 {sv.namehint = "_shift_logic_T"} : i4
+    %233 = comb.and bin %232, %12 {sv.namehint = "_shift_logic_T_1"} : i1
+    %234 = comb.concat %c0_i63, %233 : i63, i1
+    %235 = comb.or bin %234, %227, %231, %221, %223 {sv.namehint = "shift_logic"} : i64
+    %236 = comb.icmp bin eq %io_fn, %c0_i4 {sv.namehint = "_out_T"} : i4
+    %237 = comb.icmp bin eq %io_fn, %c-6_i4 {sv.namehint = "_out_T_1"} : i4
+    %238 = comb.or bin %236, %237 {sv.namehint = "_out_T_2"} : i1
+    %239 = comb.mux bin %238, %5, %235 {sv.namehint = "out"} : i64
+    %240 = comb.extract %239 from 31 {sv.namehint = "_io_out_T_1"} : (i64) -> i1
+    %241 = comb.replicate %240 {sv.namehint = "io_out_hi"} : (i1) -> i32
+    %242 = comb.extract %239 from 0 {sv.namehint = "io_out_lo"} : (i64) -> i32
+    %243 = comb.concat %241, %242 {sv.namehint = "_io_out_T_2"} : i32, i32
+    %244 = comb.mux bin %io_dw, %239, %243 {sv.namehint = "io_out"} : i64
+    hw.output %244, %5, %16 : i64, i64, i1
   }
   hw.module private @MulDiv(in %clock : !seq.clock, in %reset : i1, out io_req_ready : i1, in %io_req_valid : i1, in %io_req_bits_fn : i4, in %io_req_bits_dw : i1, in %io_req_bits_in1 : i64, in %io_req_bits_in2 : i64, in %io_req_bits_tag : i5, in %io_kill : i1, in %io_resp_ready : i1, out io_resp_valid : i1, out io_resp_bits_data : i64, out io_resp_bits_tag : i5) {
     %c0_i5 = hw.constant 0 : i5
@@ -28421,6 +28654,9 @@ module {
         sv.if %424 {
           sv.fatal 1
         }
+        sv.if %424 {
+          sv.fatal 1
+        }
         %504 = comb.and bin %STOP_COND_, %421 : i1
         sv.if %504 {
           sv.fatal 1
@@ -28494,6 +28730,9 @@ module {
           sv.fatal 1
         }
         %30 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %30 {
+          sv.fatal 1
+        }
         sv.if %30 {
           sv.fatal 1
         }
@@ -29391,6 +29630,9 @@ module {
         sv.if %491 {
           sv.fatal 1
         }
+        sv.if %413 {
+          sv.fatal 1
+        }
         %492 = comb.and bin %STOP_COND_, %410 : i1
         sv.if %492 {
           sv.fatal 1
@@ -30190,6 +30432,9 @@ module {
         sv.if %307 {
           sv.fatal 1
         }
+        sv.if %255 {
+          sv.fatal 1
+        }
         %308 = comb.and bin %STOP_COND_, %252 : i1
         sv.if %308 {
           sv.fatal 1
@@ -30307,6 +30552,9 @@ module {
         }
         %108 = comb.and bin %STOP_COND_, %76 : i1
         sv.if %108 {
+          sv.fatal 1
+        }
+        sv.if %106 {
           sv.fatal 1
         }
       }
@@ -30953,6 +31201,9 @@ module {
         }
         %224 = comb.and bin %STOP_COND_, %181 : i1
         sv.if %224 {
+          sv.fatal 1
+        }
+        sv.if %193 {
           sv.fatal 1
         }
         %225 = comb.and bin %STOP_COND_, %190 : i1
@@ -31792,6 +32043,9 @@ module {
         sv.if %378 {
           sv.fatal 1
         }
+        sv.if %317 {
+          sv.fatal 1
+        }
         %379 = comb.and bin %STOP_COND_, %314 : i1
         sv.if %379 {
           sv.fatal 1
@@ -32505,6 +32759,9 @@ module {
         sv.if %266 {
           sv.fatal 1
         }
+        sv.if %226 {
+          sv.fatal 1
+        }
         %267 = comb.and bin %STOP_COND_, %223 : i1
         sv.if %267 {
           sv.fatal 1
@@ -32553,6 +32810,13 @@ module {
           sv.fatal 1
         }
         %35 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %35 {
+          sv.fatal 1
+        }
+        %36 = comb.and bin %STOP_COND_, %false : i1
+        sv.if %36 {
+          sv.fatal 1
+        }
         sv.if %35 {
           sv.fatal 1
         }
@@ -33355,6 +33619,9 @@ module {
         }
         %396 = comb.and bin %STOP_COND_, %317 : i1
         sv.if %396 {
+          sv.fatal 1
+        }
+        sv.if %329 {
           sv.fatal 1
         }
         sv.if %329 {
@@ -34375,6 +34642,9 @@ module {
         sv.if %480 {
           sv.fatal 1
         }
+        sv.if %402 {
+          sv.fatal 1
+        }
         %481 = comb.and bin %STOP_COND_, %399 : i1
         sv.if %481 {
           sv.fatal 1
@@ -35254,6 +35524,9 @@ module {
         }
         %482 = comb.and bin %STOP_COND_, %393 : i1
         sv.if %482 {
+          sv.fatal 1
+        }
+        sv.if %405 {
           sv.fatal 1
         }
         %483 = comb.and bin %STOP_COND_, %402 : i1
@@ -36526,16 +36799,20 @@ module {
         sv.if %1081 {
           sv.fatal 1
         }
-        %1082 = comb.and bin %STOP_COND_, %1062 : i1
+        %1082 = comb.and bin %STOP_COND_, %false : i1
         sv.if %1082 {
           sv.fatal 1
         }
-        %1083 = comb.and bin %STOP_COND_, %1072 : i1
+        %1083 = comb.and bin %STOP_COND_, %1062 : i1
         sv.if %1083 {
           sv.fatal 1
         }
-        %1084 = comb.and bin %STOP_COND_, %1080 : i1
+        %1084 = comb.and bin %STOP_COND_, %1072 : i1
         sv.if %1084 {
+          sv.fatal 1
+        }
+        %1085 = comb.and bin %STOP_COND_, %1080 : i1
+        sv.if %1085 {
           sv.fatal 1
         }
       }
@@ -37451,6 +37728,9 @@ module {
         }
         %399 = comb.and bin %STOP_COND_, %331 : i1
         sv.if %399 {
+          sv.fatal 1
+        }
+        sv.if %335 {
           sv.fatal 1
         }
         sv.if %335 {
